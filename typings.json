@@ -1,5 +1,8 @@
 {
   "name": "electron-test",
   "version": false,
-  "dependencies": {}
+  "dependencies": {},
+  "ambientDependencies": {
+    "github-electron": "registry:dt/github-electron#0.36.3+20160319055237"
+  }
 }
