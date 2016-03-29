@@ -2,14 +2,14 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Hello World!</title>
+  <title>Electron Dock</title>
 </head>
 <body>
-  <h1>jorma 123</h1>
-
-  <webview src="http://www.dmm.com/netgame/social/-/gadgets/=/app_id=854854/" partition="persist:kc" width="800" minheight="480" plugins autosize="on"
-      nodeintegration style="width: 800px; height: 480px"></webview>
+  <webview src="http://www.dmm.com/netgame/social/-/gadgets/=/app_id=854854/" partition="persist:kc"
+    width="800" minheight="480" plugins autosize="on" nodeintegration style="width: 800px; height: 480px"></webview>
   <script>
+    const Immutable = require('immutable');
+
     let webview = document.querySelector('webview');
     let firstLoad = true;
     let gameUrl;
@@ -35,7 +35,7 @@
         }
 
         webContents.debugger.on('detach', function (event, reason) {
-          console.log("Debugger detached due to : ", reason);
+          console.log("Debugger detached due to: ", reason);
         });
 
         webContents.debugger.on('message', function (event, method, params) {
@@ -48,7 +48,6 @@
                 console.log('URL\t\t=>', params.response.url.replace(/.*\/kcsapi/, ''));
                 console.log('event\t=>', JSON.parse(JSON.stringify(event)));
                 console.log('params\t=>', JSON.parse(JSON.stringify(params)));
-                //console.log('result\t=>', result, JSON.stringify(result));
               }
             });
           }
@@ -68,6 +67,12 @@
           webview.loadURL(gameUrl);
         }
       });
+
+      let cklg = {
+        expires: new Date(),
+        domain: '.dmm.com',
+        path: '/'
+      };
 
       webContents.executeJavaScript([
         'document.cookie = "cklg=welcome;expires=Sun, 09 Feb 2019 09:00:09 GMT;domain=.dmm.com;path=/";',
