@@ -15,7 +15,8 @@
   "license": "MIT",
   "dependencies": {
     "electron-prebuilt": "^0.37.2",
-    "http-proxy": "^1.13.2"
+    "http-proxy": "^1.13.2",
+    "immutable": "^3.7.6"
   },
   "bugs": {
     "url": "https://github.com/stuf/electron-yard/issues"
