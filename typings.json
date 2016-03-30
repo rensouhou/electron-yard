@@ -3,6 +3,7 @@
   "version": false,
   "dependencies": {},
   "ambientDependencies": {
-    "github-electron": "registry:dt/github-electron#0.36.3+20160319055237"
+    "github-electron": "registry:dt/github-electron#0.36.3+20160319055237",
+    "webpack": "registry:dt/webpack#1.12.9+20160321060707"
   }
 }
