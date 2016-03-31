@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Electron Dock—</title>
+  <script>
+    (function () {
+      if (!process.env.HOT) {
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = '../dist/style.css';
+        document.write(link.outerHTML);
+      }
+    }());
+  </script>
+</head>
+<body>
+  <webview id="game" src="http://www.dmm.com/netgame/social/-/gadgets/=/app_id=854854/" partition="persist:kc"
+      width="800" minheight="480" plugins autosize="on" nodeintegration style="width: 800px; height: 480px"></webview>
+  <webview id="ui" src="views/ui.html" nodeintegration partition="persist:kcui"></webview>
+
+  <script src="../dist/game.bundle.js"></script>
+</body>
+</html>
