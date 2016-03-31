@@ -1,9 +1,9 @@
+/* eslint strict: 0, no-console: 0 */
 /**
  * @overview
  *
- * @since 0.0.1
+ * @since 0.1.0
  * @author Stefan Rimaila <stefan@rimaila.fi>
- * @module
  */
 'use strict';
 
@@ -11,52 +11,59 @@ const path = require('path');
 const electron = require('electron');
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
+const Menu = electron.Menu;
+const crashReporter = electron.crashReporter;
+const shell = electron.shell;
+
+crashReporter.start();
+
+if (process.env.NODE_ENV === 'development') {
+  require('electron-debug')();
+}
 
 let mainWindow = null;
-let ppapi_flash_path = null;
+let ppapiFlashPath = null;
 
-// Specify flash path.
-// On Windows, it might be /path/to/pepflashplayer.dll
-// On OS X, /path/to/PepperFlashPlayer.plugin
-// On Linux, /path/to/libpepflashplayer.so
-if (process.platform == 'darwin') {
-  ppapi_flash_path = path.join(__dirname, 'PepperFlashPlayer.plugin');
+if (process.platform === 'darwin') {
+  ppapiFlashPath = path.join(__dirname, 'lib', 'PepperFlashPlayer.plugin');
 }
 
 app.commandLine.appendSwitch('remote-debugging-port', '8609');
-
-app.commandLine.appendSwitch('ppapi-flash-path', ppapi_flash_path);
+app.commandLine.appendSwitch('ppapi-flash-path', ppapiFlashPath);
 app.commandLine.appendSwitch('ppapi-flash-version', '21.0.0.197');
+
+// @todo(@stuf): make sure to be able to flush cache on non-dev envs
+if (process.env.NODE_ENV !== 'production') {
+  app.commandLine.appendSwitch('disable-http-cache');
+}
 
 function createWindow() {
   const windowOpts = {
     width: 1200,
     height: 800,
-    'web-preferences': { 'plugins': true }
+    'web-preferences': {
+      plugins: true
+    }
   };
 
   mainWindow = new BrowserWindow(windowOpts);
-  mainWindow.loadURL('file://' + __dirname + '/src/index.html');
+  mainWindow.loadURL(`file://${__dirname}/app/app.html`);
 
   mainWindow.webContents.openDevTools();
 
-  mainWindow.on('closed', function () {
+  mainWindow.on('closed', () => {
     mainWindow = null;
   });
 }
 
 app.on('ready', createWindow);
 
-app.on('window-all-closed', function () {
-  if (process.platform != 'darwin') {
-    app.quit();
-  }
+app.on('window-all-closed', () => {
+  if (process.platform !== 'darwin') app.quit();
 });
 
-app.on('activate', function () {
-  // On OS X it's common to re-create a window in the app when the
-  // dock icon is clicked and there are no other windows open.
-  if (mainWindow === null) {
+app.on('activate', () => {
+  if (mainWindow == null) {
     createWindow();
   }
 });
