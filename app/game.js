@@ -5,8 +5,14 @@
  * @since 0.1.0
  * @author Stefan Rimaila <stefan@rimaila.fi>
  */
-const webview = document.querySelector('#game');
+const fs = require('fs');
+const remote = require('electron').remote;
+
+remote.getCurrentWindow().removeAllListeners();
+
+const gameView = document.querySelector('#game');
 const uiView = document.querySelector('#ui');
+
 let firstLoad = true;
 let gameUrl;
 let debuggerAttached = false;
@@ -18,10 +24,10 @@ const config = {
   pathRegex: /.*\/kcsapi/
 };
 
-webview.addEventListener('dom-ready', (...args) => {
+gameView.addEventListener('dom-ready', (...args) => {
   console.log('Webview ready; ', args);
 
-  const webContents = webview.getWebContents();
+  const webContents = gameView.getWebContents();
   const webSession = webContents.session;
 
   // @todo(@stuf): refactor the debugger logic to be more consistent
@@ -65,7 +71,7 @@ webview.addEventListener('dom-ready', (...args) => {
           }
           else if (config.pathRegex.test(params.response.url)) {
             console.group('Unexpected data');
-            if (err) console.error('Error\t=>', err);
+            if (err) console.error('Error\t=>', JSON.parse(JSON.stringify(err)));
             console.log('URL\t\t=>', params.response.url.replace(config.pathRegex, ''));
             console.log('event\t=>', JSON.parse(JSON.stringify(event)));
             console.log('params\t=>', JSON.parse(JSON.stringify(params)));
@@ -85,7 +91,7 @@ webview.addEventListener('dom-ready', (...args) => {
       gameUrl = details.url;
       firstLoad = false;
 
-      webview.loadURL(gameUrl);
+      gameView.loadURL(gameUrl);
     }
   });
 
@@ -102,3 +108,20 @@ webview.addEventListener('dom-ready', (...args) => {
 uiView.addEventListener('console-message', (e) => {
   console.log('Guest page logged a message:', e);
 });
+
+// @todo(@stuf): take care of different DPI screenshots?
+document.getElementById('capture').addEventListener('click', (e) => {
+  e.preventDefault();
+  const gameViewRect = gameView.getBoundingClientRect();
+  remote.getCurrentWindow().capturePage({
+    x: gameViewRect.left,
+    y: gameViewRect.top,
+    width: gameViewRect.width,
+    height: gameViewRect.height
+  }, (image) => {
+    fs.writeFile(`/Users/stuf/electron_${+(new Date())}.png`, image.toPng(), () => {
+      console.log('Screenshot saved');
+    });
+  });
+});
+

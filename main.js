@@ -32,14 +32,9 @@ app.commandLine.appendSwitch('remote-debugging-port', '8609');
 app.commandLine.appendSwitch('ppapi-flash-path', ppapiFlashPath);
 app.commandLine.appendSwitch('ppapi-flash-version', '21.0.0.197');
 
-// @todo(@stuf): make sure to be able to flush cache on non-dev envs and/or after an update
-if (process.env.NODE_ENV !== 'production') {
-  app.commandLine.appendSwitch('disable-http-cache');
-}
-
 function createWindow() {
   const windowOpts = {
-    width: 1200,
+    width: 1400,
     height: 800,
     'web-preferences': {
       plugins: true
