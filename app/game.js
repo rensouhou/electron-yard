@@ -21,11 +21,17 @@ let firstLoad = true;
 let gameUrl;
 let debuggerAttached = false;
 
+gameView.loadURL(config.gamePageURL);
+
 gameView.addEventListener('dom-ready', () => {
   const webContents = gameView.getWebContents();
   const webSession = webContents.session;
 
-  // @todo(@stuf): refactor the debugger logic to be more consistent
+  gameView.addEventListener('close', () => {
+    webContents.debugger.sendCommand('Network.disable');
+  });
+
+  // @todo(stuf): refactor the debugger logic to be more consistent
   if (!debuggerAttached) {
     try {
       webContents.debugger.attach('1.1');
@@ -35,13 +41,11 @@ gameView.addEventListener('dom-ready', () => {
       console.log('Debugger attach failed : ', err);
     }
 
-    webContents.debugger.on('detach', (event, reason) => {
-      console.log(`Debugger detached due to: ${reason}`);
+    webContents.debugger.on('detach', () => {
       debuggerAttached = false;
     });
 
-    webContents.debugger.on('message',
-      new GameDataHandler(webContents));
+    webContents.debugger.on('message', new GameDataHandler(webContents));
 
     webContents.debugger.sendCommand('Network.enable');
 
