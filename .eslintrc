@@ -15,7 +15,8 @@
     "consistent-return": 0,
     "eqeqeq": ["error", "allow-null"],
     "max-len": 0,
-    "brace-style": ["error", "stroustrup"]
+    "brace-style": ["error", "stroustrup"],
+    "new-cap": 0
   },
   "plugins": [
     "react"
