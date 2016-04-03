@@ -1,23 +1,27 @@
 /**
  * Models
  */
-export namespace KCS {
-    class Ship {
-    }
+namespace KCS {
+  export class Ship {
+  }
 
-    class SlotItem {
-    }
+  export class SlotItem {
+  }
 
-    class ConstructionDock {
-    }
+  export class ConstructionDock {
+  }
 
-    class RepairDock {
-    }
+  export class RepairDock {
+  }
 }
 
 /**
  * API stuff
  */
-export namespace KCSApi {
-    
+namespace KCSApi {
+  export interface Response {
+    api_data: any;
+    api_result: number;
+    api_result_msg: string;
+  }
 }
