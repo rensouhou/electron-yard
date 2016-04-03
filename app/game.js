@@ -4,9 +4,13 @@
  *
  * @since 0.1.0
  * @author Stefan Rimaila <stefan@rimaila.fi>
+ * @module app/game
  */
 const fs = require('fs');
 const remote = require('electron').remote;
+
+import GameDataHandler from './core/game-data-handler';
+import config from './config';
 
 remote.getCurrentWindow().removeAllListeners();
 
@@ -17,16 +21,7 @@ let firstLoad = true;
 let gameUrl;
 let debuggerAttached = false;
 
-const config = {
-  rootEventName: 'kancolledata',
-  rootEventNode: 'body',
-  apiDataPrefix: 'svdata=',
-  pathRegex: /.*\/kcsapi/
-};
-
 gameView.addEventListener('dom-ready', (...args) => {
-  console.log('Webview ready; ', args);
-
   const webContents = gameView.getWebContents();
   const webSession = webContents.session;
 
@@ -44,54 +39,21 @@ gameView.addEventListener('dom-ready', (...args) => {
       console.log(`Debugger detached due to: ${reason}`);
     });
 
-    // @todo(@stuf): extract into its own handler
-    webContents.debugger.on('message', (event, method, params) => {
-      // @todo(@stuf): This does not work on all requests for some reason
-      if (method === 'Network.responseReceived') {
-        webContents.debugger.sendCommand('Network.getResponseBody', {
-          requestId: params.requestId
-        }, (err, result) => {
-          if (!err.message && config.pathRegex.test(params.response.url)) {
-            const _path = params.response.url.replace(config.pathRegex, '');
-            const _data = result.body.substring(config.apiDataPrefix.length);
-
-            let jsonData = null;
-            try {
-              jsonData = JSON.parse(_data);
-            }
-            catch (e) {
-              console.error('Error parsing JSON');
-            }
-
-            console.groupCollapsed(`Network.getResponseBody; ${_path}`);
-            console.log('event\t=>', JSON.parse(JSON.stringify(event)));
-            console.log('params\t=>', JSON.parse(JSON.stringify(params)));
-            console.log('result\t=>', jsonData);
-            console.groupEnd();
-          }
-          else if (config.pathRegex.test(params.response.url)) {
-            console.group('Unexpected data');
-            if (err) console.error('Error\t=>', JSON.parse(JSON.stringify(err)));
-            console.log('URL\t\t=>', params.response.url.replace(config.pathRegex, ''));
-            console.log('event\t=>', JSON.parse(JSON.stringify(event)));
-            console.log('params\t=>', JSON.parse(JSON.stringify(params)));
-            console.groupEnd();
-          }
-        });
-      }
-    });
+    webContents.debugger.on('message',
+      new GameDataHandler(webContents));
 
     webContents.debugger.sendCommand('Network.enable');
   }
 
-  // @todo(@stuf): extract into a separate handler
-  webSession.webRequest.onCompleted((details) => {
-    if (/kcs\/mainD2/.test(details.url) && firstLoad) {
-      console.log('Found game SWF: ', details.url);
+  webSession.webRequest.onBeforeRequest((details, callback) => {
+    const cancel = config.gameSwfPrefix.test(details.url) && firstLoad;
+    callback({ cancel });
+
+    if (cancel) {
+      console.log(`Found game SWF: ${details.url}`);
       gameUrl = details.url;
       firstLoad = false;
-
-      gameView.loadURL(gameUrl);
+      webContents.loadURL(gameUrl);
     }
   });
 
@@ -119,8 +81,9 @@ document.getElementById('capture').addEventListener('click', (e) => {
     width: gameViewRect.width,
     height: gameViewRect.height
   }, (image) => {
-    fs.writeFile(`/Users/stuf/electron_${+(new Date())}.png`, image.toPng(), () => {
-      console.log('Screenshot saved');
+    const filename = `/Users/stuf/electron_${+(new Date())}.png`;
+    fs.writeFile(filename, image.toPng(), () => {
+      console.log(`Screenshot saved as: ${filename}`);
     });
   });
 });
