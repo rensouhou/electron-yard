@@ -1,6 +1,6 @@
 /**
  * @overview
- *  Kancolle Game Webview
+ *  Kancolle Game Webview entry point
  *
  * @since 0.1.0
  * @author Stefan Rimaila <stefan@rimaila.fi>
@@ -21,7 +21,7 @@ let firstLoad = true;
 let gameUrl;
 let debuggerAttached = false;
 
-gameView.addEventListener('dom-ready', (...args) => {
+gameView.addEventListener('dom-ready', () => {
   const webContents = gameView.getWebContents();
   const webSession = webContents.session;
 
@@ -37,25 +37,26 @@ gameView.addEventListener('dom-ready', (...args) => {
 
     webContents.debugger.on('detach', (event, reason) => {
       console.log(`Debugger detached due to: ${reason}`);
+      debuggerAttached = false;
     });
 
     webContents.debugger.on('message',
       new GameDataHandler(webContents));
 
     webContents.debugger.sendCommand('Network.enable');
+
+    webSession.webRequest.onBeforeRequest((details, callback) => {
+      const cancel = config.gameSwfPrefix.test(details.url) && firstLoad;
+      callback({ cancel });
+
+      if (cancel) {
+        console.log(`Found game SWF: ${details.url}`);
+        gameUrl = details.url;
+        firstLoad = false;
+        webContents.loadURL(gameUrl);
+      }
+    });
   }
-
-  webSession.webRequest.onBeforeRequest((details, callback) => {
-    const cancel = config.gameSwfPrefix.test(details.url) && firstLoad;
-    callback({ cancel });
-
-    if (cancel) {
-      console.log(`Found game SWF: ${details.url}`);
-      gameUrl = details.url;
-      firstLoad = false;
-      webContents.loadURL(gameUrl);
-    }
-  });
 
   webContents.executeJavaScript([
     'document.cookie = "cklg=welcome;expires=Sun, 09 Feb 2019 09:00:09 GMT;domain=.dmm.com;path=/";',

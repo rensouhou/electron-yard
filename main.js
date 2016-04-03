@@ -1,9 +1,11 @@
 /* eslint strict: 0, no-console: 0 */
 /**
  * @overview
+ *  Main electron entry point
  *
  * @since 0.1.0
  * @author Stefan Rimaila <stefan@rimaila.fi>
+ * @module main
  */
 'use strict';
 
@@ -47,6 +49,7 @@ function createWindow() {
   mainWindow.webContents.openDevTools();
 
   mainWindow.on('closed', () => {
+    mainWindow.removeAllListeners();
     mainWindow = null;
   });
 }
@@ -62,4 +65,5 @@ app.on('activate', () => {
     createWindow();
   }
 });
+
 
