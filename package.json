@@ -5,13 +5,14 @@
   "main": "main.js",
   "scripts": {
     "start": "cross-env NODE_ENV=products electron ./",
-    "start-dev": "cross-env NODE_ENV=development electron ./",
+    "start-dev": "cross-env ELECTRON_ENABLE_LOGGING=true NODE_ENV=development electron ./",
     "start-hot": "cross-env HOT=1 NODE_ENV=development electron ./",
-    "webpack-dev": "webpack --config webpack.config.development.js --progress --watch --colors",
+    "webpack-dev": "webpack --config webpack.config.development.js --progress --colors",
+    "webpack-dev-watch": "webpack --config webpack.config.development.js --progress --watch --colors",
     "lint": "eslint app *.js",
     "hot-server": "node server.js",
     "postinstall": "typings install",
-    "dev": "concurrently --kill-others \"npm run webpack-dev\" \"npm run start-dev\""
+    "dev": "npm run webpack-dev; concurrently --kill-others \"npm run webpack-dev\" \"npm run start-dev\""
   },
   "repository": {
     "type": "git",
@@ -54,6 +55,7 @@
   },
   "dependencies": {
     "babel-plugin-syntax-flow": "^6.5.0",
+    "chrome-remote-interface": "^0.11.0",
     "electron-debug": "^0.5.2",
     "electron-prebuilt": "^0.37.2",
     "http-proxy": "^1.13.2",
