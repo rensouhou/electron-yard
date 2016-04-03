@@ -12,16 +12,16 @@ const remote = require('electron').remote;
 import GameDataHandler from './core/game-data-handler';
 import config from './config';
 
-remote.getCurrentWindow().removeAllListeners();
+const curWindow = remote.getCurrentWindow();
+curWindow.removeAllListeners();
 
 const gameView = document.querySelector('#game');
 const uiView = document.querySelector('#ui');
 
-let firstLoad = true;
+let initialLoad = true;
+let firstGameLoad = true;
 let gameUrl;
 let debuggerAttached = false;
-
-gameView.loadURL(config.gamePageURL);
 
 gameView.addEventListener('dom-ready', () => {
   const webContents = gameView.getWebContents();
@@ -46,17 +46,16 @@ gameView.addEventListener('dom-ready', () => {
     });
 
     webContents.debugger.on('message', new GameDataHandler(webContents));
-
     webContents.debugger.sendCommand('Network.enable');
 
     webSession.webRequest.onBeforeRequest((details, callback) => {
-      const cancel = config.gameSwfPrefix.test(details.url) && firstLoad;
+      const cancel = config.gameSwfPrefix.test(details.url) && firstGameLoad;
       callback({ cancel });
 
       if (cancel) {
         console.log(`Found game SWF: ${details.url}`);
         gameUrl = details.url;
-        firstLoad = false;
+        firstGameLoad = false;
         webContents.loadURL(gameUrl);
       }
     });
@@ -72,11 +71,7 @@ gameView.addEventListener('dom-ready', () => {
   ].join('\n'));
 });
 
-uiView.addEventListener('console-message', (e) => {
-  console.log('Guest page logged a message:', e);
-});
-
-// @todo(@stuf): take care of different DPI screenshots?
+// @todo(stuf): take care of different DPI screenshots?
 document.getElementById('capture').addEventListener('click', (e) => {
   e.preventDefault();
   const gameViewRect = gameView.getBoundingClientRect();

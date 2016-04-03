@@ -9,13 +9,15 @@
  */
 'use strict';
 
+process.env.NODE_ENV = process.env.NODE_ENV || 'production';
+
 const path = require('path');
 const electron = require('electron');
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
-const Menu = electron.Menu;
+// const Menu = electron.Menu;
 const crashReporter = electron.crashReporter;
-const shell = electron.shell;
+// const shell = electron.shell;
 
 crashReporter.start();
 
@@ -47,6 +49,11 @@ function createWindow() {
   mainWindow.loadURL(`file://${__dirname}/app/app.html`);
 
   mainWindow.webContents.openDevTools();
+
+  mainWindow.webContents.on('did-finish-load', () => {
+    mainWindow.show();
+    mainWindow.focus();
+  });
 
   mainWindow.on('closed', () => {
     mainWindow.removeAllListeners();

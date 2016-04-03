@@ -12,7 +12,8 @@
     "lint": "eslint app *.js",
     "hot-server": "node server.js",
     "postinstall": "typings install",
-    "dev": "npm run webpack-dev; concurrently --kill-others \"npm run webpack-dev\" \"npm run start-dev\""
+    "dev": "npm run webpack-dev; concurrently --kill-others \"npm run webpack-dev-watch\" \"npm run start-dev\"",
+    "dev-hot": "npm run webpack-dev; concurrently --kill-others \"npm run hot-server\" \"npm run start-hot\""
   },
   "repository": {
     "type": "git",
@@ -48,6 +49,10 @@
     "express": "^4.13.4",
     "extract-text-webpack-plugin": "^1.0.1",
     "json-loader": "^0.5.4",
+    "redux-devtools": "^3.2.0",
+    "redux-devtools-dock-monitor": "^1.1.1",
+    "redux-devtools-log-monitor": "^1.0.9",
+    "redux-logger": "^2.6.1",
     "style-loader": "^0.13.1",
     "webpack": "^1.12.14",
     "webpack-dev-middleware": "^1.6.1",
@@ -55,9 +60,19 @@
     "webpack-target-electron-renderer": "^0.4.0"
   },
   "dependencies": {
+    "autoprefixer-loader": "^3.2.0",
     "electron-debug": "^0.5.2",
     "electron-prebuilt": "^0.37.2",
     "immutable": "^3.7.6",
-    "postcss": "^5.0.19"
+    "less-loader": "^2.2.3",
+    "postcss": "^5.0.19",
+    "react": "^0.14.8",
+    "react-dom": "^0.14.8",
+    "react-redux": "^4.4.1",
+    "react-router": "^2.0.1",
+    "react-router-redux": "^4.0.1",
+    "redux": "^3.3.1",
+    "redux-thunk": "^2.0.1",
+    "semantic-ui": "^2.1.8"
   }
 }

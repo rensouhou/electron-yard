@@ -1,3 +1,7 @@
 [*.{js,es6,ts}]
 indent_size = 2
 indent_style = space
+
+[*.{css,less}]
+indent_size = 2
+indent_style = space

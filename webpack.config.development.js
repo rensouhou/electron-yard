@@ -11,18 +11,20 @@ config.debug = true;
 
 config.devtool = 'cheap-module-eval-source-map';
 
-// config.entry = [
-//   './app/game',
-//   './app/index'
-// ];
 config.entry = {
-  game: ['./app/game.js'],
-  index: ['./app/index.js']
+  index: [
+    './app/index',
+    'webpack-hot-middleware/client?path=http://localhost:3000/__webpack_hmr&overlay=true'
+  ],
+  game: ['./app/game']
 };
 
 config.output.publicPath = 'http://localhost:3000/dist/';
 
 config.module.loaders.push({
+  test: /\.less$/,
+  loader: 'style!css!autoprefixer!less'
+}, {
   test: /\.global\.css$/,
   loaders: [
     'style-loader',
@@ -36,8 +38,9 @@ config.module.loaders.push({
   ]
 });
 
-
 config.plugins.push(
+  new webpack.optimize.OccurenceOrderPlugin(),
+  new webpack.HotModuleReplacementPlugin(),
   new webpack.NoErrorsPlugin(),
   new webpack.DefinePlugin({
     __DEV__: true,
