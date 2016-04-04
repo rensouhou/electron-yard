@@ -11,7 +11,17 @@ import Home from '../components/Home';
 export default class HomePage extends Component {
   render() {
     return (
-      <Home />
+      <div>
+        <div className="ui buttons">
+          <button className="ui basic blue button">
+            <i className="camera retro icon" />Screenshot
+          </button>
+          <button className="ui basic blue button">
+            <i className="refresh icon" /> Reload
+          </button>
+        </div>
+        <Home />
+      </div>
     );
   }
 }

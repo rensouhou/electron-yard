@@ -5,7 +5,6 @@
  * @author Stefan Rimaila <stefan@rimaila.fi>
  * @module app/containers/DevTools
  */
-
 import React from 'react';
 import { createDevTools } from 'redux-devtools';
 import LogMonitor from 'redux-devtools-log-monitor';

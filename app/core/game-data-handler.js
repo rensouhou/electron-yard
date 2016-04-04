@@ -1,5 +1,6 @@
 /**
  * @overview
+ *  Game data handler for {@see KCSApi} traffic
  *
  * @since 0.1.0
  * @author Stefan Rimaila
