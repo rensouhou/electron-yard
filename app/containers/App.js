@@ -1,5 +1,6 @@
 /**
  * @overview
+ *  Root layout for application
  *
  * @since 0.2.0
  * @author Stefan Rimaila <stefan@rimaila.fi>
@@ -12,18 +13,18 @@ export default class App extends Component {
     children: PropTypes.element.isRequired
   };
 
+  renderDevTools = () => {
+    if (process.env.NODE_ENV !== 'production') {
+      const DevTools = require('./DevTools');
+      return <DevTools />;
+    }
+  };
+
   render() {
     return (
       <div>
         {this.props.children}
-        {
-          (() => {
-            if (process.env.NODE_ENV !== 'production') {
-              const DevTools = require('./DevTools');
-              return <DevTools />;
-            }
-          })()
-        }
+        {this.renderDevTools()}
       </div>
     );
   }
