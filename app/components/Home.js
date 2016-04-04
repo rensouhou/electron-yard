@@ -12,7 +12,7 @@ export default class Home extends Component {
   render() {
     return (
       <div>
-        <h1>Helo</h1>
+        <h1>Placeholder</h1>
       </div>
     );
   }
