@@ -8,7 +8,6 @@
 import React, { Component, PropTypes } from 'react';
 import { findDOMNode } from 'react-dom';
 
-import webview from './electron/electron.webview';
 import { handleGameView } from '../core/game-data-handler';
 
 class Game extends Component {
@@ -26,17 +25,13 @@ class Game extends Component {
     view.nodeintegration = true;
     view.plugins = true;
 
-    const n = findDOMNode(this.refs.gameViewHolder);
+    const n = findDOMNode(this.refs.gameViewHolder).appendChild(view);
     n.appendChild(view);
 
     view.addEventListener('dom-ready', handleGameView);
-
-    console.log('n =>', n);
   }
 
   render() {
-    console.log('component:Game', this.props);
-
     return (
       <div ref="gameViewHolder">
       </div>
