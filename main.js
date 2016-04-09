@@ -15,9 +15,7 @@ const path = require('path');
 const electron = require('electron');
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
-// const Menu = electron.Menu;
 const crashReporter = electron.crashReporter;
-// const shell = electron.shell;
 
 crashReporter.start();
 
@@ -32,7 +30,7 @@ if (process.platform === 'darwin') {
   ppapiFlashPath = path.join(__dirname, 'lib', 'PepperFlashPlayer.plugin');
 }
 
-app.commandLine.appendSwitch('remote-debugging-port', '8609');
+app.commandLine.appendSwitch('remote-debugging-port', '8642');
 app.commandLine.appendSwitch('ppapi-flash-path', ppapiFlashPath);
 app.commandLine.appendSwitch('ppapi-flash-version', '21.0.0.197');
 
@@ -47,8 +45,6 @@ function createWindow() {
 
   mainWindow = new BrowserWindow(windowOpts);
   mainWindow.loadURL(`file://${__dirname}/app/app.html`);
-
-  mainWindow.webContents.openDevTools();
 
   mainWindow.webContents.on('did-finish-load', () => {
     mainWindow.show();
@@ -72,5 +68,3 @@ app.on('activate', () => {
     createWindow();
   }
 });
-
-

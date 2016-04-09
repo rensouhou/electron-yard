@@ -7,25 +7,19 @@
  * @module app/containers/App
  */
 import React, { Component, PropTypes } from 'react';
+import BaseContainer from './BaseContainer';
 
 export default class App extends Component {
   static propTypes = {
     children: PropTypes.element.isRequired
   };
 
-  renderDevTools = () => {
-    if (process.env.NODE_ENV !== 'production') {
-      const DevTools = require('./DevTools');
-      return <DevTools />;
-    }
-  };
-
   render() {
+    const { children } = this.props;
     return (
-      <div>
-        {this.props.children}
-        {this.renderDevTools()}
-      </div>
+      <BaseContainer>
+        {children}
+      </BaseContainer>
     );
   }
 }

@@ -12,6 +12,8 @@ const remote = require('electron').remote;
 import GameDataHandler from './core/game-data-handler';
 import config from './config';
 
+window.kcscontainer = window.kcscontainer || {};
+
 const curWindow = remote.getCurrentWindow();
 curWindow.removeAllListeners();
 
@@ -22,6 +24,8 @@ let initialLoad = true;
 let firstGameLoad = true;
 let gameUrl;
 let debuggerAttached = false;
+
+const selfwindow = window;
 
 gameView.addEventListener('dom-ready', () => {
   const webContents = gameView.getWebContents();
@@ -57,6 +61,8 @@ gameView.addEventListener('dom-ready', () => {
         gameUrl = details.url;
         firstGameLoad = false;
         webContents.loadURL(gameUrl);
+
+        selfwindow.kcscontainer.webContents = webContents;
       }
     });
   }
@@ -70,21 +76,3 @@ gameView.addEventListener('dom-ready', () => {
     'document.cookie = "ckcy=1;expires=Sun, 09 Feb 2019 09:00:09 GMT;domain=.dmm.com;path=/netgame_s/";'
   ].join('\n'));
 });
-
-// @todo(stuf): take care of different DPI screenshots?
-document.getElementById('capture').addEventListener('click', (e) => {
-  e.preventDefault();
-  const gameViewRect = gameView.getBoundingClientRect();
-  remote.getCurrentWindow().capturePage({
-    x: gameViewRect.left,
-    y: gameViewRect.top,
-    width: gameViewRect.width,
-    height: gameViewRect.height
-  }, (image) => {
-    const filename = `/Users/stuf/electron_${+(new Date())}.png`;
-    fs.writeFile(filename, image.toPng(), () => {
-      console.log(`Screenshot saved as: ${filename}`);
-    });
-  });
-});
-

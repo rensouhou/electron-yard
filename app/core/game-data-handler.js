@@ -34,7 +34,6 @@ export default class GameDataHandler {
 
             webContents.debugger.sendCommand('Network.getResponseBody', { requestId },
               (err, result) => {
-                console.log(`${requestId}: Network.getResponseBody done = ${path}`);
                 let jsonBody;
 
                 try {
@@ -46,7 +45,7 @@ export default class GameDataHandler {
                   console.error(e);
                 }
 
-                console.log(`${requestId}:\t%O`, JSON.parse(JSON.stringify({ path, response, jsonBody })));
+                console.log(`${requestId}: Network.getResponseBody done = ${path}\t%O`, JSON.parse(JSON.stringify({ path, response, jsonBody })));
               });
           }
           break;

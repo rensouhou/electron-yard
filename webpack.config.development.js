@@ -24,7 +24,10 @@ config.output.publicPath = 'http://localhost:3000/dist/';
 config.module.loaders.push(
   {
     test: /\.less$/,
-    loader: 'style!css!autoprefixer!less'
+    loaders: [
+      'style-loader',
+      'css-loader?modules&sourceMap&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]'
+    ]
   },
   {
     test: /\.global\.css$/,
@@ -43,6 +46,7 @@ config.module.loaders.push(
 
 config.plugins.push(
   new webpack.optimize.OccurenceOrderPlugin(),
+  new webpack.optimize.DedupePlugin(),
   new webpack.HotModuleReplacementPlugin(),
   new webpack.NoErrorsPlugin(),
   new webpack.DefinePlugin({

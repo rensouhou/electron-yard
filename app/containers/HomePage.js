@@ -5,23 +5,25 @@
  * @author Stefan Rimaila <stefan@rimaila.fi>
  * @module app/containers/HomePage
  */
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import Home from '../components/Home';
+import { connect } from 'react-redux';
 
-export default class HomePage extends Component {
+class HomeContainer extends Component {
   render() {
     return (
-      <div>
-        <div className="ui buttons">
-          <button className="ui basic blue button">
-            <i className="camera retro icon" />Screenshot
-          </button>
-          <button className="ui basic blue button">
-            <i className="refresh icon" /> Reload
-          </button>
-        </div>
-        <Home />
-      </div>
+      <Home />
     );
   }
 }
+
+const mapStateToProps = (state) => ({
+  coreApp: {
+    gameWebView: state.coreApp.gameWebView
+  }
+});
+
+export default connect(
+  mapStateToProps,
+  null
+)(HomeContainer);

@@ -9,6 +9,7 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import { persistState } from 'redux-devtools';
 import thunk from 'redux-thunk';
 import createLogger from 'redux-logger';
+import promiseMiddleware from 'redux-promise';
 import { hashHistory } from 'react-router';
 import { routerMiddleware } from 'react-router-redux';
 import rootReducer from '../reducers';
@@ -22,7 +23,7 @@ const logger = createLogger({
 const router = routerMiddleware(hashHistory);
 
 const enhancer = compose(
-  applyMiddleware(thunk, router, logger),
+  applyMiddleware(thunk, router, promiseMiddleware, logger),
   DevTools.instrument(),
   persistState(
     window.location.href.match(
@@ -33,6 +34,8 @@ const enhancer = compose(
 
 export default function configureStore(initialState) {
   const store = createStore(rootReducer, initialState, enhancer);
+
+  console.log('initial state =>', initialState);
 
   if (module.hot) {
     module.hot.accept('../reducers', () => {
