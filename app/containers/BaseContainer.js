@@ -28,7 +28,6 @@ class BaseContainer extends Component {
   };
 
   render() {
-    console.log('BaseContainer.render:this.props =', this.props);
     const { children } = this.props;
     return (
       <Base>

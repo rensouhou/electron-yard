@@ -25,7 +25,7 @@ class Game extends Component {
     view.nodeintegration = true;
     view.plugins = true;
 
-    const n = findDOMNode(this.refs.gameViewHolder).appendChild(view);
+    const n = findDOMNode(this.refs.gameViewHolder);
     n.appendChild(view);
 
     view.addEventListener('dom-ready', handleGameView);

@@ -16,9 +16,7 @@ class GameContainer extends Component {
   };
 
   render() {
-    console.log('GameContainer.render:this.props =', this.props);
     const { gameURL } = this.props;
-
     return <Game gameURL={gameURL} />;
   }
 }

@@ -5,17 +5,14 @@
  * @author Stefan Rimaila <stefan@rimaila.fi>
  * @module app/reducers/core-app
  */
-import { REGISTER_GAME_VIEW, UPDATE_CONFIGURATION } from '../actions/app-core';
+import {
+  REGISTER_GAME_VIEW,
+  UPDATE_CONFIGURATION
+} from '../actions/app-core';
 
-const initialState = {
-  gameWebView: null
-};
-
-export default function appCoreReducer(state = initialState, action) {
-  console.log(`appCoreReducer():call; action = ${action.type}`);
+export default function appCoreReducer(state = {}, action) {
   switch (action.type) {
     case REGISTER_GAME_VIEW:
-      console.log(REGISTER_GAME_VIEW);
       return { ...state, gameview: action.payload };
     case UPDATE_CONFIGURATION:
       return { ...state, config: action.payload };
