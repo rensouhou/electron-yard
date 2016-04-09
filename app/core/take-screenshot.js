@@ -8,11 +8,13 @@
  */
 const browserWindow = require('electron').remote.getCurrentWindow();
 
-export function takeScreenshot(event: Event): boolean {
+export function takeScreenshot(event:Event):boolean {
+  console.error('Deprecated use, fix reference to gameView');
+
   event.preventDefault();
-  const gameView: HTMLElement = document.getElementById('game');
-  const gameViewRect: ClientRect = gameView.getBoundingClientRect();
-  let wasSuccessful: boolean = false;
+  const gameView:HTMLElement = document.getElementById('game');
+  const gameViewRect:ClientRect = gameView.getBoundingClientRect();
+  let wasSuccessful:boolean = false;
 
   browserWindow.capturePage({
     x: gameViewRect.left,
@@ -21,7 +23,7 @@ export function takeScreenshot(event: Event): boolean {
     height: gameViewRect.height
   }, (image) => {
     const fs = require('fs');
-    const filename: string = `/Users/stuf/electron_${+(new Date())}.png`;
+    const filename:string = `/Users/stuf/electron_${+(new Date())}.png`;
     fs.writeFile(filename, image.toPng(), () => {
       console.log(`Screenshot saved as: ${filename}`);
       wasSuccessful = true;

@@ -6,17 +6,39 @@
  * @module app/components/Game
  */
 import React, { Component, PropTypes } from 'react';
+import { findDOMNode } from 'react-dom';
+
+import webview from './electron/electron.webview';
+import { handleGameView } from '../core/game-data-handler';
 
 class Game extends Component {
   static propTypes = {
     gameURL: PropTypes.any
   };
 
+  componentDidMount() {
+    const view = document.createElement('webview');
+    view.src = 'http://www.dmm.com/netgame/social/-/gadgets/=/app_id=854854/';
+    view.partition = 'persist:kc';
+    view.style.width = '800px';
+    view.style.height = '480px';
+    view.style.border = 'solid 2px #f00';
+    view.nodeintegration = true;
+    view.plugins = true;
+
+    const n = findDOMNode(this.refs.gameViewHolder);
+    n.appendChild(view);
+
+    view.addEventListener('dom-ready', handleGameView);
+
+    console.log('n =>', n);
+  }
+
   render() {
     console.log('component:Game', this.props);
+
     return (
-      <div>
-        game
+      <div ref="gameViewHolder">
       </div>
     );
   }

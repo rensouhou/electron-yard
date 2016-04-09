@@ -12,20 +12,14 @@ const remote = require('electron').remote;
 import GameDataHandler from './core/game-data-handler';
 import config from './config';
 
-window.kcscontainer = window.kcscontainer || {};
-
 const curWindow = remote.getCurrentWindow();
 curWindow.removeAllListeners();
 
 const gameView = document.querySelector('#game');
-const uiView = document.querySelector('#ui');
 
-let initialLoad = true;
 let firstGameLoad = true;
 let gameUrl;
 let debuggerAttached = false;
-
-const selfwindow = window;
 
 gameView.addEventListener('dom-ready', () => {
   const webContents = gameView.getWebContents();
@@ -61,8 +55,6 @@ gameView.addEventListener('dom-ready', () => {
         gameUrl = details.url;
         firstGameLoad = false;
         webContents.loadURL(gameUrl);
-
-        selfwindow.kcscontainer.webContents = webContents;
       }
     });
   }
