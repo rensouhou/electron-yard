@@ -8,14 +8,17 @@
 import React, { Component, PropTypes } from 'react';
 import { findDOMNode } from 'react-dom';
 
-import { handleGameView } from '../core/game-data-handler';
+import { createGameViewHandler } from '../core/game-data-handler';
 
 class Game extends Component {
   static propTypes = {
-    gameURL: PropTypes.any
+    gameURL: PropTypes.any,
+    parseApiData: PropTypes.func.isRequired
   };
 
   componentDidMount() {
+    const { gameViewHolder } = this.refs;
+    const { parseApiData } = this.props;
     const view = document.createElement('webview');
     view.src = 'http://www.dmm.com/netgame/social/-/gadgets/=/app_id=854854/';
     view.partition = 'persist:kc';
@@ -24,18 +27,13 @@ class Game extends Component {
     view.style.border = 'solid 2px #f00';
     view.nodeintegration = true;
     view.plugins = true;
+    view.addEventListener('dom-ready', createGameViewHandler(parseApiData));
 
-    const n = findDOMNode(this.refs.gameViewHolder);
-    n.appendChild(view);
-
-    view.addEventListener('dom-ready', handleGameView);
+    findDOMNode(gameViewHolder).appendChild(view);
   }
 
   render() {
-    return (
-      <div ref="gameViewHolder">
-      </div>
-    );
+    return <div ref="gameViewHolder"></div>;
   }
 }
 

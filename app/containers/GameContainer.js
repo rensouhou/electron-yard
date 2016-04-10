@@ -6,10 +6,15 @@
  * @module app/containers/Game
  */
 import { connect } from 'react-redux';
-import { registerGameView } from '../actions/app-core';
+import { bindActionCreators } from 'redux';
+import * as GameActions from '../actions/game';
 import Game from '../components/Game';
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(GameActions, dispatch);
+}
 
 export default connect(
   null,
-  { registerGameView }
+  mapDispatchToProps
 )(Game);

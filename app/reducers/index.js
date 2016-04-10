@@ -8,11 +8,11 @@
 import { combineReducers } from 'redux';
 import { routerReducer as routing } from 'react-router-redux';
 import coreApp from './app-core';
-import electron from './electron';
+import game from './game';
 
 const rootReducer = combineReducers({
-  electron,
   coreApp,
+  game,
   routing
 });
 
