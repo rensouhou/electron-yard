@@ -19,7 +19,7 @@ class HomeContainer extends Component {
 
 const mapStateToProps = (state) => ({
   coreApp: {
-    gameWebView: state.coreApp.gameWebView
+    gameWebView: state.core.gameWebView
   }
 });
 

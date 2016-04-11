@@ -7,8 +7,8 @@
  */
 import React, { Component, PropTypes } from 'react';
 import { findDOMNode } from 'react-dom';
-
 import { createGameViewHandler } from '../core/game-data-handler';
+import config from '../config';
 
 class Game extends Component {
   static propTypes = {
@@ -16,6 +16,8 @@ class Game extends Component {
     parseApiData: PropTypes.func.isRequired
   };
 
+  // The webview needs to be appended as a vanilla DOM element,
+  // since the `plugins` does not if mounted through React.
   componentDidMount() {
     const { gameViewHolder } = this.refs;
     const { parseApiData } = this.props;
@@ -27,12 +29,13 @@ class Game extends Component {
     view.style.border = 'solid 2px #f00';
     view.nodeintegration = true;
     view.plugins = true;
-    view.addEventListener('dom-ready', createGameViewHandler(parseApiData));
+    view.addEventListener('dom-ready', createGameViewHandler(parseApiData, config));
 
     findDOMNode(gameViewHolder).appendChild(view);
   }
 
   render() {
+    console.log('this.props =>', this.props);
     return <div ref="gameViewHolder"></div>;
   }
 }

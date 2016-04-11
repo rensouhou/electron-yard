@@ -1,28 +1,15 @@
-/* eslint quote-props: 0, no-param-reassign: 0 */
+/* eslint quote-props: 0 */
 /**
  * @overview
  *
  * @since 0.3.0
  * @author Stefan Rimaila <stefan@rimaila.fi>
- * @module app/actions/game
- * @flow
+ * @module app/constants/api-events
  */
-import type { ApiRequest, ApiRequestResult } from '../types/api';
-
-import { createAction } from 'redux-actions';
 import T from 'immutable';
-import ApiTransformers from '../transformers/kcsapi';
 
-// const reduceFn = (acc, t) => acc.concat([t, ApiTransformers[t]]);
-// const boundTransformersMap = T.Map(Object.keys(ApiTransformers).reduce(reduceFn, []));
-
-export const RECEIVED_API_DATA:string = 'RECEIVED_API_DATA';
-export const PARSED_API_DATA:string = 'PARSED_API_DATA';
-
-/**
- * @type {Dockyard.Events}
- */
-const EVENTS = T.Map({
+/** @type {Dockyard.ApiEventsByPath} */
+export const apiEventsByPath = T.Map({
   'api_start2': 'INITIALIZE_GAME',
   'api_port/port': 'GET_BASE_DATA',
   'mission/start': 'START_MISSION',
@@ -68,19 +55,52 @@ const EVENTS = T.Map({
   'get_member/payitem': 'GET_PAID_ITEMS',
   'get_member/slot_item': 'GET_SLOT_ITEMS'
 });
-const transformers = T.Map(ApiTransformers);
 
-export const getBaseData = createAction('GET_BASE_DATA', (data:ApiRequest):ApiRequestResult => {
+export default {
+  INITIALIZE_GAME: 'INITIALIZE_GAME',
+  GET_PROFILE_DATA: 'GET_PROFILE_DATA',
+  GET_FURNITURE: 'GET_FURNITURE',
+  GET_BASE_DATA: 'GET_BASE_DATA',
+  GET_MATERIAL: 'GET_MATERIAL',
+  GET_USABLE_ITEMS: 'GET_USABLE_ITEMS',
+  GET_FLEET_DATA: 'GET_FLEET_DATA',
+  GET_FLEET: 'GET_FLEET',
+  GET_SLOT_ITEMS: 'GET_SLOT_ITEMS',
+  USE_ITEM: 'USE_ITEM',
+  DESTROY_ITEM: 'DESTROY_ITEM',
 
-});
+  // Ship-related
+  CREATE_SHIP: 'CREATE_SHIP',
+  CHANGE_SHIP: 'CHANGE_SHIP',
+  RESUPPLY_SHIP: 'RESUPPLY_SHIP',
+  DESTROY_SHIP: 'DESTROY_SHIP',
+  REMODEL_SHIP: 'REMODEL_SHIP',
+  MODERNIZE_SHIP: 'MODERNIZE_SHIP',
 
-export const parseApiData = createAction(RECEIVED_API_DATA, (data:ApiRequest):ApiRequestResult => {
-  const event:string = EVENTS.find((v:string, k:string) => data.path.includes(k));
+  // Fleet-related (and combined)
+  FLEET_COMBINED: 'FLEET_COMBINED',
+  COMBINED_BATTLE_WATER_PHASE: 'COMBINED_BATTLE_WATER_PHASE',
 
-  if (!transformers.has(event)) {
-    console.warn(`No handler for event ${event}`);
-  }
-  else {
-    return transformers.get(event)(data);
-  }
-});
+  // Quests
+  GET_QUEST_LIST: 'GET_QUEST_LIST',
+  START_QUEST: 'START_QUEST',
+  STOP_QUEST: 'STOP_QUEST',
+
+  // Expeditions/missions
+  GET_MISSION_LIST: 'GET_MISSION_LIST',
+  START_MISSION: 'START_MISSION',
+  QUIT_MISSION: 'QUIT_MISSION',
+
+  // PVP/Practice
+  GET_OPPONENT_INFO: 'GET_OPPONENT_INFO',
+  GET_PVP_OPPONENT_LIST: 'GET_PVP_OPPONENT_LIST',
+  START_PVP_BATTLE: 'START_PVP_BATTLE',
+  START_PVP_NIGHT_BATTLE: 'START_PVP_NIGHT_BATTLE',
+  FINISHED_PRACTICE: 'FINISHED_PRACTICE',
+
+  // Sorties
+  START_SORTIE: 'START_SORTIE',
+
+  // Items
+  USE_PAID_ITEM: 'USE_PAID_ITEM'
+};

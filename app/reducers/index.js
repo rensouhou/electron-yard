@@ -7,12 +7,14 @@
  */
 import { combineReducers } from 'redux';
 import { routerReducer as routing } from 'react-router-redux';
-import coreApp from './app-core';
+import core from './app-core';
 import game from './game';
+import player from './player';
 
 const rootReducer = combineReducers({
-  coreApp,
+  core,
   game,
+  player,
   routing
 });
 

@@ -2,6 +2,7 @@
  * @overview
  *
  * @since 0.1.0
+ * @version 0.3.0
  * @author Stefan Rimaila <stefan@rimaila.fi>
  */
 import 'babel-polyfill';
@@ -27,3 +28,4 @@ render(
   </Provider>,
   document.getElementById('root')
 );
+
