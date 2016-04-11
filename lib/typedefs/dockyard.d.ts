@@ -70,25 +70,27 @@ namespace __PROTO {
     postBody?: any;
   }
 
+  /**
+   * Application internal state shape
+   */
   export interface AppState {
     core: {
-
     };
 
     /**
+     * Game-related base data
      * Holds the processed (but not yet transformed?) API data.
      */
     game: {
       ships: Array<Dockyard.BaseData.Ship>
       shipTypes: Array<Dockyard.BaseData.ShipTypes>;
       slotItems: Array<Dockyard.BaseData.SlotItem>;
+      slotItemTypes: Array<any>;
     };
 
-    /**
-     * The player's personalized stuff
-     */
+    /** The player's personalized stuff */
     player: {
-      id: number;   // shorthand
+      id: number;
       profile: Dockyard.PlayerData.Profile;
       quests: Array<Dockyard.PlayerData.Quest>;
       fleets: Array<Dockyard.PlayerData.Fleet>;
@@ -99,7 +101,7 @@ namespace __PROTO {
       inventory: {
         ships: Array<Dockyard.PlayerData.Ship>;
         slotItems: Array<Dockyard.PlayerData.SlotItem>;
-        materials: {};
+        materials: Dockyard.PlayerData.Materials;
       }
     };
   }

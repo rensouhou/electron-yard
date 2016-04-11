@@ -153,13 +153,9 @@ function Handler(wc, parseFunObj, cfg) {
 
                 const res = { path, error, body, postBody };
 
-                console.log(`Available transformerActions: ${Object.keys(parseFunObj.transformerActions).join()}`);
-
                 // Look up the appropriate event name
                 const eventToHandle = ApiEventsByPath.find((v, k) => res.path.includes(k));
                 const handler = (parseFunObj.transformerActions || {})[eventToHandle];
-
-                console.log({ eventToHandle, handler });
 
                 if (eventToHandle && handler) {
                   console.log(`found a handler for the event ${eventToHandle}`);
