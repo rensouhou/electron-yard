@@ -8,36 +8,27 @@
  * @see {@link __PROTO.AppState}
  * @flow
  */
-
+import type { ApiRequest, ApiRequestResult } from '../../types/api';
 import profile from '../profile';
 import fleet from '../fleet';
 import materials from '../materials';
 
-type ApiRequest = {
-  path: string,
-  status: string,
-  body: ?any,
-  postBody: ?any
-};
-
-export default function (r:ApiRequest) {
-  const event = 'GET_BASE_DATA';
+// Entry point
+export default function (r: ApiRequest): ApiRequestResult {
+  console.log('get-base-data:Handler', r);
   const basic = r.body.api_basic;
 
   const player = {
     id: basic.api_member_id,
     profile: profile(basic),
     quests: {},
-    fleets: fleet(r.body.api_deck_port),
+    fleets: r.body.api_deck_port.map(fleet),
     docks: {},
     inventory: {
       ships: r.body.api_ship,
       materials: materials(r.body.api_material)
     }
   };
-
-  // @todo(@stuf): Dispatch this through its own proper event
-  [player].forEach(it => it.$_type = event);
 
   return { player };
 }

@@ -13,14 +13,15 @@ import config from '../config';
 class Game extends Component {
   static propTypes = {
     gameURL: PropTypes.any,
-    parseApiData: PropTypes.func.isRequired
+    game: PropTypes.object,
+    transformerActions: PropTypes.object
   };
 
   // The webview needs to be appended as a vanilla DOM element,
   // since the `plugins` does not if mounted through React.
   componentDidMount() {
     const { gameViewHolder } = this.refs;
-    const { parseApiData } = this.props;
+    const { game, transformerActions } = this.props;
     const view = document.createElement('webview');
     view.src = 'http://www.dmm.com/netgame/social/-/gadgets/=/app_id=854854/';
     view.partition = 'persist:kc';
@@ -29,7 +30,7 @@ class Game extends Component {
     view.style.border = 'solid 2px #f00';
     view.nodeintegration = true;
     view.plugins = true;
-    view.addEventListener('dom-ready', createGameViewHandler(parseApiData, config));
+    view.addEventListener('dom-ready', createGameViewHandler({ game, transformerActions }, config));
 
     findDOMNode(gameViewHolder).appendChild(view);
   }

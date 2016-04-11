@@ -9,7 +9,7 @@
 import T from 'immutable';
 
 /** @type {Dockyard.ApiEventsByPath} */
-export const apiEventsByPath = T.Map({
+export const ApiEventsByPath = T.Map({
   'api_start2': 'INITIALIZE_GAME',
   'api_port/port': 'GET_BASE_DATA',
   'mission/start': 'START_MISSION',
@@ -56,7 +56,7 @@ export const apiEventsByPath = T.Map({
   'get_member/slot_item': 'GET_SLOT_ITEMS'
 });
 
-export default {
+export const ApiEvents = {
   INITIALIZE_GAME: 'INITIALIZE_GAME',
   GET_PROFILE_DATA: 'GET_PROFILE_DATA',
   GET_FURNITURE: 'GET_FURNITURE',

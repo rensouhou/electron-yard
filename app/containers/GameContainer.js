@@ -11,7 +11,10 @@ import * as GameActions from '../actions/game';
 import Game from '../components/Game';
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators(GameActions, dispatch);
+  return {
+    transformerActions: bindActionCreators(GameActions.transformerActions(), dispatch),
+    game: bindActionCreators(GameActions.game(), dispatch)
+  };
 }
 
 export default connect(

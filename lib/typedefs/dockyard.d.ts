@@ -64,11 +64,10 @@ namespace __PROTO {
   enum Status { OK, ERROR }
 
   export interface ApiRequest {
-    status: Status;
+    path: string;
     error?: any;
     body?: any;
-    post?: any;
-    path: string;
+    postBody?: any;
   }
 
   export interface AppState {

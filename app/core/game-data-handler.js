@@ -9,8 +9,10 @@
  */
 import qs from 'querystring';
 import T from 'immutable';
-import config from '../config';
 import invariant from 'invariant';
+
+import { ApiEventsByPath } from '../constants/api-events';
+import config from '../config';
 
 let req = T.Map();
 
@@ -24,17 +26,20 @@ const NETWORK = {
   LoadingFinished: 'Network.loadingFinished'
 };
 
-export function createGameViewHandler(parseFn, cfg) {
-  invariant(parseFn, 'A parsing function is required.');
+export function createGameViewHandler(parseFunObj, cfg) {
+  invariant(parseFunObj, 'A parsing function is required.');
   invariant(cfg, 'A configuration object is required.');
 
-  return handleGameView(parseFn, cfg);
+  console.log('createGameViewHandler; parseFn =', parseFunObj);
+
+  return handleGameView(parseFunObj, cfg);
 }
 
-export function handleGameView(parseFn, cfg) {
+export function handleGameView(parseFunObj, cfg) {
   return (e) => {
     const view = e.target;
     const wc = view.getWebContents();
+    /** @type {Electron.Session} */
     const ws = wc.session;
 
     invariant(view, 'A webview reference is required.');
@@ -55,8 +60,7 @@ export function handleGameView(parseFn, cfg) {
       }
 
       wc.debugger.on('detach', () => debuggerAttached = false);
-
-      wc.debugger.on('message', new Handler(wc, parseFn, cfg));
+      wc.debugger.on('message', new Handler(wc, parseFunObj, cfg));
       wc.debugger.sendCommand('Network.enable');
 
       // Redirect to the SWF itself when available.
@@ -82,8 +86,6 @@ export function handleGameView(parseFn, cfg) {
         'document.cookie = "ckcy=1;expires=Sun, 09 Feb 2019 09:00:09 GMT;domain=.dmm.com;path=/netgame_s/";'
       ].join('\n'));
     }
-
-    console.log(e);
   };
 }
 
@@ -97,10 +99,9 @@ function logMethod(requestId, method, ...args) {
 
 /**
  * Game data interceptor
- *
  * @todo(@stuf): add support to choose which action to dispatch instead of generic actions
  */
-function Handler(wc, parseFn, cfg) {
+function Handler(wc, parseFunObj, cfg) {
   return (event, method, params) => {
     const { pathPrefix, apiDataPrefix } = cfg;
     const { requestId } = params;
@@ -116,7 +117,6 @@ function Handler(wc, parseFn, cfg) {
                 request: params.request,
                 path: parsePath(url, pathPrefix)
               }));
-            console.log('req =>', req.toJS());
           }
           break;
         case NETWORK.ResponseReceived:
@@ -124,12 +124,10 @@ function Handler(wc, parseFn, cfg) {
           if (pathPrefix.test(url)) {
             req = req.update(requestId,
               (it) => Object.assign({}, it, { response: params.response }));
-            console.log('req =>', req.toJS());
           }
           break;
         case NETWORK.LoadingFinished:
           if (req.has(requestId)) {
-            logMethod(requestId, method);
             const { path, request } = req.get(requestId);
             req = req.delete(requestId);
             wc.debugger.sendCommand('Network.getResponseBody', { requestId },
@@ -155,9 +153,17 @@ function Handler(wc, parseFn, cfg) {
 
                 const res = { path, error, body, postBody };
 
-                if (!!parseFn && typeof parseFn === 'function') {
-                  /** @type {__PROTO.ApiRequest} */
-                  parseFn(res);
+                console.log(`Available transformerActions: ${Object.keys(parseFunObj.transformerActions).join()}`);
+
+                // Look up the appropriate event name
+                const eventToHandle = ApiEventsByPath.find((v, k) => res.path.includes(k));
+                const handler = (parseFunObj.transformerActions || {})[eventToHandle];
+
+                console.log({ eventToHandle, handler });
+
+                if (eventToHandle && handler) {
+                  console.log(`found a handler for the event ${eventToHandle}`);
+                  handler(res);
                 }
 
                 console.log(`${requestId}: Network.getResponseBody done = ${path}\t%O`,
