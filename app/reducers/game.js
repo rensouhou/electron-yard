@@ -11,9 +11,7 @@ export default function gameReducer(state = {}, action) {
   switch (action.type) {
     case ApiEvents.INITIALIZE_GAME:
       console.log(`ApiEvents.${action.type}`, { state, action });
-      return Object.assign({}, state, {
-        ships: action.payload.ships
-      });
+      return Object.assign({}, state, action.payload);
     default:
       return state;
   }

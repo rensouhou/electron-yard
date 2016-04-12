@@ -11,9 +11,28 @@
 import type { Material } from '../types/kcsapi';
 import R from 'ramda';
 
-const materials = ['fuel', 'ammo', 'steel', 'bauxite', 'one', 'two', 'three', 'four'];
+/** @private */
+const materials = [
+  'fuel', 'ammo', 'steel', 'bauxite', 'instantConstruction', 'instantRepair', 'developmentMaterials',
+  'improvementMaterials'
+];
+
+/** @private */
 const matIntoPair = R.map(({ api_id, api_value }:Material):[number, number] => [api_id, api_value]);
+
+/** @private */
 const fixMatKey = R.map(([i, v]:[number, number]):[string, number] => [materials[i - 1], v]);
 
+/**
+ * @type {Function}
+ * @example
+ * let mats = [100, 100, 200, 50];
+ * let matObj = parseMaterialArray(mats);
+ * console.log(matObj); // => { fuel: 100, ammo: 100, steel: 200, bauxite: 50 }
+ */
 export const parseMaterialArray = R.zipObj(materials);
+
+/**
+ * @type {Function}
+ */
 export const parseMaterialObjects = R.compose(R.fromPairs, fixMatKey, matIntoPair);
