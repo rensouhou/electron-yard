@@ -10,7 +10,7 @@
 export type ApiRequest = {
   path: string,
   status: string,
-  body: ?any,
+  body: ?(Array<any> | { [key: string]: (string | number | Array | Object)}),
   postBody: ?any
 };
 

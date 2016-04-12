@@ -74,6 +74,9 @@ namespace __PROTO {
    * Application internal state shape
    */
   export interface AppState {
+    /**
+     * Core state
+     */
     core: {
     };
 
@@ -88,7 +91,9 @@ namespace __PROTO {
       slotItemTypes: Array<any>;
     };
 
-    /** The player's personalized stuff */
+    /**
+     * The player's personalized stuff
+     */
     player: {
       id: number;
       profile: Dockyard.PlayerData.Profile;
