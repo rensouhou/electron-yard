@@ -25,7 +25,7 @@ namespace Dockyard {
       };
       rarity: Rarity;
       gains: {
-        scrap: BasicMaterials;
+        scrap: Materials;
         remodel: RemodelGains;
       };
       stats: ShipStats;
@@ -120,11 +120,15 @@ namespace Dockyard {
     postBody?: any;
   }
 
-  export interface BasicMaterials {
+  export interface Materials {
     fuel: number;
     ammo: number;
     steel: number;
     bauxite: number;
+    instantConstruction?: number;
+    instantRepair?: number;
+    developmentMaterials?: number;
+    improvementMaterials?: number;
   }
 
   export interface RemodelGains {
