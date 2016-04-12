@@ -1,4 +1,4 @@
-/* eslint no-param-reassign: 0 */
+/* eslint no-param-reassign: 0, camelcase: 0 */
 /**
  * @overview
  *
@@ -8,23 +8,12 @@
  * @see {@link __PROTO.AppState}
  * @flow
  */
+import type { Material } from '../types/kcsapi';
+import R from 'ramda';
 
-type Material = {
-  api_id: number,
-  api_member_id: number,
-  api_value: number
-};
+const materials = ['fuel', 'ammo', 'steel', 'bauxite', 'one', 'two', 'three', 'four'];
+const matIntoPair = R.map(({ api_id, api_value }: Material) => [api_id, api_value]);
+const fixMatKey = R.map(([i, v]) => [materials[i - 1], v]);
 
-const materials = [
-  -1,
-  'fuel', 'ammo', 'steel', 'bauxite'
-];
-
-// @todo(@stuf): fix me up
-export default function (d:Array<Material>) {
-  return d.reduce((acc, m, i) => {
-    console.log(`${i} =>`, m);
-    acc[materials[i]] = m.api_value;
-    return acc;
-  }, {});
-}
+export const parseMaterialArray = R.zipObj(materials);
+export const parseMaterialObjects = R.compose(R.fromPairs, fixMatKey, matIntoPair);
