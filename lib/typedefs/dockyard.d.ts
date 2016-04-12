@@ -6,9 +6,70 @@ namespace Dockyard {
    * Non-personal base data
    */
   export module BaseData {
-    interface Ship {}
-    interface ShipTypes {}
+    interface Ship {
+      id: number;
+      sortId: number;
+      name: {
+        kanji: string;
+        reading?: string;
+      };
+      flavorText: string;
+      remodel: Remodel;
+      capacity: {
+        fuel: {
+          max: number;
+        };
+        ammo: {
+          max: number;
+        };
+      };
+      rarity: Rarity;
+      gains: {
+        scrap: BasicMaterials;
+        remodel: RemodelGains;
+      };
+      stats: ShipStats;
+      slots: {
+        count: number;
+        planeSlotCapacity: [number, number, number, number, number];
+      };
+      type: ShipType;
+      shipExtraVoices: boolean;
+    }
+
+    interface ShipType {
+      id: number;
+      sortId: number;
+      name: string;
+      equippableTypes: number;
+      _unknown: {
+        kcnt: any;
+        scnt: any;
+      };
+    }
+
     interface SlotItem {}
+
+    interface Remodel {
+      level: number;
+      remodelsToId: number;
+      cost: {
+        fuel: number;
+        ammo: number;
+      };
+    }
+
+    interface ShipStats {
+      firepower: [number, number];
+      torpedo: [number, number];
+      endurance: [number, number];
+      antiAir: [number, number];
+      luck: [number, number];
+      range: number;
+      speed: number;
+    }
+
+    enum Rarity { 1, 2, 3, 4, 5 }
   }
 
   export module PlayerData {
@@ -58,6 +119,19 @@ namespace Dockyard {
     body?: any;
     postBody?: any;
   }
+
+  export interface BasicMaterials {
+    fuel: number;
+    ammo: number;
+    steel: number;
+    bauxite: number;
+  }
+
+  export interface RemodelGains {
+    torpedo?: number;
+    stat?: number;
+    stat2?: number;
+  }
 }
 
 namespace __PROTO {
@@ -86,7 +160,7 @@ namespace __PROTO {
      */
     game: {
       ships: Array<Dockyard.BaseData.Ship>
-      shipTypes: Array<Dockyard.BaseData.ShipTypes>;
+      shipTypes: Array<Dockyard.BaseData.ShipType>;
       slotItems: Array<Dockyard.BaseData.SlotItem>;
       slotItemTypes: Array<any>;
     };
