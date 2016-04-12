@@ -8,8 +8,9 @@
  */
 import type { ApiRequest } from '../types/api';
 import type { PlayerProfile } from '../types/player-profile';
+import { asBool } from './primitive';
 
-export default (d: ApiRequest): PlayerProfile => ({
+export default (d:ApiRequest):PlayerProfile => ({
   id: d.api_member_id,
   nickname: d.api_nickname,
   level: d.api_level,
@@ -24,7 +25,7 @@ export default (d: ApiRequest): PlayerProfile => ({
   comment: d.api_comment,
   furniture: d.api_furniture,
   fleetCount: d.api_count_deck,
-  lsc: (d.api_large_dock !== 0),
+  lsc: asBool(d.api_large_dock),
   missions: {
     total: d.api_ms_count,
     succeeded: d.api_ms_success,
@@ -47,10 +48,10 @@ export default (d: ApiRequest): PlayerProfile => ({
   },
   startTime: d.api_starttime,
   tutorial: {
-    inProgress: (d.api_tutorial !== 0),
+    inProgress: asBool(d.api_tutorial),
     progress: d.api_tutorial_progress
   },
-  _active: (d.api_active_flag === 0),
+  _active: asBool(d.api_active_flag),
   _playtime: d.api_playtime,
   _ptChallenged: d.api_pt_challenged,
   _ptChallengedWon: d.api_pt_challenged_won,

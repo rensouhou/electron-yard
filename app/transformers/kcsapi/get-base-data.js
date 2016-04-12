@@ -10,11 +10,14 @@
  * @flow
  */
 import type { ApiRequest, ApiRequestResult } from '../../types/api';
+import { parseMaterialObjects } from '../materials';
 import profile from '../profile';
 import fleet from '../fleet';
-import { parseMaterialObjects } from '../materials';
 
-// Entry point
+/**
+ * @event GET_BASE_DATA
+ * @param r
+ */
 export default function (r:ApiRequest):ApiRequestResult {
   const basic = r.body.api_basic;
 
