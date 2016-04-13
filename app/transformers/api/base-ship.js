@@ -6,7 +6,7 @@
  * @module app/transformers/api/base-ship
  */
 import { asNumber, formatLineBreaks } from '../primitive';
-import { parseMaterialArray } from '../materials';
+import { parseMaterialArray } from './materials';
 
 /**
  * @param s

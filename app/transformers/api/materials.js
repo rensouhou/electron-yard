@@ -8,7 +8,7 @@
  * @see {@link __PROTO.AppState}
  * @flow
  */
-import type { Material } from '../types/kcsapi';
+import type { Material } from '../../types/kcsapi';
 import R from 'ramda';
 
 /** @private */

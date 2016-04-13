@@ -6,9 +6,9 @@
  * @module app/transformers/profile
  * @flow
  */
-import type { ApiRequest } from '../types/api';
-import type { PlayerProfile } from '../types/player-profile';
-import { asBool } from './primitive';
+import type { ApiRequest } from '../../types/api';
+import type { PlayerProfile } from '../../types/player-profile';
+import { asBool } from '../primitive';
 
 export default (d:ApiRequest):PlayerProfile => ({
   id: d.api_member_id,

@@ -6,7 +6,7 @@
  * @module app/transformers/kcsapi/get-material
  */
 import { ApiRequest, ApiRequestResult } from '../../types/api';
-import { parseMaterialObjects } from '../materials';
+import { parseMaterialObjects } from '../api/materials';
 
 /**
  * @param {__PROTO.ApiRequest} r

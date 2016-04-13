@@ -6,8 +6,8 @@
  * @module app/transformers
  */
 
-import fleet from './fleet';
-import profile from './profile';
-import materials from './materials';
+import fleet from './api/player-fleet';
+import profile from './api/player-profile';
+import materials from './api/materials';
 
 export default { fleet, profile, materials };

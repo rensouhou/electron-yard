@@ -5,7 +5,7 @@
  * @author Stefan Rimaila <stefan@rimaila.fi>
  * @module app/transformers/fleet
  */
-import { notEmpty, getArrayOrDefault } from './primitive';
+import { notEmpty, getArrayOrDefault } from '../primitive';
 
 /**
  * @param {KCSApi.PlayerFleet} d

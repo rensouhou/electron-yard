@@ -10,10 +10,10 @@
  * @flow
  */
 import type { ApiRequest, ApiRequestResult } from '../../types/api';
-import { parseMaterialObjects } from '../materials';
+import { parseMaterialObjects } from '../api/materials';
 import { playerShip } from '../api/player-ship';
-import profile from '../profile';
-import fleet from '../fleet';
+import profile from '../api/player-profile';
+import fleet from '../api/player-fleet';
 
 /**
  * @event GET_BASE_DATA

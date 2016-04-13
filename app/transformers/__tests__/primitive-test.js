@@ -1,7 +1,5 @@
 /* eslint no-undef: 0 */
 /**
- * @overview
- *
  * @since 0.3.0
  * @author Stefan Rimaila <stefan@rimaila.fi>
  * @module app/transformers/__tests__/primitive-test
@@ -10,7 +8,7 @@ import * as Primitive from '../primitive';
 
 jest.unmock('../primitive');
 
-describe('primitive', () => {
+describe('primitive transformer', () => {
   describe('asBool', () => {
     const { asBool } = Primitive;
     it('interprets `1` or `"1"` as `true`', () => {
