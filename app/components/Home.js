@@ -7,11 +7,15 @@
  */
 import React, { Component } from 'react';
 import GameContainer from '../containers/GameContainer';
+import HomeUIContainer from '../containers/HomeUIContainer';
 
 export default class Home extends Component {
   render() {
     return (
-      <GameContainer />
+      <div>
+        <GameContainer />
+        <HomeUIContainer />
+      </div>
     );
   }
 }

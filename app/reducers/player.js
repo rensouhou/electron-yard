@@ -7,7 +7,23 @@
  */
 import { ApiEvents } from '../actions/game';
 
-export default function playerReducer(state = {}, action) {
+const initialState = {
+  profile: {},
+  quests: [],
+  fleets: [],
+  missions: [],
+  docks: {
+    repairDocks: [],
+    constructionDocks: []
+  },
+  inventory: {
+    ships: [],
+    slotItems: [],
+    materials: {}
+  }
+};
+
+export default function playerReducer(state = initialState, action) {
   switch (action.type) {
     case ApiEvents.GET_BASE_DATA:
       return Object.assign({}, state, action.payload.player);

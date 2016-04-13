@@ -5,6 +5,7 @@
  * @author Stefan Rimaila <stefan@rimaila.fi>
  * @module app/transformers/fleet
  */
+import { notEmpty, getArrayOrDefault } from './primitive';
 
 /**
  * @param {KCSApi.PlayerFleet} d
@@ -16,7 +17,7 @@ const fleet = (d) => ({
   memberId: d.api_member_id,
   mission: d.api_mission,
   name: d.api_name,
-  ships: d.api_ship,
+  ships: getArrayOrDefault(d.api_ship).filter(notEmpty),
   $_unknown: {
     nameId: d.api_name_id
   }

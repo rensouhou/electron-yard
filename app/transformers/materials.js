@@ -30,7 +30,7 @@ const fixMatKey = R.map(([i, v]:[number, number]):[string, number] => [materials
  * let matObj = parseMaterialArray(mats);
  * console.log(matObj); // => { fuel: 100, ammo: 100, steel: 200, bauxite: 50 }
  */
-export const parseMaterialArray = R.zipObj(materials);
+export const parseMaterialArray = (arr) => R.zipObj(materials)(arr || []);
 
 /**
  * @type {Function}

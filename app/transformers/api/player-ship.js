@@ -8,6 +8,11 @@
  */
 import { asBool } from '../primitive';
 
+/**
+ *
+ * @param s
+ * @returns {Dockyard.PlayerData.Ship}
+ */
 const playerShip = (s) => ({
   id: s.api_id,
   sortId: s.api_sortno,

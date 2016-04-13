@@ -85,6 +85,7 @@
     "redux-actions": "^0.9.1",
     "redux-promise": "^0.5.3",
     "redux-thunk": "^2.0.1",
+    "reselect": "^2.3.0",
     "semantic-ui": "^2.1.8"
   }
 }
