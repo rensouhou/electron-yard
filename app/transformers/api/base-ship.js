@@ -20,11 +20,21 @@ const baseShip = (s) => ({
     reading: s.api_yomi
   },
   stats: {
-    firepower: s.api_houg,
-    torpedo: s.api_raig,
-    endurance: s.api_taik,
-    antiAir: s.api_tyku,
-    luck: s.api_luck,
+    firepower: {
+      base: s.api_houg
+    },
+    torpedo: {
+      base: s.api_raig
+    },
+    endurance: {
+      base: s.api_taik
+    },
+    antiAir: {
+      base: s.api_tyku
+    },
+    luck: {
+      base: s.api_luck
+    },
     range: s.api_leng,
     speed: s.api_soku
   },

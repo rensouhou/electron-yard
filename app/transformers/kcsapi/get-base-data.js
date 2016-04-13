@@ -11,6 +11,7 @@
  */
 import type { ApiRequest, ApiRequestResult } from '../../types/api';
 import { parseMaterialObjects } from '../materials';
+import { playerShip } from '../api/player-ship';
 import profile from '../profile';
 import fleet from '../fleet';
 
@@ -26,7 +27,7 @@ export default function (r:ApiRequest):ApiRequestResult {
     profile: profile(basic),
     fleets: r.body.api_deck_port.map(fleet),
     inventory: {
-      ships: r.body.api_ship,
+      ships: r.body.api_ship.map(playerShip),
       materials: parseMaterialObjects(r.body.api_material)
     }
   };

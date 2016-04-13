@@ -8,7 +8,8 @@
  */
 
 const transformers = {
-  GET_BASE_DATA: require('./get-base-data')
+  GET_BASE_DATA: require('./get-base-data'),
+  INITIALIZE_GAME: require('./initialize-game')
 };
 
 export default transformers;

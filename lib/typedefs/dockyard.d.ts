@@ -42,7 +42,7 @@ namespace Dockyard {
       sortId: number;
       name: string;
       equippableTypes: number;
-      _unknown: {
+      $_unknown: {
         kcnt: any;
         scnt: any;
       };
@@ -74,12 +74,9 @@ namespace Dockyard {
 
   export module PlayerData {
     interface Ship {
-      id: number;
-      shipId: number;
-      name: {
-        romanised?: string;
-        kanji: string;
-        reading: string;
+      hp: {
+        now: number;
+        max: number;
       };
     }
 
