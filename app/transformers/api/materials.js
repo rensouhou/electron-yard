@@ -4,7 +4,7 @@
  *
  * @since 0.3.0
  * @author Stefan Rimaila <stefan@rimaila.fi>
- * @module app/transformers/materials
+ * @module app/transformers/api/materials
  * @see {@link __PROTO.AppState}
  * @flow
  */

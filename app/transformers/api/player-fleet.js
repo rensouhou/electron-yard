@@ -3,7 +3,7 @@
  *
  * @since 0.3.0
  * @author Stefan Rimaila <stefan@rimaila.fi>
- * @module app/transformers/fleet
+ * @module app/transformers/api/player-fleet
  */
 import { notEmpty, getArrayOrDefault } from '../primitive';
 

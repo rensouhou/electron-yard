@@ -4,7 +4,7 @@
  * @author Stefan Rimaila <stefan@rimaila.fi>
  * @module app/transformers/api/__tests__/materials-test
  */
-import * as Materials from '../materials';
+import { parseMaterialArray, parseMaterialObjects } from '../materials';
 
 jest.unmock('../materials');
 
