@@ -13,16 +13,12 @@ jest.unmock('../primitive');
 describe('primitive', () => {
   describe('asBool', () => {
     const { asBool } = Primitive;
-    it('interprets `1` as `true`', () => {
+    it('interprets `1` or `"1"` as `true`', () => {
       expect(asBool(1)).toBe(true);
-    });
-    it('interprets `"1"` as true', () => {
       expect(asBool('1')).toBe(true);
     });
-    it('interprets `0` as `false`', () => {
+    it('interprets `0` or `"0"` as `false`', () => {
       expect(asBool(0)).toBe(false);
-    });
-    it('interprets `"0"` as `false`', () => {
       expect(asBool('0')).toBe(false);
     });
   });
@@ -52,6 +48,10 @@ describe('primitive', () => {
     it('leaves `\\n` alone', () => {
       expect(formatLineBreaks('My line\nbreaks')).toBe('My line\nbreaks');
     });
+    it('returns an empty string on undefined or null', () => {
+      expect(formatLineBreaks()).toBe('');
+      expect(formatLineBreaks(null)).toBe('');
+    });
   });
   describe('getArrayOrDefault', () => {
     const { getArrayOrDefault } = Primitive;
@@ -71,5 +71,13 @@ describe('primitive', () => {
   });
   describe('notEmpty', () => {
     const { notEmpty } = Primitive;
+    it('returns true', () => {
+      expect(notEmpty(0)).toBe(true);
+      expect(notEmpty(1)).toBe(true);
+    });
+    it('returns false on "API empty" values', () => {
+      expect(notEmpty(-1)).toBe(false);
+      expect(notEmpty('-1')).toBe(false);
+    });
   });
 });

@@ -11,5 +11,5 @@
 export const getArrayOrDefault = (arr:Array):Array => arr || [];
 export const asNumber = (num:any):number => parseInt(num, 10);
 export const asBool = (n:number):boolean => asNumber(n) === 1;
-export const notEmpty = (x:number):boolean => x !== -1; // not "api empty"
+export const notEmpty = (n:number):boolean => asNumber(n) !== -1;
 export const formatLineBreaks = (s:string):string => (s || '').replace(/<br\s?\/?>/gi, '\n');
