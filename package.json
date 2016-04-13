@@ -9,11 +9,15 @@
     "start-hot": "cross-env HOT=1 NODE_ENV=development electron ./",
     "webpack-dev": "webpack --config webpack.config.development.js --progress --colors",
     "webpack-dev-watch": "webpack --config webpack.config.development.js --progress --watch --colors",
+    "test": "cross-env BABEL_DISABLE_CACHE=1 jest",
     "lint": "eslint app *.js",
     "hot-server": "node server.js",
     "postinstall": "typings install",
     "dev": "npm run webpack-dev; concurrently --kill-others \"npm run webpack-dev-watch\" \"npm run start-dev\"",
     "dev-hot": "concurrently --kill-others \"npm run hot-server\" \"npm run start-hot\""
+  },
+  "jest": {
+    "rootDir": "./app"
   },
   "repository": {
     "type": "git",
