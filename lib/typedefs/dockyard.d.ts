@@ -2,6 +2,8 @@
  * Dockyard namespace
  */
 namespace Dockyard {
+  enum MissionState { Idle = 0, InProgress = 1, Returned = 2 }
+
   /**
    * Non-personal base data
    */
@@ -74,16 +76,24 @@ namespace Dockyard {
 
   export module PlayerData {
     interface Ship {
-      hp: {
-        now: number;
-        max: number;
-      };
+      hp: [number, number]; // [now, max]
     }
 
     interface ShipType {}
     interface SlotItem {}
     interface Profile {}
-    interface Fleet {}
+
+    interface Fleet {
+      id: number;
+      memberId: number;
+      flagship: any;
+      missionState: MissionState;
+      ships: Array<number>;
+      $_unknown: {
+        nameId: any;
+      };
+    }
+
     interface Quest {}
     interface Dock {}
     interface RepairDock extends Dock {}
@@ -94,6 +104,14 @@ namespace Dockyard {
       ammo: number;
       steel: number;
       bauxite: number;
+    }
+
+    interface Mission {
+      missionId: number;
+      state: any;
+      completionTime: number;
+      fleetId: number;
+      _last?: any;
     }
   }
 
@@ -133,10 +151,26 @@ namespace Dockyard {
     stat?: number;
     stat2?: number;
   }
+
+  export interface PlayerMission {
+    missionId: number;
+    state: any;
+    completionTime: number;
+    fleetId: number;
+    _last?: any;
+  }
 }
 
 namespace __PROTO {
-  enum Status { OK, ERROR }
+  enum Status {
+    OK,
+    ERROR
+  }
+
+  enum GameState {
+    Idle = 0,
+    InSortie = 1
+  }
 
   export interface ApiRequest {
     path: string;
@@ -153,6 +187,7 @@ namespace __PROTO {
      * Core state
      */
     core: {
+      gameState: GameState
     };
 
     /**
@@ -174,6 +209,7 @@ namespace __PROTO {
       profile: Dockyard.PlayerData.Profile;
       quests: Array<Dockyard.PlayerData.Quest>;
       fleets: Array<Dockyard.PlayerData.Fleet>;
+      missions: Array<Dockyard.PlayerData.Mission>;
       docks: {
         repairDocks: Array<Dockyard.PlayerData.RepairDock>;
         constructionDocks: Array<Dockyard.PlayerData.ConstructionDock>;

@@ -49,4 +49,14 @@ namespace KCSApi {
     api_result: number;
     api_result_msg: string;
   }
+
+  export interface PlayerFleet {
+    api_flagship: any;
+    api_id: number;
+    api_member_id: number;
+    api_mission: Array<number>;
+    api_name: string;
+    api_name_id: any;
+    api_ship: Array<any>;
+  }
 }
