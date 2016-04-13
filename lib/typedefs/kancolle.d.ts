@@ -3,6 +3,8 @@
  */
 namespace KCS {
   export module Models {
+    interface BaseShip {}
+
     interface PlayerShip {
       api_backs: number;
       api_bull: number;

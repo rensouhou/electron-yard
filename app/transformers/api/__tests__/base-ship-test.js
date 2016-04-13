@@ -9,7 +9,7 @@ import { baseShip } from '../base-ship';
 jest.unmock('../base-ship');
 
 describe('base-ship transformer', () => {
-  it('should correctly parse a player\'s ship');
+  it('parses a `KCS.Models.BaseShip` model correctly');
   it('should correctly parse an enemy ship');
-  it('should handle null fields without errors');
+  it('should handle null fields');
 });
