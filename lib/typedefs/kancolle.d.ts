@@ -3,7 +3,9 @@
  */
 namespace KCS {
   export module Models {
-    interface BaseShip {}
+    interface BaseShip {
+      api_id: number;
+    }
 
     interface PlayerShip {
       api_backs: number;
@@ -37,6 +39,7 @@ namespace KCS {
       api_taiku: [number, number];
       api_taisen: [number, number];
     }
+
     interface PlayerProfile {
       api_active_flag: number;
       api_comment?: string;
@@ -72,6 +75,7 @@ namespace KCS {
       api_tutorial: number;
       api_tutorial_progress: number;
     }
+
     interface Fleet {
       api_flagship: string;
       api_id: number;
@@ -81,12 +85,14 @@ namespace KCS {
       api_name_id: string;
       api_ship: Array<number>;
     }
+
     interface Log {
       api_message: string;
       api_no: number;
       api_state: string;
       api_type: string;
     }
+
     interface Furniture {}
 
     interface Material {
@@ -94,11 +100,19 @@ namespace KCS {
       api_member_id: number;
       api_value: number;
     }
-  }
 
-  export class Ship {
-  }
+    enum QuestCategory {
+      3 = PracticeDaily
+    }
 
+    enum QuestState {
+      2 = InProgress
+    }
+
+    enum QuestType {
+      2 = PracticeDaily
+    }
+  }
 
   export class SlotItem {
   }
@@ -107,9 +121,6 @@ namespace KCS {
   }
 
   export class RepairDock {
-  }
-
-  export interface apiBasic {
   }
 
   enum MaterialType {
@@ -131,6 +142,9 @@ namespace KCSApi {
   }
 
   module API {
+    export interface INITIALIZE_GAME {
+      api_mst_ship: Array<any>;
+    }
     export interface GET_BASE_DATA {
       api_basic: KCS.Models.PlayerProfile;
       api_deck_port: Array<KCS.Models.Fleet>;
@@ -143,15 +157,23 @@ namespace KCSApi {
     }
   }
 
-  module Models {
-    export interface PlayerFleet {
-      api_flagship: any;
-      api_id: number;
-      api_member_id: number;
-      api_mission: Array<number>;
-      api_name: string;
-      api_name_id: any;
-      api_ship: Array<any>;
-    }
-  }
+  // module Models {
+  //   export interface BaseShip {
+  //     api_id: number;
+  //     api_sort_no: number;
+  //   }
+  //   export interface BaseSlotItem {
+  //     api_id: number;
+  //   }
+  //
+  //   export interface PlayerFleet {
+  //     api_flagship: any;
+  //     api_id: number;
+  //     api_member_id: number;
+  //     api_mission: Array<number>;
+  //     api_name: string;
+  //     api_name_id: any;
+  //     api_ship: Array<any>;
+  //   }
+  // }
 }

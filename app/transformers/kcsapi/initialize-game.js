@@ -1,5 +1,8 @@
+/// <reference path="../../../lib/typedefs/kancolle.d.ts" />
+/// <reference path="../../../lib/typedefs/dockyard.d.ts" />
 /**
  * @overview
+ *  Handler for `INITIALIZE_GAME` event
  *
  * @since 0.3.0
  * @author Stefan Rimaila <stefan@rimaila.fi>
@@ -18,6 +21,7 @@ export default function (r:ApiRequest):ApiRequestResult {
   console.log('INITIALIZE_GAME r:ApiRequest =>', r);
   const { api_mst_ship } = r.body;
   const ships = R.indexBy(R.prop('sortId'), api_mst_ship.map(baseShip));
+  const slotItems = api_msg_slotitem;
 
   return { ships };
 }

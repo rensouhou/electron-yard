@@ -1,3 +1,5 @@
+/// <reference path="../../../lib/typedefs/kancolle.d.ts" />
+/// <reference path="../../../lib/typedefs/dockyard.d.ts" />
 /**
  * @overview
  *
@@ -9,12 +11,13 @@ import { asNumber, formatLineBreaks } from '../primitive';
 import { parseMaterialArray } from './materials';
 
 /**
- * @param s
+ * @param {KCS.Models.BaseShip} s
  * @returns {Dockyard.BaseData.Ship}
  */
 const baseShip = (s) => ({
   id: s.api_id,
   sortId: s.api_sortno,
+  flavorText: formatLineBreaks(s.api_getmes),
   name: {
     kanji: s.api_name,
     reading: s.api_yomi
@@ -45,23 +48,16 @@ const baseShip = (s) => ({
   },
   slots: {
     count: s.api_slot_num,
-    planeSlotCapacity: s.api_maxeq
+    capacity: s.api_maxeq
   },
   type: s.api_stype,
   shipExtraVoices: s.api_voicef,
-  capacity: {
-    bullets: {
-      max: s.api_bull_max
-    },
-    fuel: {
-      max: s.api_fuel_max
-    }
-  },
+  ammo: s.api_bull_max,
+  fuel: s.api_fuel_max,
   remodel: {
     level: s.api_afterlv,
     remodelsToId: asNumber(s.api_aftershipid)
   },
-  flavorText: formatLineBreaks(s.api_getmes),
   buildTime: s.api_buildtime,
   $_finalized: false,
   $_wip: true

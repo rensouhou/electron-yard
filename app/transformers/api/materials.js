@@ -12,8 +12,19 @@ import type { Material } from '../../types/kcsapi';
 import { getArrayOrDefault } from '../primitive';
 import R from 'ramda';
 
+type MaterialsObject = {
+  fuel: number,
+  ammo: number,
+  steel: number,
+  bauxite: number,
+  instantConstruction: ?number,
+  instantRepair: ?number,
+  developmentMaterials: ?number,
+  improvementMaterials: ?number
+};
+
 /** @private */
-const materials = [
+const materials: Array<string> = [
   'fuel', 'ammo', 'steel', 'bauxite', 'instantConstruction', 'instantRepair', 'developmentMaterials',
   'improvementMaterials'
 ];
@@ -26,14 +37,26 @@ const fixMatKey = R.map(([i, v]:[number, number]):[string, number] => [materials
 
 /**
  * @type {Function}
+ * @returns {Dockyard.Materials}
  * @example
  * let mats = [100, 100, 200, 50];
  * let matObj = parseMaterialArray(mats);
  * console.log(matObj); // => { fuel: 100, ammo: 100, steel: 200, bauxite: 50 }
  */
-export const parseMaterialArray = (arr) => R.zipObj(materials)(getArrayOrDefault(arr));
+export const parseMaterialArray: MaterialsObject = (arr) => R.zipObj(materials)(getArrayOrDefault(arr));
 
 /**
  * @type {Function}
+ * @returns {Dockyard.Materials}
+ * @example
+ * let createMaterial = (id, val, ?memberId) => { api_id: id, api_value: val, api_member_id: memberId };
+ * let mats = [
+ *   createMaterial(1, 100),
+ *   createMaterial(2, 100),
+ *   createMaterial(3, 200),
+ *   createMaterial(4, 50)
+ * ];
+ * lat matObj = parseMaterialObjects(mats);
+ * console.log(matObj); // => { fuel: 100, ammo: 100, steel: 200, bauxite: 50 }
  */
-export const parseMaterialObjects = R.compose(R.fromPairs, fixMatKey, matIntoPair);
+export const parseMaterialObjects: MaterialsObject = R.compose(R.fromPairs, fixMatKey, matIntoPair);

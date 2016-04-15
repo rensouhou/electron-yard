@@ -2,24 +2,19 @@
 /// <reference path="../../../lib/typedefs/dockyard.d.ts" />
 /**
  * @overview
- *  Handler for `START_SORTIE` event
+ *  Handler for `START_PVP_BATTLE` event
  *
  * @since 0.3.0
  * @author Stefan Rimaila <stefan@rimaila.fi>
- * @module app/transformers/kcsapi/start-sortie
+ * @module app/transformers/kcsapi/start-pvp-battle
  * @flow
  */
 import type { ApiRequest, ApiRequestResult } from '../../types/api';
 
 /**
- * @event START_SORTIE
- * @param {__PROTO.ApiRequest} r
+ * @event START_PVP_BATTLE
+ * @param r
  */
 export default function (r:ApiRequest):ApiRequestResult {
-  console.log('START_SORTIE r:ApiRequest =>', r);
-  // Derp
-  return {
-    $_finalized: false,
-    $_nyi: true
-  };
+  return { r };
 }

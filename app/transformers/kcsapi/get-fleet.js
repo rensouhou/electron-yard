@@ -1,7 +1,11 @@
 /**
+ * @overview
+ *  Handler for `GET_FLEET` event
+ *
  * @since 0.3.0
  * @author Stefan Rimaila <stefan@rimaila.fi>
  * @module app/transformers/kcsapi/get-fleet
+ * @see {@link __PROTO.AppState}
  * @flow
  */
 import type { ApiRequest, ApiRequestResult } from '../../types/api';

@@ -1,3 +1,5 @@
+/// <reference path="../../../lib/typedefs/kancolle.d.ts" />
+/// <reference path="../../../lib/typedefs/dockyard.d.ts" />
 /**
  * @overview
  *
@@ -8,7 +10,7 @@
 import { notEmpty, getArrayOrDefault } from '../primitive';
 
 /**
- * @param {KCSApi.PlayerFleet} d
+ * @param {KCS.Models.Fleet} d
  * @returns {Dockyard.PlayerData.Fleet}
  */
 const playerFleet = (d) => ({

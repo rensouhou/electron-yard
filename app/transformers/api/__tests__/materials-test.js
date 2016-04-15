@@ -5,11 +5,13 @@
  * @module app/transformers/api/__tests__/materials-test
  */
 // @todo(@stuf): currently on-hold as Ramda+ES6 in Jasmine herps a derp
-import { parseMaterialArray, parseMaterialObjects } from '../materials';
+var Materials = require('../materials');
+var parseMaterialArray = Materials.parseMaterialArray;
+var parseMaterialObjects = Materials.parseMaterialObjects;
 
 jest.unmock('../materials');
 
-describe('materials transformer', () => {
+describe('materials transformer', function () {
   it('parses a `KCSApi.Models.Material` model correctly');
   it('parses a short materials array');
   it('parses a long materials array');

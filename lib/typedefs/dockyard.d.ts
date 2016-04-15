@@ -2,7 +2,11 @@
  * Dockyard namespace
  */
 namespace Dockyard {
-  enum MissionState { Idle = 0, InProgress = 1, Returned = 2 }
+  enum MissionState {
+    Idle = 0,
+    InProgress = 1,
+    Returned = 2
+  }
 
   /**
    * Non-personal base data
@@ -11,20 +15,14 @@ namespace Dockyard {
     interface Ship {
       id: number;
       sortId: number;
+      flavorText: string;
       name: {
         kanji: string;
         reading?: string;
       };
-      flavorText: string;
       remodel: Remodel;
-      capacity: {
-        fuel: {
-          max: number;
-        };
-        ammo: {
-          max: number;
-        };
-      };
+      fuel: number;  // Max capacity
+      ammo: number;  // Max capacity
       rarity: Rarity;
       gains: {
         scrap: Materials;
@@ -33,7 +31,7 @@ namespace Dockyard {
       stats: ShipStats;
       slots: {
         count: number;
-        planeSlotCapacity: [number, number, number, number, number];
+        capacity: [number, number, number, number, number];
       };
       type: ShipType;
       shipExtraVoices: boolean;
@@ -76,8 +74,13 @@ namespace Dockyard {
   }
 
   export module PlayerData {
+    enum Stars { 1, 2, 3, 4, 5 }
+
     interface Ship {
       hp: [number, number]; // [now, max]
+      fuel: number;  // Current fuel, merge with baseship when presenting
+      ammo: number;  // Current ammo, merge with baseship when presenting
+      stars: Stars;
     }
 
     interface ShipType {
@@ -100,14 +103,19 @@ namespace Dockyard {
 
     interface Quest {
     }
+    
     interface Dock {
     }
+
     interface RepairDock extends Dock {
     }
+
     interface ConstructionDock extends Dock {
     }
+
     interface Profile {
     }
+
     interface Materials {
       fuel: number;
       ammo: number;
@@ -120,7 +128,9 @@ namespace Dockyard {
       state: any;
       completionTime: number;
       fleetId: number;
-      _last?: any;
+      $_unknown: {
+        last?: any;
+      }
     }
   }
 
@@ -166,7 +176,9 @@ namespace Dockyard {
     state: any;
     completionTime: number;
     fleetId: number;
-    _last?: any;
+    $_unknown: {
+      $_last?: any;
+    }
   }
 }
 
@@ -174,11 +186,6 @@ namespace __PROTO {
   enum Status {
     OK,
     ERROR
-  }
-
-  enum GameState {
-    Idle = 0,
-    InSortie = 1
   }
 
   export interface ApiRequest {
@@ -195,9 +202,12 @@ namespace __PROTO {
     /**
      * Core state
      */
-    core: {
-      gameState: GameState
-    };
+    core: {};
+
+    /**
+     * Current game state
+     */
+    gameState: string;
 
     /**
      * Game-related base data

@@ -8,6 +8,7 @@
  */
 
 export const getArrayOrDefault = (arr:Array):Array => arr || [];
+export const getObjectOrDefault = (obj:Object):Object => obj || {};
 export const asNumber = (num:any):number => parseInt(num, 10);
 export const asBool = (n:number):boolean => asNumber(n) === 1;
 export const notEmpty = (n:number):boolean => asNumber(n) !== -1;
