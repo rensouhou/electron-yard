@@ -9,6 +9,7 @@
  * @flow
  */
 import type { Material } from '../../types/kcsapi';
+import { getArrayOrDefault } from '../primitive';
 import R from 'ramda';
 
 /** @private */
@@ -30,7 +31,7 @@ const fixMatKey = R.map(([i, v]:[number, number]):[string, number] => [materials
  * let matObj = parseMaterialArray(mats);
  * console.log(matObj); // => { fuel: 100, ammo: 100, steel: 200, bauxite: 50 }
  */
-export const parseMaterialArray = (arr) => R.zipObj(materials)(arr || []);
+export const parseMaterialArray = (arr) => R.zipObj(materials)(getArrayOrDefault(arr));
 
 /**
  * @type {Function}

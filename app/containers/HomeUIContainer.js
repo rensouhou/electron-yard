@@ -12,6 +12,7 @@ import { getFleetShips } from '../selectors/fleet-ships';
 function mapStateToProps(state) {
   return {
     game: state.game,
+    gameState: state.gameState,
     player: state.player,
     uiStateData: {
       fleetShips: getFleetShips(state)

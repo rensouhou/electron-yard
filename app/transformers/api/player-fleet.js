@@ -11,7 +11,7 @@ import { notEmpty, getArrayOrDefault } from '../primitive';
  * @param {KCSApi.PlayerFleet} d
  * @returns {Dockyard.PlayerData.Fleet}
  */
-const fleet = (d) => ({
+const playerFleet = (d) => ({
   flagship: d.api_flagship,
   id: d.api_id,
   memberId: d.api_member_id,
@@ -20,7 +20,9 @@ const fleet = (d) => ({
   ships: getArrayOrDefault(d.api_ship).filter(notEmpty),
   $_unknown: {
     nameId: d.api_name_id
-  }
+  },
+  $_finalized: false,
+  $_wip: true
 });
 
-export default fleet;
+export { playerFleet };

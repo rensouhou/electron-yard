@@ -158,7 +158,7 @@ function Handler(wc, parseFunObj, cfg) {
                 const handler = (parseFunObj.transformerActions || {})[eventToHandle];
 
                 if (eventToHandle && handler) {
-                  console.log(`found a handler for the event ${eventToHandle}`);
+                  // console.log(`found a handler for the event ${eventToHandle}`);
                   handler(res);
                 }
 

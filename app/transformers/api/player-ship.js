@@ -1,6 +1,4 @@
 /**
- * @overview
- *
  * @since 0.3.0
  * @author Stefan Rimaila <stefan@rimaila.fi>
  * @module app/transformers/api/player-ship
@@ -9,7 +7,6 @@
 import { asBool } from '../primitive';
 
 /**
- *
  * @param s
  * @returns {Dockyard.PlayerData.Ship}
  */
@@ -62,7 +59,9 @@ const playerShip = (s) => ({
     ammo: {
       now: s.api_bull
     }
-  }
+  },
+  $_finalized: false,
+  $_wip: true
 });
 
 export { playerShip };

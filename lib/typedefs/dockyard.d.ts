@@ -50,7 +50,8 @@ namespace Dockyard {
       };
     }
 
-    interface SlotItem {}
+    interface SlotItem {
+    }
 
     interface Remodel {
       level: number;
@@ -79,9 +80,12 @@ namespace Dockyard {
       hp: [number, number]; // [now, max]
     }
 
-    interface ShipType {}
-    interface SlotItem {}
-    interface Profile {}
+    interface ShipType {
+    }
+    interface SlotItem {
+    }
+    interface Profile {
+    }
 
     interface Fleet {
       id: number;
@@ -94,11 +98,16 @@ namespace Dockyard {
       };
     }
 
-    interface Quest {}
-    interface Dock {}
-    interface RepairDock extends Dock {}
-    interface ConstructionDock extends Dock {}
-    interface Profile {}
+    interface Quest {
+    }
+    interface Dock {
+    }
+    interface RepairDock extends Dock {
+    }
+    interface ConstructionDock extends Dock {
+    }
+    interface Profile {
+    }
     interface Materials {
       fuel: number;
       ammo: number;
@@ -214,11 +223,9 @@ namespace __PROTO {
         repairDocks: Array<Dockyard.PlayerData.RepairDock>;
         constructionDocks: Array<Dockyard.PlayerData.ConstructionDock>;
       };
-      inventory: {
-        ships: Array<Dockyard.PlayerData.Ship>;
-        slotItems: Array<Dockyard.PlayerData.SlotItem>;
-        materials: Dockyard.PlayerData.Materials;
-      }
+      ships: Array<Dockyard.PlayerData.Ship>;
+      slotItems: Array<Dockyard.PlayerData.SlotItem>;
+      materials: Dockyard.PlayerData.Materials;
     };
   }
 }

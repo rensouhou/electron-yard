@@ -6,28 +6,44 @@
  * @module app/reducers/player
  */
 import { ApiEvents } from '../actions/game';
+import createReducer from './create-reducer';
 
 const initialState = {
   profile: {},
-  quests: [],
-  fleets: [],
-  missions: [],
+  quests: {},
+  fleets: {},
+  missions: {},
   docks: {
-    repairDocks: [],
-    constructionDocks: []
+    repairDocks: {},
+    constructionDocks: {}
   },
-  inventory: {
-    ships: [],
-    slotItems: [],
-    materials: {}
-  }
+  ships: {},
+  slotItems: {},
+  materials: {}
 };
 
-export default function playerReducer(state = initialState, action) {
-  switch (action.type) {
-    case ApiEvents.GET_BASE_DATA:
-      return Object.assign({}, state, action.payload.player);
-    default:
-      return state;
+export default createReducer(initialState, {
+  [ApiEvents.GET_BASE_DATA](state, action) {
+    return {
+      ...state,
+      ...action.payload.player
+    };
+  },
+  [ApiEvents.GET_FLEET](state, action) {
+    return {
+      ...state,
+      ...{
+        ships: {
+          ...state.ships,
+          ...action.payload.ships
+        }
+      }
+    };
+  },
+  [ApiEvents.GET_MATERIAL](state, action) {
+    return {
+      ...state,
+      ...action.payload
+    };
   }
-}
+});

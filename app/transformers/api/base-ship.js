@@ -62,7 +62,11 @@ const baseShip = (s) => ({
     remodelsToId: asNumber(s.api_aftershipid)
   },
   flavorText: formatLineBreaks(s.api_getmes),
-  buildTime: s.api_buildtime
+  buildTime: s.api_buildtime,
+  $_finalized: false,
+  $_wip: true
 });
 
 export { baseShip };
+
+export default baseShip;

@@ -14,10 +14,7 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import routes from './routes';
 import configureStore from './store/configure-store';
 
-// Electron-related imports
 import './components/electron';
-
-// import './assets/css/app.global.less';
 
 const store = configureStore();
 const history = syncHistoryWithStore(hashHistory, store);

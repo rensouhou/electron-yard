@@ -10,26 +10,26 @@
  * @flow
  */
 import type { ApiRequest, ApiRequestResult } from '../../types/api';
+import R from 'ramda';
 import { parseMaterialObjects } from '../api/materials';
-import { playerShip } from '../api/player-ship';
-import profile from '../api/player-profile';
-import fleet from '../api/player-fleet';
+import { playerShip as ship } from '../api/player-ship';
+import { playerProfile as profile } from '../api/player-profile';
+import { playerFleet as fleet } from '../api/player-fleet';
 
 /**
  * @event GET_BASE_DATA
- * @param r
+ * @param {__PROTO.ApiRequest} r
  */
 export default function (r:ApiRequest):ApiRequestResult {
+  console.log('GET_BASE_DATA r:ApiRequest =>', r);
   const basic = r.body.api_basic;
 
   const player = {
     id: basic.api_member_id,
     profile: profile(basic),
-    fleets: r.body.api_deck_port.map(fleet),
-    inventory: {
-      ships: r.body.api_ship.map(playerShip),
-      materials: parseMaterialObjects(r.body.api_material)
-    }
+    fleets: R.indexBy(R.prop('id'), r.body.api_deck_port.map(fleet)),
+    ships: R.indexBy(R.prop('sortId'), r.body.api_ship.map(ship)),
+    materials: parseMaterialObjects(r.body.api_material)
   };
 
   return { player };

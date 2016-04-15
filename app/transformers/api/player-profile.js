@@ -10,7 +10,7 @@ import type { ApiRequest } from '../../types/api';
 import type { PlayerProfile } from '../../types/player-profile';
 import { asBool } from '../primitive';
 
-export default (d:ApiRequest):PlayerProfile => ({
+const playerProfile = (d:ApiRequest):PlayerProfile => ({
   id: d.api_member_id,
   nickname: d.api_nickname,
   level: d.api_level,
@@ -57,5 +57,9 @@ export default (d:ApiRequest):PlayerProfile => ({
   _ptChallengedWon: d.api_pt_challenged_won,
   _pvp: d.api_pvp,
   _commentId: d.api_comment_id,
-  _nicknameId: d.api_nickname_id
+  _nicknameId: d.api_nickname_id,
+  $_finalized: false,
+  $_wip: true
 });
+
+export { playerProfile };

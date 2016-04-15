@@ -9,7 +9,10 @@
 
 const transformers = {
   GET_BASE_DATA: require('./get-base-data'),
-  INITIALIZE_GAME: require('./initialize-game')
+  GET_FLEET: require('./get-fleet'),
+  GET_MATERIAL: require('./get-material'),
+  INITIALIZE_GAME: require('./initialize-game'),
+  START_SORTIE: require('./start-sortie')
 };
 
 export default transformers;

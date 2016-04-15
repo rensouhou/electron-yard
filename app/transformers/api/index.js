@@ -5,6 +5,6 @@
  * @author Stefan Rimaila <stefan@rimaila.fi>
  * @module app/transformers/api
  */
-import { baseShip } from './base-ship';
+import baseShip from './base-ship';
 
-export default { baseShip };
+export { baseShip };
