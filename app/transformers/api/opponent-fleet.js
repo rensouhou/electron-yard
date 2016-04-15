@@ -11,6 +11,7 @@ import { asBool, getObjectOrDefault } from '../primitive';
 
 /**
  * @param d
+ * @todo(@stuf): add type of `OpponentFleet extends Fleet`
  */
 export const opponentFleet = (d) => ({
   id: d.api_member_id,

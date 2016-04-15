@@ -2,8 +2,8 @@
  * @overview
  *
  * @since 0.0.0
- * @author Anon
- * @module
+ * @author Stefan Rimaila <stefan@rimaila.fi>
+ * @module app/config
  */
 
 export default {

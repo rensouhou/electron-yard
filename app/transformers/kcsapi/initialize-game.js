@@ -12,16 +12,16 @@
 import type { ApiRequest, ApiRequestResult } from '../../types/api';
 import R from 'ramda';
 import { baseShip } from '../api/base-ship';
+// import { baseSlotItem } from '../api/base-slotitem';
 
 /**
  * @event INITIALIZE_GAME
  * @param {__PROTO.ApiRequest} r
  */
 export default function (r:ApiRequest):ApiRequestResult {
-  console.log('INITIALIZE_GAME r:ApiRequest =>', r);
-  const { api_mst_ship } = r.body;
-  const ships = R.indexBy(R.prop('sortId'), api_mst_ship.map(baseShip));
-  const slotItems = api_msg_slotitem;
+  const { api_mst_ship, api_mst_slotitem } = r.body;
 
-  return { ships };
+  return {
+    ships: R.indexBy(R.prop('sortId'), api_mst_ship.map(baseShip))
+  };
 }

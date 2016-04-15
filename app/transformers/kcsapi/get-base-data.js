@@ -20,7 +20,7 @@ import { playerFleet as fleet } from '../api/player-fleet';
  * @event GET_BASE_DATA
  * @param {__PROTO.ApiRequest} r
  */
-export default function (r:ApiRequest):ApiRequestResult {
+export default function action$getBaseData(r:ApiRequest):ApiRequestResult {
   console.log('GET_BASE_DATA r:ApiRequest =>', r);
   const basic = r.body.api_basic;
 

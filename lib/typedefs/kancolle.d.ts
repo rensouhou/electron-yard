@@ -101,6 +101,22 @@ namespace KCS {
       api_value: number;
     }
 
+    interface Quest {
+      api_no: number;
+      api_category: QuestCategory;
+      api_detail: string;
+      api_get_material: Array<number>;
+      api_progress_flag: QuestProgress;
+      api_state: QuestState;
+      api_title: string;
+      api_type: QuestType;
+      api_invalid_flag: number;
+    }
+
+    enum QuestProgress {
+      0, 1, 2
+    }
+
     enum QuestCategory {
       3 = PracticeDaily
     }

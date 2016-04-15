@@ -101,10 +101,8 @@ namespace Dockyard {
       };
     }
 
-    interface Quest {
-    }
-    
     interface Dock {
+      id: number;
     }
 
     interface RepairDock extends Dock {
@@ -132,6 +130,54 @@ namespace Dockyard {
         last?: any;
       }
     }
+  }
+
+  export module API {
+    interface GetQuestList {
+      questCount: number;
+      currentPage: number;
+      totalPageCount: number;
+      list: Array<any>;
+      $_unknown: {
+        execCount: any;
+        execType: any;
+      };
+    }
+  }
+
+  export module Quests {
+    interface Quest {
+      id: number;
+      type: QuestType;
+      category: QuestCategory;
+      state: QuestState;
+      progress: QuestProgress;
+      title: number;
+      detail: number;
+      reward: Materials;
+    }
+
+    enum QuestType { 0, 1, 2, 3 }
+
+    // @todo(@stuf): recheck if these are valid
+    enum QuestCategory {
+      1 = Composition,
+      2 = Sortie,
+      3 = Practice,
+      4 = Mission,
+      5 = RepairResupply,
+      6 = Construction,
+      7 = Improvisation,
+      8 = Sortie2,
+      9 = Other
+    }
+
+    enum QuestProgress {
+      0 = 'ZERO',
+      1 = 'FIFTY',
+      2 = 'EIGHTY'
+    }
+    enum QuestState { 0, 1, 2, 3 }
   }
 
   export interface Profile {
@@ -221,12 +267,32 @@ namespace __PROTO {
     };
 
     /**
+     * PVP
+     */
+    practice: {
+      opponents: {};
+    };
+
+    /**
+     * Quests
+     */
+    quest: {
+      count: number;
+      currentPage: number;
+      totalPageCount: number;
+      quests: {[id: number]: Dockyard.Quests.Quest};
+      $_unknown: {
+        execCount: any;
+        execType: any;
+      };
+    };
+
+    /**
      * The player's personalized stuff
      */
     player: {
       id: number;
       profile: Dockyard.PlayerData.Profile;
-      quests: Array<Dockyard.PlayerData.Quest>;
       fleets: Array<Dockyard.PlayerData.Fleet>;
       missions: Array<Dockyard.PlayerData.Mission>;
       docks: {
