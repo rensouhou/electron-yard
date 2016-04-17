@@ -1,6 +1,9 @@
 /// <reference path="../../../lib/typedefs/kancolle.d.ts" />
 /// <reference path="../../../lib/typedefs/dockyard.d.ts" />
 /**
+ * @overview
+ *  Handler for `GET_QUEST_LIST` event
+ *
  * @since 0.3.0
  * @author Stefan Rimaila <stefan@rimaila.fi>
  * @module app/transformers/kcsapi/get-quest-list

@@ -173,11 +173,15 @@ namespace Dockyard {
     }
 
     enum QuestProgress {
-      0 = 'ZERO',
-      1 = 'FIFTY',
-      2 = 'EIGHTY'
+      0 = Zero,
+      1 = Fifty,
+      2 = Eighty
     }
-    enum QuestState { 0, 1, 2, 3 }
+    enum QuestState {
+      1 = Idle,
+      2 = InProgress,
+      3 = Done
+    }
   }
 
   export interface Profile {

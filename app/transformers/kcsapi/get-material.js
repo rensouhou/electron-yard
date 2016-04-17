@@ -21,7 +21,6 @@ type GetMaterialPost = null;
  * @param {__PROTO.ApiRequest} r
  */
 export default function (r:ApiRequest):ApiRequestResult {
-  console.log('GET_MATERIAL r:ApiRequest =>', r);
   return {
     materials: parseMaterialObjects(getArrayOrDefault(r.body))
   };

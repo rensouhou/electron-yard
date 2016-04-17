@@ -15,8 +15,7 @@ config.entry = {
   index: [
     './app/index',
     'webpack-hot-middleware/client?path=http://localhost:3000/__webpack_hmr&overlay=true'
-  ],
-  game: ['./app/game']
+  ]
 };
 
 config.output.publicPath = 'http://localhost:3000/dist/';

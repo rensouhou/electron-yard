@@ -13,6 +13,7 @@ import { parseMaterialArray } from './materials';
 /**
  * @param {KCS.Models.BaseShip} s
  * @returns {Dockyard.BaseData.Ship}
+ * @todo(@stuf): create methods to check if a ship is player/enemy
  */
 const baseShip = (s) => ({
   id: s.api_id,
@@ -59,8 +60,7 @@ const baseShip = (s) => ({
     remodelsToId: asNumber(s.api_aftershipid)
   },
   buildTime: s.api_buildtime,
-  $_finalized: false,
-  $_wip: true
+  $_finalized: false
 });
 
 export { baseShip };

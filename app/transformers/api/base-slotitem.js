@@ -9,9 +9,19 @@
  */
 
 /**
- * @param {KCSApi.Models.BaseSlotItem} it
+ * @param {KCS.Models.BaseSlotItem} o
  * @returns {Dockyard.BaseData.SlotItem}
  */
-export const slotItem = it => ({
-  id: it.api_id
-});
+export const slotItem = o => {
+  const { api_id, api_sortno, api_name, api_type, ...rest } = o;
+
+  return {
+    id: api_id,
+    sortId: api_sortno,
+    name: api_name,
+    type: api_type,
+    endurance: api_taik,
+    $_finalized: false,
+    $_rest: rest
+  };
+};

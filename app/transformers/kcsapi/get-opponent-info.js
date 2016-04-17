@@ -19,5 +19,5 @@ import { opponentFleet } from '../api/opponent-fleet';
  * @param {__PROTO.ApiRequest} r
  */
 export default function (r:ApiRequest):ApiRequestResult {
-  return opponentFleet(r);
+  return opponentFleet(r.body);
 }

@@ -39,6 +39,7 @@ export const ApiEventsByPath = T.Map({
   'req_practice/battle_result': 'FINISHED_PRACTICE',
   'req_hensei/combined': 'FLEET_COMBINED',
   'req_combined_battle/battle_water': 'COMBINED_BATTLE_WATER_PHASE',
+  'get_member/require_info': 'GET_PLAYER_BASE_DATA',
   'get_member/sortie_conditions': 'GET_SORTIE_CONDITIONS',
   'get_member/ship_deck': 'GET_FLEET',
   'get_member/deck': 'GET_FLEET_DATA',
@@ -100,6 +101,7 @@ export const ApiEvents = {
 
   // Sorties
   START_SORTIE: 'START_SORTIE',
+  FINISHED_SORTIE: 'FINISHED_SORTIE',
 
   // Items
   USE_PAID_ITEM: 'USE_PAID_ITEM'

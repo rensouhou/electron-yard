@@ -7,6 +7,10 @@ namespace KCS {
       api_id: number;
     }
 
+    interface BaseSlotItem {
+      api_id: number;
+    }
+
     interface PlayerShip {
       api_backs: number;
       api_bull: number;

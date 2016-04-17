@@ -1,3 +1,5 @@
+/// <reference path="../../../lib/typedefs/kancolle.d.ts" />
+/// <reference path="../../../lib/typedefs/dockyard.d.ts" />
 /**
  * @overview
  *
@@ -18,7 +20,10 @@ export default createReducer(initialState, {
   [ApiEvents.GET_OPPONENT_INFO](state, action) {
     return {
       ...state,
-      opponents: upsertOpponent(action.payload)
+      opponents: {
+        ...state.opponents,
+        ...{ [action.payload.id]: upsertOpponent(action.payload) }
+      }
     };
   }
 });
