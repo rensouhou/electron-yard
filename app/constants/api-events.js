@@ -13,9 +13,8 @@ export const ApiEventsByPath = T.Map({
   'api_start2': 'INITIALIZE_GAME',
   'api_port/port': 'GET_BASE_DATA',
   'mission/start': 'START_MISSION',
-  'mission/result': 'COMPLETE_EXPEDITION',
+  'mission/result': 'COMPLETE_MISSION',
   'req_mission/return_instruction': 'QUIT_MISSION',
-  'quest/clearitemget': 'COMPLETE_QUEST',
   'kuosyou/destroyship': 'SCRAP_SHIP',
   'hokyu/charge': 'RESUPPLY_SHIP',
   'req_kousyou/createitem': 'CRAFT_ITEM',
@@ -27,6 +26,7 @@ export const ApiEventsByPath = T.Map({
   'req_kaisou/lock': 'LOCK_EQUIPMENT',
   'req_hensei/change': 'CHANGE_SHIP',
   'req_quest/start': 'START_QUEST',
+  'quest/clearitemget': 'COMPLETE_QUEST',
   'req_quest/stop': 'STOP_QUEST',
   'req_map/start': 'START_SORTIE',
   'req_map/next': 'NEXT_SORTIE_NODE',
@@ -95,6 +95,7 @@ export const ApiEvents = {
   GET_MISSION_LIST: 'GET_MISSION_LIST',
   START_MISSION: 'START_MISSION',
   QUIT_MISSION: 'QUIT_MISSION',
+  COMPLETE_MISSION: 'COMPLETE_MISSION',
 
   // PVP/Practice
   GET_OPPONENT_INFO: 'GET_OPPONENT_INFO',

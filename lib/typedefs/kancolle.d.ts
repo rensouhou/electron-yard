@@ -164,6 +164,24 @@ namespace KCSApi {
     api_result_msg: string;
   }
 
+  /** `kdock` */
+  enum ConstructionDockState {
+    Locked = -1,
+    Empty = 0,
+    UnderConstruction = 2,
+    ConstructionComplete = 3
+  }
+
+  /** `useitem` */
+  enum UseItemCategory {
+    Other = 0,
+    Furniture = 6
+  }
+  enum UseItemType {
+    Unavailable = 0,
+    Available = 4
+  }
+
   module API {
     export interface INITIALIZE_GAME extends ApiRequest {
       body: {
@@ -191,11 +209,17 @@ namespace KCSApi {
         };
       };
     }
-    export interface FINISHED_PRACTICE extends ApiRequest {
-      body: {
-
-      };
+    export interface GET_MATERIAL extends ApiRequest {
+      body: Array<{
+        api_member_id: number;
+        api_id: number;
+        api_value: number;
+      }>;
     }
+    export interface FINISHED_PRACTICE extends ApiRequest {
+      body: {};
+    }
+    export interface START_REPAIR extends ApiRequest {}
     export interface CRAFT_SHIP extends ApiRequest {
       postBody: {
         api_kdock_id: number;
@@ -240,31 +264,69 @@ namespace KCSApi {
         }>;
       };
     }
-
-    interface CombatResult {
-
+    export interface START_MISSION extends ApiRequest {}
+    export interface COMPLETE_MISSION extends ApiRequest {}
+    export interface GET_CONSTRUCTION_DOCKS extends ApiRequest {
+      body: {
+        api_member_id: number;
+        api_id: number;
+        api_state: ConstructionDockState;
+        api_created_ship_id: number;
+        api_complete_time: number;
+        api_complete_time_str: string;
+        api_item1: number;
+        api_item2: number;
+        api_item3: number;
+        api_item4: number;
+        api_item5: number;
+      };
+    }
+    export interface GET_USABLE_ITEMS extends ApiRequest {
+      body: Array<{
+        api_member_id: number;
+        api_id: number;
+        api_value: number;
+        api_usetype: UseItemType;
+        api_category: UseItemCategory;
+        api_name: string;
+        api_description: string;
+        api_price: number;
+        api_count: number;
+      }>;
+    }
+    export interface START_QUEST extends ApiRequest {
+      postBody: {
+        api_quest_id: number;
+      };
+    }
+    export interface STOP_QUEST extends ApiRequest {
+      postBody: {
+        api_quest_id: number;
+      }
+    }
+    export interface COMPLETE_QUEST extends ApiRequest {
+      body: {
+        api_material: Array<number>;
+        api_bounus_count: number;
+        api_bounus: Array<{
+          api_type: number;
+          api_count: number;
+          api_item: {
+            api_id: number;
+            api_name: string;
+            api_id_from: number;
+            api_id_to: number;
+            api_message: string;
+          };
+        }>;
+      };
+      postBody: {
+        api_quest: any;
+        api_quest_id: number;
+      };
     }
   }
-
-  // module Models {
-  //   export interface BaseShip {
-  //     api_id: number;
-  //     api_sort_no: number;
-  //   }
-  //   export interface BaseSlotItem {
-  //     api_id: number;
-  //   }
-  //
-  //   export interface PlayerFleet {
-  //     api_flagship: any;
-  //     api_id: number;
-  //     api_member_id: number;
-  //     api_mission: Array<number>;
-  //     api_name: string;
-  //     api_name_id: any;
-  //     api_ship: Array<any>;
-  //   }
-  // }
 }
 
-interface $_unclear {}
+interface $_unclear {
+}

@@ -1,3 +1,5 @@
+/// <reference path="../../../lib/typedefs/kancolle.d.ts" />
+/// <reference path="../../../lib/typedefs/dockyard.d.ts" />
 /* eslint no-param-reassign: 0, camelcase: 0 */
 /**
  * @overview
@@ -43,7 +45,8 @@ const fixMatKey = R.map(([i, v]:[number, number]):[string, number] => [materials
  * let matObj = parseMaterialArray(mats);
  * console.log(matObj); // => { fuel: 100, ammo: 100, steel: 200, bauxite: 50 }
  */
-export const parseMaterialArray:MaterialsObject = (arr) => R.zipObj(materials)(getArrayOrDefault(arr));
+export const parseMaterialArray:MaterialsObject =
+  (arr) => R.zipObj(materials)(getArrayOrDefault(arr));
 
 /**
  * @type {Function}
@@ -59,9 +62,8 @@ export const parseMaterialArray:MaterialsObject = (arr) => R.zipObj(materials)(g
  * let matObj = parseMaterialObjects(mats);
  * console.log(matObj); // => { fuel: 100, ammo: 100, steel: 200, bauxite: 50 }
  */
-export const parseMaterialObjects:MaterialsObject = R.compose(R.fromPairs, fixMatKey, matIntoPair);
-
-const isNil = (k, v) => R.isNil(v);
+export const parseMaterialObjects:MaterialsObject =
+  R.compose(R.fromPairs, fixMatKey, matIntoPair);
 
 /**
  * Composes a {@link Dockyard.Materials} object with {@link parseMaterialArray}
@@ -74,4 +76,5 @@ const isNil = (k, v) => R.isNil(v);
  * let matObj = parseMaterialsRecipe([100, 100, 200, 50, null, null, 20]);
  * console.log(matObj); // => { fuel: 100, ammo: 100, steel: 200, bauxite: 50, developmentMaterials: 20 }
  */
-export const parseMaterialsRecipe:MaterialsObject = R.compose(R.pickBy(isNil), parseMaterialArray);
+export const parseMaterialsRecipe:MaterialsObject =
+  R.compose(R.pickBy((k, v) => !R.isNil(v)), parseMaterialArray);
