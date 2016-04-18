@@ -1,3 +1,5 @@
+/// <reference path="../../../lib/typedefs/kancolle.d.ts" />
+/// <reference path="../../../lib/typedefs/dockyard.d.ts" />
 /**
  * @overview
  *  Handler for `GET_MATERIAL` event
@@ -12,16 +14,11 @@ import { ApiRequest, ApiRequestResult } from '../../types/api';
 import { parseMaterialObjects } from '../api/materials';
 import { getArrayOrDefault } from '../primitive';
 
-type GetMaterial = Array<any>;
-
-type GetMaterialPost = null;
-
 /**
  * @event GET_MATERIAL
  * @param {__PROTO.ApiRequest} r
+ * @returns {Dockyard.API.GetMaterial}
  */
 export default function (r:ApiRequest):ApiRequestResult {
-  return {
-    materials: parseMaterialObjects(getArrayOrDefault(r.body))
-  };
+  return parseMaterialObjects(getArrayOrDefault(r.body));
 }

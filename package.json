@@ -70,6 +70,7 @@
     "autoprefixer-loader": "^3.2.0",
     "camelcase": "^2.1.1",
     "decamelize": "^1.2.0",
+    "deep-assign": "^2.0.0",
     "electron-debug": "^0.5.2",
     "electron-prebuilt": "^0.37.2",
     "file-loader": "^0.8.5",

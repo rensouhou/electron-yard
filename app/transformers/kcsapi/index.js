@@ -15,6 +15,7 @@ const transformers = {
   GET_QUEST_LIST: require('./get-quest-list'),
   GET_OPPONENT_INFO: require('./get-opponent-info'),
   GET_PLAYER_BASE_DATA: require('./get-player-base-data'),
+  LOAD_FLEET_PRESET: require('./load-fleet-preset'),
   INITIALIZE_GAME: require('./initialize-game'),
   START_SORTIE: require('./start-sortie'),
   START_QUEST: require('./start-quest'),

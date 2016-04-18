@@ -64,5 +64,3 @@ const baseShip = (s) => ({
 });
 
 export { baseShip };
-
-export default baseShip;

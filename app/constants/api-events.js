@@ -24,6 +24,7 @@ export const ApiEventsByPath = T.Map({
   'req_kousyou/destroyitem2': 'DESTROY_ITEM',
   'req_kousyou/getship': 'GET_SHIP',
   'req_kaisou/powerup': 'MODERNIZE_SHIP',
+  'req_kaisou/lock': 'LOCK_EQUIPMENT',
   'req_hensei/change': 'CHANGE_SHIP',
   'req_quest/start': 'START_QUEST',
   'req_quest/stop': 'STOP_QUEST',
@@ -38,6 +39,7 @@ export const ApiEventsByPath = T.Map({
   'req_practice/midnight_battle': 'START_PVP_MIDNIGHT_BATTLE',
   'req_practice/battle_result': 'FINISHED_PRACTICE',
   'req_hensei/combined': 'FLEET_COMBINED',
+  '/api_req_hensei/preset_select': 'LOAD_FLEET_PRESET',
   'req_combined_battle/battle_water': 'COMBINED_BATTLE_WATER_PHASE',
   'get_member/require_info': 'GET_PLAYER_BASE_DATA',
   'get_member/sortie_conditions': 'GET_SORTIE_CONDITIONS',
@@ -69,6 +71,7 @@ export const ApiEvents = {
   GET_SLOT_ITEMS: 'GET_SLOT_ITEMS',
   USE_ITEM: 'USE_ITEM',
   DESTROY_ITEM: 'DESTROY_ITEM',
+  LOCK_EQUIPMENT: 'LOCK_EQUIPMENT',
 
   // Ship-related
   CREATE_SHIP: 'CREATE_SHIP',
@@ -81,6 +84,7 @@ export const ApiEvents = {
   // Fleet-related (and combined)
   FLEET_COMBINED: 'FLEET_COMBINED',
   COMBINED_BATTLE_WATER_PHASE: 'COMBINED_BATTLE_WATER_PHASE',
+  LOAD_FLEET_PRESET: 'LOAD_FLEET_PRESET',
 
   // Quests
   GET_QUEST_LIST: 'GET_QUEST_LIST',

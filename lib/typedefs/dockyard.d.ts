@@ -133,6 +133,11 @@ namespace Dockyard {
   }
 
   export module API {
+    interface GetBaseData {
+
+    }
+
+    /** @event GET_QUEST_LIST */
     interface GetQuestList {
       questCount: number;
       currentPage: number;
@@ -142,6 +147,16 @@ namespace Dockyard {
         execCount: any;
         execType: any;
       };
+    }
+
+    /** @event GET_MATERIAL */
+    interface GetMaterial extends Materials {}
+
+    /** @event GET_SORTIE_CONDITIONS */
+    interface GetSortieConditions {
+      win: number;
+      lose: number;
+      rate: number;
     }
   }
 
@@ -245,24 +260,21 @@ namespace __PROTO {
     postBody?: any;
   }
 
+  export interface ApiRequestResponse {
+    [key: string]: any;
+  }
+
   /**
    * Application internal state shape
    */
   export interface AppState {
-    /**
-     * Core state
-     */
+    /** Core state */
     core: {};
 
-    /**
-     * Current game state
-     */
+    /** Current game state */
     gameState: string;
 
-    /**
-     * Game-related base data
-     * Holds the processed (but not yet transformed?) API data.
-     */
+    /** Game-related base data */
     game: {
       ships: Array<Dockyard.BaseData.Ship>
       shipTypes: Array<Dockyard.BaseData.ShipType>;
@@ -270,16 +282,15 @@ namespace __PROTO {
       slotItemTypes: Array<any>;
     };
 
-    /**
-     * PVP
-     */
+    /** PVP */
     practice: {
       opponents: {};
     };
 
-    /**
-     * Quests
-     */
+    /** Combat results */
+    result: {};
+
+    /** Quests */
     quest: {
       count: number;
       currentPage: number;
@@ -291,9 +302,7 @@ namespace __PROTO {
       };
     };
 
-    /**
-     * The player's personalized stuff
-     */
+    /** The player's personalized stuff */
     player: {
       id: number;
       profile: Dockyard.PlayerData.Profile;

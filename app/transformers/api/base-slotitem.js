@@ -12,7 +12,7 @@
  * @param {KCS.Models.BaseSlotItem} o
  * @returns {Dockyard.BaseData.SlotItem}
  */
-export const slotItem = o => {
+export const baseSlotItem = o => {
   const { api_id, api_sortno, api_name, api_type, ...rest } = o;
 
   return {
@@ -20,7 +20,6 @@ export const slotItem = o => {
     sortId: api_sortno,
     name: api_name,
     type: api_type,
-    endurance: api_taik,
     $_finalized: false,
     $_rest: rest
   };

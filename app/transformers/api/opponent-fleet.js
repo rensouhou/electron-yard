@@ -10,27 +10,27 @@
 import { asBool, getObjectOrDefault } from '../primitive';
 
 /**
- * @param d
+ * @param o
  * @todo(@stuf): add type of `OpponentFleet extends Fleet`
  */
-export const opponentFleet = (d) => ({
-  id: d.api_member_id,
-  level: d.api_level,
-  comment: d.api_cmt,
-  nickname: d.api_nickname,
-  rank: d.api_rank,
+export const opponentFleet = (o) => ({
+  id: o.api_member_id,
+  level: o.api_level,
+  comment: o.api_cmt,
+  nickname: o.api_nickname,
+  rank: o.api_rank,
   counts: {
-    ships: d.api_ship,
-    slotItems: d.api_slotitem
+    ships: o.api_ship,
+    slotItems: o.api_slotitem
   },
   fleet: {
-    name: d.api_deckname,
-    ships: getObjectOrDefault(d.api_deck).api_ships
+    name: o.api_deckname,
+    ships: getObjectOrDefault(o.api_deck).api_ships
   },
   $_unknown: {
-    friend: asBool(d.api_friend),
-    commentId: d.api_cmt_id,
-    nameId: d.api_deckname_id,
-    nicknameId: d.api_nickname_id
+    friend: asBool(o.api_friend),
+    commentId: o.api_cmt_id,
+    nameId: o.api_deckname_id,
+    nicknameId: o.api_nickname_id
   }
 });

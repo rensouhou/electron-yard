@@ -18,10 +18,10 @@ import { playerFleet as fleet } from '../api/player-fleet';
 
 /**
  * @event GET_BASE_DATA
- * @param {__PROTO.ApiRequest} r
+ * @param {KCSApi.API.GET_BASE_DATA} r
+ * @returns {Dockyard.API.GetBaseData}
  */
 export default function action$getBaseData(r:ApiRequest):ApiRequestResult {
-  console.log('GET_BASE_DATA r:ApiRequest =>', r);
   const basic = r.body.api_basic;
 
   const player = {

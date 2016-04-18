@@ -1,3 +1,5 @@
+/// <reference path="../../../lib/typedefs/kancolle.d.ts" />
+/// <reference path="../../../lib/typedefs/dockyard.d.ts" />
 /**
  * @overview
  *
@@ -5,8 +7,10 @@
  * @author Stefan Rimaila <stefan@rimaila.fi>
  * @module app/reducers/player
  */
+import deepAssign from 'deep-assign';
 import { ApiEvents } from '../actions/game';
 import createReducer from './create-reducer';
+import { deepMerge } from '../transformers/utils';
 
 const initialState = {
   profile: {},
@@ -24,26 +28,18 @@ const initialState = {
 
 export default createReducer(initialState, {
   [ApiEvents.GET_BASE_DATA](state, action) {
-    return {
-      ...state,
-      ...action.payload.player
-    };
+    const { player } = action.payload;
+    return deepMerge(state, player);
   },
   [ApiEvents.GET_FLEET](state, action) {
-    return {
-      ...state,
-      ...{
-        ships: {
-          ...state.ships,
-          ...action.payload.ships
-        }
-      }
-    };
+    const { ships } = action.payload;
+    return deepMerge(state, { ships });
+  },
+  [ApiEvents.LOAD_FLEET_PRESET](state, action) {
+    const { fleetId, fleet } = action.payload;
+    return deepMerge(state, { fleets: { [fleetId]: fleet } });
   },
   [ApiEvents.GET_MATERIAL](state, action) {
-    return {
-      ...state,
-      ...action.payload
-    };
+    return deepMerge(state, { materials: action.payload });
   }
 });

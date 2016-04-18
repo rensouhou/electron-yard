@@ -97,7 +97,8 @@ namespace KCS {
       api_type: string;
     }
 
-    interface Furniture {}
+    interface Furniture {
+    }
 
     interface Material {
       api_id: MaterialType;
@@ -155,6 +156,8 @@ namespace KCS {
  * API stuff
  */
 namespace KCSApi {
+  import ApiRequest = require('./dockyard');
+
   export interface Response {
     api_data: any;
     api_result: number;
@@ -162,18 +165,84 @@ namespace KCSApi {
   }
 
   module API {
-    export interface INITIALIZE_GAME {
-      api_mst_ship: Array<any>;
+    export interface INITIALIZE_GAME extends ApiRequest {
+      body: {
+        api_mst_ship: Array<any>;
+      }
     }
-    export interface GET_BASE_DATA {
-      api_basic: KCS.Models.PlayerProfile;
-      api_deck_port: Array<KCS.Models.Fleet>;
-      api_log: Array<KCS.Models.Log>;
-      api_material: Array<KCS.Models.Material>;
-      api_ndock: any;
-      api_p_bgm_id: number;
-      api_parallel_quest_count: number;
-      api_ship: Array<KCS.Models.PlayerShip>;
+    export interface GET_BASE_DATA extends ApiRequest {
+      body: {
+        api_basic: KCS.Models.PlayerProfile;
+        api_deck_port: Array<KCS.Models.Fleet>;
+        api_log: Array<KCS.Models.Log>;
+        api_material: Array<KCS.Models.Material>;
+        api_ndock: any;
+        api_p_bgm_id: number;
+        api_parallel_quest_count: number;
+        api_ship: Array<KCS.Models.PlayerShip>;
+      }
+    }
+    export interface GET_SORTIE_CONDITIONS extends ApiRequest {
+      body: {
+        api_war: {
+          api_win: string;
+          api_lose: number;
+          api_rate: any;
+        };
+      };
+    }
+    export interface FINISHED_PRACTICE extends ApiRequest {
+      body: {
+
+      };
+    }
+    export interface CRAFT_SHIP extends ApiRequest {
+      postBody: {
+        api_kdock_id: number;
+        api_highspeed: number;
+        api_large_flag: number;
+        api_item1: number;
+        api_item2: number;
+        api_item3: number;
+        api_item4: number;
+        api_item5: number;
+      };
+    }
+    export interface CRAFT_ITEM extends ApiRequest {
+      body: {
+        api_create_flag: number;
+        api_shizai_flag: number;
+        api_fdata: $_unclear;
+        api_slot_item: {
+          api_id: number;
+          api_slotitem_id: number;
+        };
+        api_material: $_unclear;
+        api_type3: number;
+        api_unsetslot: $_unclear;
+      };
+      postBody: {
+        api_item1: number;
+        api_item2: number;
+        api_item3: number;
+        api_item4: number;
+      };
+    }
+    export interface GET_SHIP extends ApiRequest {
+      body: {
+        api_id: number;
+        api_ship_id: number;
+        api_kdock: number;
+        api_ship: any;
+        api_slotitem: Array<{
+          api_id: number;
+          api_slotitem_id: number;
+        }>;
+      };
+    }
+
+    interface CombatResult {
+
     }
   }
 
@@ -197,3 +266,5 @@ namespace KCSApi {
   //   }
   // }
 }
+
+interface $_unclear {}
