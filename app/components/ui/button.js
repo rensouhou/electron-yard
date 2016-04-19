@@ -6,9 +6,9 @@
  * @module app/components/ui/button
  */
 import React, { Component, PropTypes } from 'react';
-import styles from './button.css';
+import styles from './button.scss';
 
-export class Button extends Component {
+class Button extends Component {
   static propTypes = {
     children: PropTypes.any
   };
@@ -21,3 +21,5 @@ export class Button extends Component {
     );
   }
 }
+
+export default Button;

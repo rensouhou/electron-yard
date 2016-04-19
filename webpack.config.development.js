@@ -22,10 +22,21 @@ config.output.publicPath = 'http://localhost:3000/dist/';
 
 config.module.loaders.push(
   {
+    test: /\.s[a|c]ss$/,
+    loaders: [
+      'style?sourceMap',
+      'css?modules&importLoaders=1&localIdentName=[path]___[name]__[local]___[hash:base64:5]',
+      'resolve-url',
+      'sass?sourceMap'
+    ]
+  },
+  {
     test: /\.less$/,
     loaders: [
-      'style-loader',
-      'css-loader?modules&sourceMap&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]'
+      'style?sourceMap',
+      'css?modules&importLoaders=1&localIdentName=[path]___[name]__[local]___[hash:base64:5]',
+      'resolve-url',
+      'less?sourceMap'
     ]
   },
   {
@@ -33,13 +44,6 @@ config.module.loaders.push(
     loaders: [
       'style-loader',
       'css-loader?sourceMap'
-    ]
-  },
-  {
-    test: /^((?!\.global).)*\.css$/,
-    loaders: [
-      'style-loader',
-      'css-loader?modules&sourceMap&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]'
     ]
   });
 

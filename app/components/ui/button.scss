@@ -1,0 +1,22 @@
+
+@import "~material-colors/dist/colors.scss";
+@import "../../assets/styles/variables";
+
+.button {
+  background: $md-white;
+  border: solid 0.2rem $md-blue-grey-700;
+  color: $md-blue-grey-800;
+  font-family: $base-font-family;
+  font-weight: 500;
+  font-size: 1rem;
+  padding: 0.4rem 1.2rem;
+  border-radius: 0.2rem;
+  display: inline-block;
+
+  &:hover {
+    cursor: pointer;
+    background-color: $md-blue-grey-700;
+    color: $md-white;
+  }
+}
+
