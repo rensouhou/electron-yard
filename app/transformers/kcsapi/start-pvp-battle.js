@@ -7,14 +7,13 @@
  * @since 0.3.0
  * @author Stefan Rimaila <stefan@rimaila.fi>
  * @module app/transformers/kcsapi/start-pvp-battle
- * @flow
  */
-import type { ApiRequest, ApiRequestResult } from '../../types/api';
 
 /**
  * @event START_PVP_BATTLE
  * @param r
  */
-export default function (r:ApiRequest):ApiRequestResult {
+export default function action$startPvpBattle(r) {
+  console.warn('action$startPvpBattle NYI; event `START_PVP_BATTLE`');
   return { r };
 }

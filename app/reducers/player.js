@@ -1,5 +1,5 @@
-/// <reference path="../../../lib/typedefs/kancolle.d.ts" />
-/// <reference path="../../../lib/typedefs/dockyard.d.ts" />
+/// <reference path="../../lib/typedefs/kancolle.d.ts" />
+/// <reference path="../../lib/typedefs/dockyard.d.ts" />
 /**
  * @overview
  *
@@ -7,10 +7,9 @@
  * @author Stefan Rimaila <stefan@rimaila.fi>
  * @module app/reducers/player
  */
-import deepAssign from 'deep-assign';
+import R from 'ramda';
 import { ApiEvents } from '../actions/game';
 import createReducer from './create-reducer';
-import { deepMerge } from '../transformers/utils';
 
 const initialState = {
   profile: {},
@@ -26,20 +25,35 @@ const initialState = {
   materials: {}
 };
 
+const mergeProfile = (k, l, r) => {
+  switch (k) {
+    case 'profile':
+    case 'ships':
+    case 'fleets':
+    case 'slotItems':
+    case 'materials':
+      return R.merge(l, r);
+    default:
+      return r;
+  }
+};
+
+const updateBaseData = (data, state) => R.mergeWithKey(mergeProfile, state, data);
+const updateFleet = (fleet, state) => R.assoc('fleets', { ...fleet }, state);
+const updateMaterials = (materials, state) => R.assoc('materials', { ...materials }, state);
+const updateShips = (ships, state) => R.assoc('ships', { ...ships }, state);
+
 export default createReducer(initialState, {
   [ApiEvents.GET_BASE_DATA](state, action) {
-    const { player } = action.payload;
-    return deepMerge(state, player);
+    return updateBaseData(action.payload, state);
   },
   [ApiEvents.GET_FLEET](state, action) {
-    const { ships } = action.payload;
-    return deepMerge(state, { ships });
+    return updateShips(action.payload.ships, state);
   },
   [ApiEvents.LOAD_FLEET_PRESET](state, action) {
-    const { fleetId, fleet } = action.payload;
-    return deepMerge(state, { fleets: { [fleetId]: fleet } });
+    return updateFleet({ [action.payload.fleetId]: action.payload.fleet }, state);
   },
   [ApiEvents.GET_MATERIAL](state, action) {
-    return deepMerge(state, { materials: action.payload });
+    return updateMaterials(action.payload, state);
   }
 });

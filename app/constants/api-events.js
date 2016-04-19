@@ -12,7 +12,7 @@ import T from 'immutable';
 export const ApiEventsByPath = T.Map({
   'api_start2': 'INITIALIZE_GAME',
   'api_port/port': 'GET_BASE_DATA',
-  'mission/start': 'START_MISSION',
+  'api_req_mission/start': 'START_MISSION',
   'mission/result': 'COMPLETE_MISSION',
   'req_mission/return_instruction': 'QUIT_MISSION',
   'kuosyou/destroyship': 'SCRAP_SHIP',
@@ -56,7 +56,8 @@ export const ApiEventsByPath = T.Map({
   'get_member/mission': 'GET_MISSION_LIST',
   'get_member/practice': 'GET_PVP_OPPONENT_LIST',
   'get_member/payitem': 'GET_PAID_ITEMS',
-  'get_member/slot_item': 'GET_SLOT_ITEMS'
+  'get_member/slot_item': 'GET_SLOT_ITEMS',
+  'get_member/record': 'GET_PLAYER_RECORD'
 });
 
 export const ApiEvents = {
@@ -74,6 +75,7 @@ export const ApiEvents = {
   LOCK_EQUIPMENT: 'LOCK_EQUIPMENT',
 
   // Ship-related
+  GET_CONSTRUCTION_DOCKS: 'GET_CONSTRUCTION_DOCKS',
   CRAFT_SHIP: 'CRAFT_SHIP',
   CHANGE_SHIP: 'CHANGE_SHIP',
   RESUPPLY_SHIP: 'RESUPPLY_SHIP',
@@ -90,6 +92,7 @@ export const ApiEvents = {
   GET_QUEST_LIST: 'GET_QUEST_LIST',
   START_QUEST: 'START_QUEST',
   STOP_QUEST: 'STOP_QUEST',
+  COMPLETE_QUEST: 'COMPLETE_QUEST',
 
   // Expeditions/missions
   GET_MISSION_LIST: 'GET_MISSION_LIST',

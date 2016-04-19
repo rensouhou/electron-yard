@@ -36,7 +36,6 @@ namespace Dockyard {
       type: ShipType;
       shipExtraVoices: boolean;
     }
-
     interface ShipType {
       id: number;
       sortId: number;
@@ -47,10 +46,8 @@ namespace Dockyard {
         scnt: any;
       };
     }
-
     interface SlotItem {
     }
-
     interface Remodel {
       level: number;
       remodelsToId: number;
@@ -59,7 +56,6 @@ namespace Dockyard {
         ammo: number;
       };
     }
-
     interface ShipStats {
       firepower: [number, number];
       torpedo: [number, number];
@@ -69,7 +65,6 @@ namespace Dockyard {
       range: number;
       speed: number;
     }
-
     enum Rarity { 1, 2, 3, 4, 5 }
   }
 
@@ -82,14 +77,12 @@ namespace Dockyard {
       ammo: number;  // Current ammo, merge with baseship when presenting
       stars: Stars;
     }
-
     interface ShipType {
     }
     interface SlotItem {
     }
     interface Profile {
     }
-
     interface Fleet {
       id: number;
       memberId: number;
@@ -133,6 +126,25 @@ namespace Dockyard {
   }
 
   export module API {
+    interface ApiAction {
+      type: string;
+      payload: Object;
+    }
+
+    interface StartMission extends ApiAction {
+      payload: {
+        completion: number;
+        fleetId: number;
+        missionId: number;
+      };
+    }
+
+    interface CompleteMission extends ApiAction {
+      payload: {
+        
+      };
+    }
+
     interface GetBaseData {
 
     }

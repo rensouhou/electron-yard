@@ -7,18 +7,17 @@
  * @since 0.3.0
  * @author Stefan Rimaila <stefan@rimaila.fi>
  * @module app/transformers/kcsapi/start-sortie
- * @flow
  */
-import type { ApiRequest, ApiRequestResult } from '../../types/api';
 
 /**
  * @event START_SORTIE
  * @param {__PROTO.ApiRequest} r
  */
-export default function (r:ApiRequest):ApiRequestResult {
-  console.log('START_SORTIE r:ApiRequest =>', r);
-  // Derp
+export default function action$startSortie(r) {
+  console.warn('action$startSortie NYI; event `START_SORTIE`');
+
   return {
+    r,
     $_finalized: false,
     $_nyi: true
   };

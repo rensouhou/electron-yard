@@ -3,6 +3,20 @@
  */
 namespace KCS {
   export module Models {
+    import ConstructionDockState = KCSApi.ConstructionDockState;
+    interface ConstructionDock {
+      api_member_id: number;
+      api_id: number;
+      api_state: ConstructionDockState;
+      api_created_ship_id: number;
+      api_complete_time: number;
+      api_complete_time_str: string;
+      api_item1: number;
+      api_item2: number;
+      api_item3: number;
+      api_item4: number;
+      api_item5: number;
+    };
     interface BaseShip {
       api_id: number;
     }
@@ -164,6 +178,13 @@ namespace KCSApi {
     api_result_msg: string;
   }
 
+  /** Missions */
+  enum MissionResult {
+    Failure = 0,
+    Success = 1,
+    HugeSuccess = 2
+  }
+
   /** `kdock` */
   enum ConstructionDockState {
     Locked = -1,
@@ -264,10 +285,47 @@ namespace KCSApi {
         }>;
       };
     }
-    export interface START_MISSION extends ApiRequest {}
-    export interface COMPLETE_MISSION extends ApiRequest {}
-    export interface GET_CONSTRUCTION_DOCKS extends ApiRequest {
+    export interface START_MISSION extends ApiRequest {
       body: {
+        api_complatetime: number;
+        api_complatetime_str: string;
+      };
+      postBody: {
+        api_deck_id: number;
+        api_mission_id: number;
+        api_mission: any;
+      };
+    }
+    export interface COMPLETE_MISSION extends ApiRequest {
+      body: {
+        api_ship_id: Array<number>;
+        api_clear_result: MissionResult;
+        api_detail: string;
+        api_get_exp: number;
+        api_get_exp_lvup: Array<[number, number]>;
+        api_get_item1: {
+          api_useitem_count: number;
+          api_useitem_id: number;
+        };
+        api_get_item2: {
+          api_useitem_count: number;
+          api_useitem_id: number;
+        };
+        api_get_material: Array<number>;
+        api_maparea_name: string;
+        api_member_exp: number;
+        api_member_lv: number;
+        api_quest_level: number;
+        api_quest_name: string;
+        api_useitem_flag: [number, number];
+      };
+      postBody: {
+        api_deck_id: number;
+      };
+    }
+
+    export interface GET_CONSTRUCTION_DOCKS extends ApiRequest {
+      body: Array<{
         api_member_id: number;
         api_id: number;
         api_state: ConstructionDockState;
@@ -279,7 +337,7 @@ namespace KCSApi {
         api_item3: number;
         api_item4: number;
         api_item5: number;
-      };
+      }>;
     }
     export interface GET_USABLE_ITEMS extends ApiRequest {
       body: Array<{
@@ -323,6 +381,43 @@ namespace KCSApi {
       postBody: {
         api_quest: any;
         api_quest_id: number;
+      };
+    }
+    export interface GET_PLAYER_RECORD extends ApiRequest {
+      body: {
+        api_member_id: number;
+        api_nickname: string;
+        api_nickname_id: any;
+        api_cmt: string;
+        api_cmt_id: any;
+        api_photo_url: any;
+        api_level: number;
+        api_rank: number;
+        api_experience: [number, number];
+        api_war: {
+          api_win: number;
+          api_lose: number;
+          api_rate: number;
+        };
+        api_mission: {
+          api_count: number;
+          api_success: number;
+          api_rate: number;
+        };
+        api_practice: {
+          api_win: number;
+          api_lose: number;
+          api_rate: number;
+        };
+        api_friend: number;
+        api_deck: any;
+        api_kdoc: number;
+        api_ndoc: number;
+        api_ship: [number, number];
+        api_slotitem: [number, number];
+        api_furniture: number;
+        api_large_dock: number;
+        api_material_max: any;
       };
     }
   }

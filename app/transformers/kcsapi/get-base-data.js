@@ -24,13 +24,11 @@ import { playerFleet as fleet } from '../api/player-fleet';
 export default function action$getBaseData(r:ApiRequest):ApiRequestResult {
   const basic = r.body.api_basic;
 
-  const player = {
+  return {
     id: basic.api_member_id,
     profile: profile(basic),
     fleets: R.indexBy(R.prop('id'), r.body.api_deck_port.map(fleet)),
     ships: R.indexBy(R.prop('sortId'), r.body.api_ship.map(ship)),
     materials: parseMaterialObjects(r.body.api_material)
   };
-
-  return { player };
 }

@@ -2,6 +2,7 @@
 /// <reference path="../../../lib/typedefs/dockyard.d.ts" />
 /**
  * @overview
+ *  Handler for `LOAD_FLEET_PRESET` event
  *
  * @since 0.3.0
  * @author Stefan Rimaila <stefan@rimaila.fi>

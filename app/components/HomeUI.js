@@ -29,7 +29,7 @@ export default class HomeUI extends Component {
     console.log('this.props =>', this.props);
 
     return (
-      <div>dirp
+      <div>
         <div>
           <h3>Game state: {this.props.gameState}</h3>
           <pre>

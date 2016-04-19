@@ -18,7 +18,7 @@ class Game extends Component {
   };
 
   // The webview needs to be appended as a vanilla DOM element,
-  // since the `plugins` does not if mounted through React.
+  // since the `plugins` attribute does not work if mounted through React.
   componentDidMount() {
     const { gameViewHolder } = this.refs;
     const { game, transformerActions } = this.props;
@@ -27,7 +27,6 @@ class Game extends Component {
     view.partition = 'persist:kc';
     view.style.width = '800px';
     view.style.height = '480px';
-    view.style.border = 'solid 2px #f00';
     view.nodeintegration = true;
     view.plugins = true;
     view.addEventListener('dom-ready', createGameViewHandler({ game, transformerActions }, config));
@@ -37,7 +36,7 @@ class Game extends Component {
 
   render() {
     console.log('this.props =>', this.props);
-    return <div ref="gameViewHolder"></div>;
+    return <div ref="gameViewHolder" id="game-view-holder"></div>;
   }
 }
 

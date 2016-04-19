@@ -1,16 +1,17 @@
 /**
  * @overview
+ *  Handler for `FINISHED_PRACTICE` event
  *
  * @since 0.3.0
  * @author Stefan Rimaila <stefan@rimaila.fi>
  * @module app/transformers/kcsapi/finished-practice
- * @flow
  */
-import type { ApiRequest, ApiRequestResult } from '../../types/api';
 
 /**
  * @param r
  */
-export default function action$finishedPractice(r:ApiRequest):ApiRequestResult {
+export default function action$finishedPractice(r) {
+  console.warn('action$finishedPractice NYI; event `FINISHED_PRACTICE`');
+
   return { r };
 }
