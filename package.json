@@ -1,6 +1,6 @@
 {
   "name": "electron-test",
-  "version": "0.0.1",
+  "version": "0.3.0",
   "description": "Dockyard-as-an-App",
   "main": "main.js",
   "scripts": {
