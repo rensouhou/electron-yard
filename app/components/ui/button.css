@@ -1,5 +1,7 @@
 
 .button {
-  background: #f00;
-  border: solid 2px #00f;
+  background: #fff;
+  border: solid 2px #c00;
+  color: #c00;
+  font-family: 'SF UI Display', 'Helvetica Neue', Arial, Helvetica, sans-serif;
 }

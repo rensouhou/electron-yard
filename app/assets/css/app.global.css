@@ -1,3 +1,9 @@
-* {
+@import '~normalize.css/normalize.css';
 
+html, body {
+  font-family: 'SF UI Display', sans-serif;
+}
+
+pre, code {
+  font-family: 'Fantasque Sans Mono', monospace, monospace;
 }

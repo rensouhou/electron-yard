@@ -14,6 +14,7 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import routes from './routes';
 import configureStore from './store/configure-store';
 
+import './assets/css/app.global.css';
 import './components/electron';
 
 const store = configureStore();
