@@ -2,18 +2,21 @@
  * @overview
  *
  * @since 0.2.0
+ * @version 0.3.0
  * @author Stefan Rimaila <stefan@rimaila.fi>
- * @module app/containers/Base
+ * @module app/containers/BaseContainer
+ * @todo(@stuf): is this even needed anymore?
  */
 import React, { Component, PropTypes } from 'react';
 import Base from '../components/Base';
-import * as InterfaceActions from '../actions/interface';
+import * as coreActions from '../actions/core';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators(InterfaceActions, dispatch);
-}
+const mapStateToProps = (state) => ({
+  gameState: state.gameState,
+  core: state.core
+});
 
 class BaseContainer extends Component {
   static propTypes = {
@@ -28,6 +31,7 @@ class BaseContainer extends Component {
   };
 
   render() {
+    console.log('BaseContainer =>', this.props);
     const { children } = this.props;
     return (
       <Base>
@@ -41,6 +45,5 @@ class BaseContainer extends Component {
 }
 
 export default connect(
-  null,
-  mapDispatchToProps
+  mapStateToProps
 )(BaseContainer);

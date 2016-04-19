@@ -8,7 +8,7 @@
 import React, { Component, PropTypes } from 'react';
 import styles from './button.scss';
 
-class Button extends Component {
+export class Button extends Component {
   static propTypes = {
     children: PropTypes.any
   };
@@ -21,5 +21,3 @@ class Button extends Component {
     );
   }
 }
-
-export default Button;

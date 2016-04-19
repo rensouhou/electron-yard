@@ -26,8 +26,6 @@ export default class HomeUI extends Component {
     const { player } = this.props;
     const profile:PlayerProfile = player.profile;
 
-    console.log('this.props =>', this.props);
-
     return (
       <div>
         <div>

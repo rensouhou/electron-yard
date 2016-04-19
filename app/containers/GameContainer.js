@@ -7,15 +7,15 @@
  */
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as GameActions from '../actions/game';
+import { createTransformerActions, createGameActions } from '../actions/game';
+import * as coreActions from '../actions/core';
 import Game from '../components/Game';
 
-function mapDispatchToProps(dispatch) {
-  return {
-    transformerActions: bindActionCreators(GameActions.transformerActions(), dispatch),
-    game: bindActionCreators(GameActions.game(), dispatch)
-  };
-}
+const mapDispatchToProps = dispatch => ({
+  transformerActions: bindActionCreators(createTransformerActions(), dispatch),
+  game: bindActionCreators(createGameActions(), dispatch),
+  actions: bindActionCreators({ ...coreActions }, dispatch)
+});
 
 export default connect(
   null,

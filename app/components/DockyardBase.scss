@@ -1,0 +1,10 @@
+@import "~material-colors/dist/colors.scss";
+
+.base {
+  border: solid 1px $md-amber-400;
+}
+
+.topBar {
+  padding: 0.2rem;
+  border: solid 1px $md-blue-grey-600;
+}

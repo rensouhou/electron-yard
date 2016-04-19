@@ -1,12 +1,15 @@
+/// <reference path="../../lib/typedefs/kancolle.d.ts" />
+/// <reference path="../../lib/typedefs/dockyard.d.ts" />
 /**
  * @overview
+ *  Core game -related actions
  *
  * @since 0.2.0
+ * @version 0.3.0
  * @author Stefan Rimaila <stefan@rimaila.fi>
- * @module app/actions/game
+ * @module app/actions/core
  */
 import { createAction } from 'redux-actions';
-import invariant from 'invariant';
 
 /** @type {string} Register a reference to the <webview /> holding the game SWF */
 export const REGISTER_GAME_VIEW = 'REGISTER_GAME_VIEW';
@@ -38,13 +41,4 @@ export const takeScreenshot = createAction(TAKE_SCREENSHOT, (view) => {
   return { error, filename };
 });
 
-export const registerGameView = createAction(REGISTER_GAME_VIEW, (webview) => {
-  invariant(webview, 'A webview is required.');
-
-  return {
-    type: REGISTER_GAME_VIEW,
-    payload: {
-      webview
-    }
-  };
-});
+export const registerGameView = createAction(REGISTER_GAME_VIEW, webview => webview);

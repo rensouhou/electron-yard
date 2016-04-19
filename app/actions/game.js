@@ -21,12 +21,12 @@ export const PARSED_API_DATA:string = 'PARSED_API_DATA';
 
 export { ApiEvents, ApiEventsByPath };
 
-export const transformerActions = () => transformers
+export const createTransformerActions = () => transformers
   .toKeyedSeq()
   .mapEntries(([k, v]) => [k, createAction(k, v)])
   .toJS();
 
-export const game = () => ({
+export const createGameActions = () => ({
   parseApiData: createAction(RECEIVED_API_DATA, (data:ApiRequest):ApiRequestResult => {
     const event:string = ApiEventsByPath.find((v:string, k:string) => data.path.includes(k));
 

@@ -1,6 +1,7 @@
-
 @import "~material-colors/dist/colors.scss";
 @import "../../assets/styles/variables";
+
+$button-border-radius: 0.3rem;
 
 .button {
   background: $md-white;
@@ -10,7 +11,6 @@
   font-weight: 500;
   font-size: 1rem;
   padding: 0.4rem 1.2rem;
-  border-radius: 0.2rem;
   display: inline-block;
 
   &:hover {
@@ -18,5 +18,22 @@
     background-color: $md-blue-grey-700;
     color: $md-white;
   }
+
+  &:first-child:last-child {
+    border-radius: $button-border-radius;
+  }
+
+  &:first-child {
+    border-top-left-radius: $button-border-radius;
+    border-bottom-left-radius: $button-border-radius;
+  }
+  &:last-child {
+    border-top-right-radius: $button-border-radius;
+    border-bottom-right-radius: $button-border-radius;
+  }
+  &:not(:first-child) {
+    border-left: 0;
+  }
 }
+
 

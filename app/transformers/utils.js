@@ -1,5 +1,5 @@
-/// <reference path="../../../lib/typedefs/kancolle.d.ts" />
-/// <reference path="../../../lib/typedefs/dockyard.d.ts" />
+/// <reference path="../../lib/typedefs/kancolle.d.ts" />
+/// <reference path="../../lib/typedefs/dockyard.d.ts" />
 /**
  * @overview
  *

@@ -7,7 +7,7 @@
  */
 import { combineReducers } from 'redux';
 import { routerReducer as routing } from 'react-router-redux';
-import core from './app-core';
+import core from './core';
 import crafting from './crafting';
 import game from './game';
 import gameState from './game-state';

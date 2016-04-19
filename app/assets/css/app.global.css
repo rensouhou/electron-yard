@@ -8,3 +8,9 @@ html, body {
 pre, code {
   font-family: 'Fantasque Sans Mono', monospace, monospace;
 }
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
