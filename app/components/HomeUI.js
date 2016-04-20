@@ -6,7 +6,6 @@
  */
 import type { PlayerProfile } from '../types/player-profile';
 import React, { Component, PropTypes } from 'react';
-import R from 'ramda';
 
 export default class HomeUI extends Component {
   static propTypes = {
@@ -17,6 +16,10 @@ export default class HomeUI extends Component {
     uiStateData: PropTypes.object
   };
 
+  /**
+   * @deprecated
+   * @returns {*}
+   */
   getFleets = () => {
     const uiStateData = this.props.uiStateData || {};
     return uiStateData.fleetShips;
@@ -31,7 +34,6 @@ export default class HomeUI extends Component {
         <div>
           <h3>Game state: {this.props.gameState}</h3>
           <pre>
-            {profile.nickname}<br />
             Level: {profile.level},
             Rank: {profile.rank},
             Coins: {profile.coins}<br />

@@ -2,6 +2,7 @@
  * @overview
  *
  * @since 0.2.0
+ * @version 0.3.0
  * @author Stefan Rimaila <stefan@rimaila.fi>
  * @module app/components/Game
  */
@@ -26,17 +27,14 @@ class Game extends Component {
   componentDidMount() {
     const { gameViewHolder } = this.refs;
     const { actions, game, transformerActions } = this.props;
-    const view = document.createElement('webview');
-    view.src = 'http://www.dmm.com/netgame/social/-/gadgets/=/app_id=854854/';
-    view.partition = 'persist:kc';
-    view.style.width = '800px';
-    view.style.height = '480px';
-    view.nodeintegration = true;
-    view.plugins = true;
+    const view = Object.assign(document.createElement('webview'), {
+      nodeintegration: true,
+      plugins: true,
+      partition: 'persist:kc',
+      src: 'http://www.dmm.com/netgame/social/-/gadgets/=/app_id=854854/'
+    });
     view.addEventListener('dom-ready', createGameViewHandler({ game, transformerActions }, config));
-
     findDOMNode(gameViewHolder).appendChild(view);
-
     actions.registerGameView(view);
   }
 

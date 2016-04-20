@@ -9,7 +9,6 @@
  */
 import React, { Component, PropTypes } from 'react';
 import Base from '../components/Base';
-import * as coreActions from '../actions/core';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
@@ -31,12 +30,10 @@ class BaseContainer extends Component {
   };
 
   render() {
-    console.log('BaseContainer =>', this.props);
-    const { children } = this.props;
     return (
       <Base>
         <div>
-          {children}
+          {this.props.children}
           {this.renderDevTools()}
         </div>
       </Base>
@@ -44,6 +41,4 @@ class BaseContainer extends Component {
   }
 }
 
-export default connect(
-  mapStateToProps
-)(BaseContainer);
+export default connect(mapStateToProps)(BaseContainer);
