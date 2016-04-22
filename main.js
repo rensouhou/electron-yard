@@ -39,7 +39,7 @@ function createWindow() {
   const windowOpts = {
     width: 1200,
     height: 800,
-    'web-preferences': {
+    webPreferences: {
       plugins: true
     }
   };
