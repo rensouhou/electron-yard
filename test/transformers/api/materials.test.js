@@ -1,6 +1,4 @@
-/*eslint-disable*/
-
-import * as Materials from '../../app/transformers/api/materials';
+import * as Materials from '../../../app/transformers/api/materials';
 import chai from 'chai';
 const { expect, should } = chai;
 

@@ -1,21 +1,23 @@
-/*eslint-disable*/
-
 import * as Primitive from '../../app/transformers/primitive';
 import chai from 'chai';
 const { expect, should } = chai;
 
 const { asNumber, asBool, getArrayOrDefault, getObjectOrDefault, formatLineBreaks } = Primitive;
 
-describe('Primitive', function () {
+describe('transformers.primitive', function () {
   describe('#asNumber', function () {
-    it('parses a string correctly', () =>  {
+    it('parses a number correctly (as string)', () => {
+      expect(asNumber('-1')).to.be.a('number');
+      expect(asNumber('0')).to.be.a('number');
+    });
+    it('returns null on non-parseable input', () =>  {
       expect(asNumber('-1')).to.be.a('number');
       expect(asNumber('abc')).not.to.be.a('number');
       expect(asNumber('abc')).to.equal(null);
     });
   });
   describe('#asBool', function () {
-    it('parses a number correctly', () => {
+    it('casts a number to boolean correctly', () => {
       expect(asBool('1')).to.equal(true);
       expect(asBool('0')).to.equal(false);
       expect(asBool('-1')).to.equal(false);

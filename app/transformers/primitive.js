@@ -3,6 +3,8 @@
 /*eslint no-confusing-arrow:0*/
 /**
  * @overview
+ *  Convenience functions for mapping and filtering API data into
+ *  primitives.
  *
  * @since 0.3.0
  * @author Stefan Rimaila <stefan@rimaila.fi>
