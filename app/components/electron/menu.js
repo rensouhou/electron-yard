@@ -108,6 +108,14 @@ if (process.platform === 'darwin') {
         accelerator: 'Command+Alt+S'
       }
     ]
+  }, {
+    label: 'Window',
+    submenu: [
+      {
+        label: 'Float on top',
+        accelerator: 'CommandOrControl+Alt+T'
+      }
+    ]
   });
 }
 

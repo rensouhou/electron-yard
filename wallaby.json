@@ -1,0 +1,9 @@
+{
+  "files": [
+    "app/**/*.js"
+  ],
+  "tests": [
+    "test/**/*test.js"
+  ],
+  "testFramework": "mocha"
+}

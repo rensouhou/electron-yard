@@ -1,7 +1,7 @@
 @import "~material-colors/dist/colors.scss";
 @import "../../assets/styles/variables";
 
-$color: $primary-color;
+$color: transparentize($md-green-a400, 0.88);
 
 .base {
   border: solid 0.2rem $color;
@@ -10,7 +10,7 @@ $color: $primary-color;
 }
 
 .bar {
-  background-color: $color;
+  background-color: $md-green-a400;
   height: 1.5rem;
   border-radius: 0.2rem;
   text-align: center;

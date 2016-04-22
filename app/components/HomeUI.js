@@ -48,20 +48,17 @@ export default class HomeUI extends Component {
           <Label>Coins: <strong>{profile.coins}</strong></Label>
         </div>
         <div className={styles.testFleet}>
-          <div>
-            {(a || []).map(s => {
-              const [cur, max] = s.hp;
-              return (
-                <div key={s.id} style={{ width: '50%', display: 'inline-block' }}>
-                  <div>
-                    {s.name.kanji}
-                    {' '}<span style={{ fontSize: '0.8em' }}>({s.name.reading})</span>
-                  </div>
-                  <Progress min={0} max={max} val={cur} label={`${cur} / ${max}`} />
+          {(a || []).map(s => {
+            const [cur, max] = s.hp;
+            return (
+              <div key={s.id} className={styles.testShip}>
+                <div>
+                  {s.name.kanji}
                 </div>
-              );
-            })}
-          </div>
+                <Progress min={0} max={max} val={cur} label={`${cur} / ${max}`} />
+              </div>
+            );
+          })}
         </div>
         <div className={styles.mainView}>
           {JSON.stringify(player.materials, null, 2)}

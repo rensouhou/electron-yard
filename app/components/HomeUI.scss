@@ -16,6 +16,14 @@
 }
 
 .testFleet {
-  width: 400px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 500px;
   padding: 0.2rem;
+}
+
+.testShip {
+  width: 50%;
+  padding: 0 0.25rem 0.25rem;
 }
