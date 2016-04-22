@@ -1,0 +1,4 @@
+--require expect.js
+--timeout 200
+--reporter dot
+--compilers js:babel-register
