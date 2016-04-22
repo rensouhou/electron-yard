@@ -1,7 +1,13 @@
 
 @import "imports";
 
-$base-font-family: "SF UI Display", "Helvetica Neue", sans-serif;
+$primary: transparentize($md-black, 0.13);
+$secondary: transparentize($md-black, 0.46);
+$disabled: transparentize($md-black, 0.62);
+$divider: transparentize($md-black, 0.88);
+
+$base-font-family: "Avenir Next", "SF UI Display", "Helvetica Neue", sans-serif;
+$base-text-color: $primary;
 
 $font-size-root: 16px !default;
 
@@ -9,7 +15,6 @@ $font-size-base: 1rem !default;
 
 $line-height-base: 1.5rem !default;
 
-$primary: transparentize($md-black, 0.13);
-$secondary: transparentize($md-black, 0.46);
-$disabled: transparentize($md-black, 0.62);
-$divider: transparentize($md-black, 0.88);
+$primary-color: $md-blue-grey-600;
+
+$bar-horizontal-space: 1rem;

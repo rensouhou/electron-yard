@@ -26,6 +26,6 @@ export default function action$craftShip(r) {
       instant: asBool(d.api_highspeed),
       lsc: asBool(d.api_large_flag)
     },
-    recipe: parseMaterialsRecipe([0, 0, 0, 0, null, null, 0])
+    recipe: parseMaterialsRecipe([d.api_item1, d.api_item1, d.api_item3, d.api_item4, null, null, d.api_item5])
   };
 }

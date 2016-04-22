@@ -29,8 +29,5 @@ const GameStateMapping = [
   [ApiEvents.GET_MISSION_LIST, GameState.BROWSING_MISSIONS]
 ];
 
-console.log('GameStateMapping =>',
-  R.fromPairs(R.map(([k, fn]) => [k, () => fn], GameStateMapping)));
-
 export default createReducer(GameState.UNINITIALIZED,
-  R.fromPairs(R.map(([k, fn]) => [k, () => fn], GameStateMapping)));
+  R.fromPairs(R.map(([apiEvent, fn]) => [apiEvent, () => fn], GameStateMapping)));

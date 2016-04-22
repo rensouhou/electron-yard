@@ -1,9 +1,11 @@
+/// <reference path="../../lib/typedefs/kancolle.d.ts" />
+/// <reference path="../../lib/typedefs/dockyard.d.ts" />
 /**
  * @overview
  *
  * @since 0.2.0
  * @author Stefan Rimaila
- * @module app/components/Home
+ * @module app/components/home
  */
 import React, { Component } from 'react';
 import GameContainer from '../containers/GameContainer';

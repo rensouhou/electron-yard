@@ -13,7 +13,7 @@ namespace Dockyard {
    */
   export module BaseData {
     interface Ship {
-      id: number;
+      shipId: number;
       sortId: number;
       flavorText: string;
       name: {

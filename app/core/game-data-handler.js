@@ -30,8 +30,7 @@ export function createGameViewHandler(parseFunObj, cfg) {
   invariant(parseFunObj, 'A parsing function is required.');
   invariant(cfg, 'A configuration object is required.');
 
-  console.log('createGameViewHandler; parseFn =', parseFunObj);
-
+  // console.log('createGameViewHandler; parseFn =', parseFunObj);
   return handleGameView(parseFunObj, cfg);
 }
 

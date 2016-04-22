@@ -1,8 +1,14 @@
 @import '~normalize.css/normalize.css';
 
 html, body {
-  font-family: 'SF UI Display', sans-serif;
-  font-size: 14px;
+  height: 100%;
+  overflow-y: auto;
+  font-family: 'Lato', 'SF UI Display', sans-serif;
+  font-size: 12pt;
+  color: rgba(255, 255, 255, 0.88);
+  background: linear-gradient(160deg, #000000, #00808c);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
 }
 
 pre, code {

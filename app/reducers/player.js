@@ -14,25 +14,26 @@ import createReducer from './create-reducer';
 const initialState = {
   profile: {},
   quests: {},
-  fleets: {},
-  missions: {},
+  fleets: [],
+  ships: [],
+  slotItems: [],
+  missions: [],
   docks: {
-    repairDocks: {},
-    constructionDocks: {}
+    repairDocks: [],
+    constructionDocks: []
   },
-  ships: {},
-  slotItems: {},
   materials: {}
 };
 
 const mergeProfile = (k, l, r) => {
   switch (k) {
     case 'profile':
+    case 'materials':
+      return R.merge(l, r);
     case 'ships':
     case 'fleets':
     case 'slotItems':
-    case 'materials':
-      return R.merge(l, r);
+      return r;
     default:
       return r;
   }

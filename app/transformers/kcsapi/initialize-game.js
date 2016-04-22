@@ -44,8 +44,8 @@ export default function (r:ApiRequest):ApiRequestResult {
         } = r.body;
 
   return {
-    ships: R.indexBy(R.prop('sortId'), api_mst_ship.map(baseShip)),
-    shipGraphics: R.indexBy(R.prop('sortId'), api_mst_shipgraph.map(baseShipGraphic)),
-    shipTypes: R.indexBy(R.prop('sortId'), api_mst_stype.map(baseShipType))
+    ships: api_mst_ship.map(baseShip),
+    shipGraphics: api_mst_shipgraph.map(baseShipGraphic),
+    shipTypes: api_mst_stype.map(baseShipType)
   };
 }

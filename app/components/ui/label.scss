@@ -1,0 +1,9 @@
+@import "~material-colors/dist/colors.scss";
+@import "../../assets/styles/variables";
+
+$color: $primary-color;
+
+.base {
+  padding-left: $bar-horizontal-space;
+  padding-right: $bar-horizontal-space;
+}

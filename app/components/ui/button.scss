@@ -1,40 +1,21 @@
 @import "~material-colors/dist/colors.scss";
 @import "../../assets/styles/variables";
 
-$button-border-radius: 0.3rem;
+$button-border-radius: 0rem;
+$color: $primary-color;
 
 .button {
-  background: $md-white;
-  border: solid 0.2rem $md-blue-grey-700;
-  color: $md-blue-grey-800;
+  background: $md-pink-a400;
+  border: solid 0.15rem $md-pink-a400;
+  // border-radius: $button-border-radius;
+  color: $md-white;
   font-family: $base-font-family;
   font-weight: 500;
-  font-size: 1rem;
-  padding: 0.4rem 1.2rem;
+  padding: 0.4rem 1rem;
   display: inline-block;
 
   &:hover {
     cursor: pointer;
-    background-color: $md-blue-grey-700;
-    color: $md-white;
-  }
-
-  // Only give round corners to single children
-  &:first-child:last-child {
-    border-radius: $button-border-radius;
-  }
-
-  // And only to the ones on the edges
-  &:first-child {
-    border-top-left-radius: $button-border-radius;
-    border-bottom-left-radius: $button-border-radius;
-  }
-  &:last-child {
-    border-top-right-radius: $button-border-radius;
-    border-bottom-right-radius: $button-border-radius;
-  }
-  &:not(:first-child) {
-    border-left: 0;
   }
 }
 

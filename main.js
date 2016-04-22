@@ -16,6 +16,7 @@ const electron = require('electron');
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 const crashReporter = electron.crashReporter;
+//const loadConfig = require('./app/core/load-config');
 
 crashReporter.start();
 
@@ -36,7 +37,7 @@ app.commandLine.appendSwitch('ppapi-flash-version', '21.0.0.197');
 
 function createWindow() {
   const windowOpts = {
-    width: 1400,
+    width: 1200,
     height: 800,
     'web-preferences': {
       plugins: true

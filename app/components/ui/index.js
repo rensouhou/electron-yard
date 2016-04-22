@@ -7,7 +7,9 @@
  */
 
 import { Button } from './button';
+import { Progress } from './progress';
+import { Label } from './label';
 
-export default { Button };
+export default { Button, Progress, Label };
 
-export { Button };
+export { Button, Progress, Label };

@@ -27,8 +27,8 @@ export default function action$getBaseData(r:ApiRequest):ApiRequestResult {
   return {
     id: basic.api_member_id,
     profile: profile(basic),
-    fleets: R.indexBy(R.prop('id'), r.body.api_deck_port.map(fleet)),
-    ships: R.indexBy(R.prop('sortId'), r.body.api_ship.map(ship)),
+    fleets: r.body.api_deck_port.map(fleet),
+    ships: r.body.api_ship.map(ship),
     materials: parseMaterialObjects(r.body.api_material)
   };
 }

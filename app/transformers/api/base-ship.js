@@ -16,7 +16,7 @@ import { parseMaterialArray } from './materials';
  * @todo(@stuf): create methods to check if a ship is player/enemy
  */
 const baseShip = (s) => ({
-  id: s.api_id,
+  shipId: s.api_id,
   sortId: s.api_sortno,
   flavorText: formatLineBreaks(s.api_getmes),
   name: {

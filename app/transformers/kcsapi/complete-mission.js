@@ -47,6 +47,6 @@ export default function action$completeMission(r) {
     rewards: [r.body.api_get_item1, r.body.api_get_item2].map(getObjectOrDefault).map(parseReward),
     materials: parseMaterialArray(r.body.api_get_material),
     ships: r.body.api_ship_id.slice[1],
-    experience: collectShipExperience(r.body.api_ship_id.slice[1], r.body.api_get_exp_lvup)
+    // experience: collectShipExperience(r.body.api_ship_id.slice[1], r.body.api_get_exp_lvup)
   };
 }

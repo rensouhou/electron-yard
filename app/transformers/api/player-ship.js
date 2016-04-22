@@ -15,6 +15,7 @@ import { asBool } from '../primitive';
 const playerShip = (s) => ({
   id: s.api_id,
   sortId: s.api_sortno,
+  shipId: s.api_ship_id,
   level: s.api_lv,
   experience: s.api_exp,
   morale: s.api_cond,

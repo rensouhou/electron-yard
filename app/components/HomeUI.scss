@@ -1,0 +1,21 @@
+@import "~material-colors/dist/colors.scss";
+
+.base {
+  width: 800px;
+  color: $md-white;
+}
+
+.topBar {
+  display: flex;
+  align-items: center;
+  padding: 0.2rem;
+}
+
+.mainView {
+  padding: 0.2rem;
+}
+
+.testFleet {
+  width: 400px;
+  padding: 0.2rem;
+}

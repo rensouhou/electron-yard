@@ -1,4 +1,6 @@
 {
   "screenshotDir": "%HOME%/Pictures",
-  "screenshotPrefix": "dockyard_"
+  "screenshotPrefix": "dockyard_",
+  "ppapiFlashPath": "%APPROOT%/lib/PepperFlashPlayer.plugin",
+  "ppapiFlashVersion": "21.0.0.197"
 }

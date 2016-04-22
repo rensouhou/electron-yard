@@ -3,12 +3,12 @@
  *
  * @since 0.3.0
  * @author Stefan Rimaila <stefan@rimaila.fi>
- * @module app/components/dockyard-base
+ * @module app/components/ui/label
  */
 import React, { Component, PropTypes } from 'react';
-import styles from './DockyardBase.scss';
+import styles from './label.scss';
 
-export default class DockyardBase extends Component {
+export class Label extends Component {
   static propTypes = {
     children: PropTypes.any
   };

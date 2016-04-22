@@ -1,3 +1,5 @@
+/// <reference path="../../lib/typedefs/kancolle.d.ts" />
+/// <reference path="../../lib/typedefs/dockyard.d.ts" />
 /**
  * @overview
  *
@@ -5,21 +7,25 @@
  * @author Stefan Rimaila <stefan@rimaila.fi>
  * @module app/containers/home-ui-container
  */
+import R from 'ramda';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import HomeUI from '../components/HomeUI';
-import { getFleetShips } from '../selectors/fleet-ships';
+import { getFleetShips, combineShips } from '../selectors/fleet-ships';
+import * as coreActions from '../actions/core';
 
-function mapStateToProps(state) {
-  return {
-    game: state.game,
-    gameState: state.gameState,
-    player: state.player,
-    uiStateData: {
-      fleetShips: getFleetShips(state)
-    }
-  };
-}
+const mapStateToProps = (state) => ({
+  game: state.game,
+  gameState: state.gameState,
+  player: state.player,
+  selectors: {
+    fleetShips: getFleetShips(state),
+    combinedShips: combineShips(state)
+  }
+});
 
-export default connect(
-  mapStateToProps
-)(HomeUI);
+const mapDispatchToProps = dispatch => ({
+  actions: bindActionCreators(Object.assign({}, coreActions), dispatch)
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomeUI);
