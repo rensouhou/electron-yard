@@ -3,3 +3,4 @@
 --reporter list
 --compilers js:babel-register
 --ui bdd
+--recursive

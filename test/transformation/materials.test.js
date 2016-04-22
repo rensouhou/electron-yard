@@ -8,6 +8,14 @@ const { parseMaterialArray } = Materials;
 
 describe('transformers/api/materials', () => {
   describe('#parseMaterialArray', () => {
-    expect(parseMaterialArray([100, 100, 200, 50])).to.be.an('object');
+    it('parses a `KCSApi.Models.Material` model correctly', () => {
+      expect(parseMaterialArray([100, 100, 200, 50])).to.be.an('object');
+    });
+    it('parses a short materials array');
+    it('parses a long materials array');
+    it('handles different-sized material arrays correctly');
+    it('handles null values without error');
+    it('handles invalid input properly');
   });
+
 });
