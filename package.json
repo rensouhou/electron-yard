@@ -3,7 +3,11 @@
   "version": "0.3.0",
   "description": "Dockyard-as-an-App",
   "main": "main.js",
+  "directories": {
+    "test": "test"
+  },
   "scripts": {
+    "coverage": "istanbul cover _mocha -- -R spec",
     "start": "cross-env NODE_ENV=products electron ./",
     "start-dev": "cross-env ELECTRON_ENABLE_LOGGING=true NODE_ENV=development electron ./",
     "start-hot": "cross-env HOT=1 NODE_ENV=development electron ./",
@@ -15,17 +19,14 @@
     "dev": "npm run webpack-dev; concurrently --kill-others \"npm run webpack-dev-watch\" \"npm run start-dev\"",
     "dev-hot": "concurrently --kill-others \"npm run hot-server\" \"npm run start-hot\""
   },
-  "jest": {
-    "rootDir": "./app"
-  },
   "repository": {
     "type": "git",
-    "url": "https://github.com/stuf/electron-yard.git"
+    "url": "https://github.com/rensouhou/electron-yard.git"
   },
   "author": "Stefan Rimaila <stefan@rimaila.fi>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/stuf/electron-yard/issues"
+    "url": "https://github.com/rensouhou/electron-yard/issues"
   },
   "bin": {
     "electron": "./node_modules/.bin/electron"
