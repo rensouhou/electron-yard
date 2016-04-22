@@ -37,6 +37,12 @@ const matIntoPair = R.map(({ api_id, api_value }:Material):[number, number] => [
 /** @private */
 const fixMatKey = R.map(([i, v]:[number, number]):[string, number] => [materials[i - 1], v]);
 
+/** @private */
+const tightFilter = R.allPass([
+  R.complement(R.isNil),
+  R.is(Number)
+]);
+
 /**
  * @type {Function}
  * @returns {Dockyard.Materials}
@@ -46,7 +52,7 @@ const fixMatKey = R.map(([i, v]:[number, number]):[string, number] => [materials
  * console.log(matObj); // => { fuel: 100, ammo: 100, steel: 200, bauxite: 50 }
  */
 export const parseMaterialArray:MaterialsObject =
-  (arr) => R.zipObj(materials)(getArrayOrDefault(arr));
+  (arr) => R.compose(R.filter(tightFilter), R.zipObj(materials))(getArrayOrDefault(arr));
 
 /**
  * @type {Function}
