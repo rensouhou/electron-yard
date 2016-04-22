@@ -9,17 +9,6 @@ import * as Primitive from '../primitive';
 jest.unmock('../primitive');
 
 describe('primitive transformer', () => {
-  describe('asBool', () => {
-    const { asBool } = Primitive;
-    it('interprets `1` or `"1"` as `true`', () => {
-      expect(asBool(1)).toBe(true);
-      expect(asBool('1')).toBe(true);
-    });
-    it('interprets `0` or `"0"` as `false`', () => {
-      expect(asBool(0)).toBe(false);
-      expect(asBool('0')).toBe(false);
-    });
-  });
   describe('asNumber', () => {
     const { asNumber } = Primitive;
     it('interprets strings containing negative numbers', () => {
@@ -35,6 +24,17 @@ describe('primitive transformer', () => {
       expect(asNumber('4.20')).toBe(4);
     });
   });
+
+  describe('asBool', () => {
+    const { asBool, asNumber } = Primitive;
+    it('interprets `1` or `"1"` as `true`', () => {
+      expect(asBool(asNumber('1'))).toBe(true);
+    });
+    it('interprets `0` or `"0"` as `false`', () => {
+      expect(asBool(asNumber('0'))).toBe(false);
+    });
+  });
+
   describe('formatLineBreaks', () => {
     const { formatLineBreaks } = Primitive;
     it('correctly replaces `<br>` with `\\n`', () => {
@@ -51,6 +51,7 @@ describe('primitive transformer', () => {
       expect(formatLineBreaks(null)).toBe('');
     });
   });
+
   describe('getArrayOrDefault', () => {
     const { getArrayOrDefault } = Primitive;
     it('`null` should return an empty array', () => {
@@ -67,15 +68,32 @@ describe('primitive transformer', () => {
       expect(getArrayOrDefault(1234)).toBe(1234);
     });
   });
+
+  describe('getObjectOrDefault', () => {
+    const { getObjectOrDefault } = Primitive;
+    it('`null` should return an empty object', () => {
+      expect(getObjectOrDefault(null)).toEqual({});
+    });
+    it('`undefined` should return an empty object', () => {
+      expect(getObjectOrDefault(undefined)).toEqual({});
+    });
+    it('should return the original array', () => {
+      const obj = { a: 1, b: 2, c: 3, d: 4 };
+      expect(getObjectOrDefault(obj)).toEqual(obj);
+    });
+    it('should return non-objects as-is', () => {
+      expect(getObjectOrDefault(1234)).toBe(1234);
+    });
+  });
+
   describe('notEmpty', () => {
-    const { notEmpty } = Primitive;
+    const { notEmpty, asNumber } = Primitive;
     it('returns true', () => {
       expect(notEmpty(0)).toBe(true);
       expect(notEmpty(1)).toBe(true);
     });
     it('returns false on "API empty" values', () => {
-      expect(notEmpty(-1)).toBe(false);
-      expect(notEmpty('-1')).toBe(false);
+      expect(notEmpty(asNumber('-1'))).toBe(false);
     });
   });
 });
