@@ -1,2 +1,4 @@
 instrumentation:
-  excludes: ['node_modules/**']
+  root: app
+  extensions:
+    - .js

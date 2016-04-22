@@ -1,6 +1,5 @@
 --require expect.js
 --timeout 200
 --reporter list
---compilers js:babel-register
 --ui bdd
 --recursive
