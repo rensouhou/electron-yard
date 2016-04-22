@@ -1,6 +1,8 @@
 
 [![Dependency Status](https://gemnasium.com/badges/github.com/rensouhou/electron-yard.svg)](https://gemnasium.com/github.com/rensouhou/electron-yard)
 [![Build Status](https://travis-ci.org/rensouhou/electron-yard.svg?branch=master)](https://travis-ci.org/rensouhou/electron-yard)
+[![Code Climate](https://codeclimate.com/github/rensouhou/electron-yard/badges/gpa.svg)](https://codeclimate.com/github/rensouhou/electron-yard)
+[![Test Coverage](https://codeclimate.com/github/rensouhou/electron-yard/badges/coverage.svg)](https://codeclimate.com/github/rensouhou/electron-yard/coverage)
 
 # Dockyard: a reincarnation
 
