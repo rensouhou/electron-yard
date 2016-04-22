@@ -14,7 +14,7 @@
     "no-console": 0,
     "no-use-before-define": 0,
     "consistent-return": 0,
-    "eqeqeq": ["error", "allow-null"],
+    "eqeqeq": [2, "allow-null"],
     "max-len": 0,
     "brace-style": ["error", "stroustrup"],
     "new-cap": 0
