@@ -9,37 +9,23 @@
  * @module src/main/timers
  * @flow
  */
-import electron from 'electron';
-import AppEvent from '../shared/constants';
+const electron = require('electron');
+const AppEvent = require('../shared/constants');
 const { ipcMain } = electron;
 
-// Flow typedefs
-type TimerArgs = {
-  id: any,
-  targetTime: number
-};
-
-type TimerReply = {
-  id: any,
-  targetTime: number,
-  error?: Error
-};
-
-type TimerObj = {
-  [id:number]: TimerArgs
-}
-
 // Timer store
-const timers:TimerObj = {};
+const timers = {};
 
 // Timer creation
-const createTimer = (arg:TimerArgs, event:Event):?TimerReply => {
+const createTimer = (arg, event) => {
+  console.log('Create timer;', arg);
+
   if (timers[arg.id]) {
     return; // already have one, get out (maybe clean it up and replace?)
             // too lazy
   }
 
-  const reply:TimerReply = { ...arg };
+  const reply = Object.assign({}, arg);
   const timeDiff = arg.targetTime - (+new Date());
 
   if (timeDiff <= 0) {
@@ -54,7 +40,8 @@ const createTimer = (arg:TimerArgs, event:Event):?TimerReply => {
 };
 
 // Timer event IPC listener
-ipcMain.on(AppEvent.TIMER_START, (event:Event, arg:TimerArgs) => {
+ipcMain.on(AppEvent.TIMER_START, (event, arg) => {
+  console.log(`ipcMain received ${AppEvent.TIMER_START}`);
   const reply = createTimer(arg, event);
-  event.sender.send(AppEvent.TIMER_STARTED, { ...reply });
+  event.sender.send(AppEvent.TIMER_STARTED, Object.assign({}, reply));
 });
