@@ -48,7 +48,7 @@ const createTimer = (arg:TimerArgs, event:Event):void => {
     return;
   }
 
-  timers[arg.id] = setTimeout(() => event.sender.send(AppEvent.TIMER_DONE, reply));
+  timers[arg.id] = setTimeout(() => event.sender.send(AppEvent.TIMER_DONE, reply), timeDiff);
 };
 
 // Timer event IPC listener
