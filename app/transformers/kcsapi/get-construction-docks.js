@@ -17,6 +17,13 @@ const apiItems = R.map(it => `api_item${it}`, range);
 const getRecipe = R.props(apiItems);
 const padList = R.insertAll(4, [null, null]);
 
+const State = {
+  LOCKED: '-1',
+  EMPTY: 0,
+  UNDER_CONSTRUCTION: 2,
+  COMPLETE: 3
+};
+
 const ConstructionDockState = {
   '-1': 'LOCKED',
   0: 'EMPTY',
