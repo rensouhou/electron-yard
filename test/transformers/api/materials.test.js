@@ -58,5 +58,4 @@ describe('transformers/api/materials', function () {
 
     it('handles invalid input properly');
   });
-
 });

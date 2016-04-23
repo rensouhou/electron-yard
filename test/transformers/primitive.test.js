@@ -4,7 +4,7 @@ const { expect, should } = chai;
 
 const { asNumber, asBool, getArrayOrDefault, getObjectOrDefault, formatLineBreaks } = Primitive;
 
-describe('transformers.primitive', function () {
+describe('transformers/primitive', function () {
   describe('#asNumber', function () {
     it('parses a number correctly (as string)', () => {
       expect(asNumber('-1')).to.be.a('number');
