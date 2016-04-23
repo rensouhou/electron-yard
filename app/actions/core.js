@@ -9,29 +9,33 @@
  * @author Stefan Rimaila <stefan@rimaila.fi>
  * @module app/actions/core
  */
+import fs from 'fs';
 import { createAction } from 'redux-actions';
 
 /** @type {string} Register a reference to the <webview /> holding the game SWF */
 export const REGISTER_GAME_VIEW = 'REGISTER_GAME_VIEW';
 export const UPDATE_CONFIGURATION = 'UPDATE_CONFIGURATION';
 export const TAKE_SCREENSHOT = 'TAKE_SCREENSHOT';
+export const POST_NOTIFICATION = 'POST_NOTIFICATION';
+export const REGISTER_NOTIFICATION_HANDLERS = 'REGISTER_NOTIFICATION_HANDLERS';
 
 /**
  * Action Creators
  */
+
+// @todo(@stuf): use configuration values for screenshot targets
 export const takeScreenshot = createAction(TAKE_SCREENSHOT, (view) => {
-  const browserWindow = require('electron').remote.getCurrentWindow();
+  const electron = require('electron');
   const gameViewRect = view.getBoundingClientRect();
   const filename = `/Users/stuf/electron_${+(new Date())}.png`;
   let error = null;
 
-  browserWindow.capturePage({
+  electron.remote.getCurrentWindow().capturePage({
     x: gameViewRect.left,
     y: gameViewRect.top,
     width: gameViewRect.width,
     height: gameViewRect.height
   }, (image) => {
-    const fs = require('fs');
     fs.writeFile(filename, image.toPng(), (err) => {
       if (err) error = err;
       console.log(`Screenshot saved as: ${filename}`);
@@ -42,3 +46,5 @@ export const takeScreenshot = createAction(TAKE_SCREENSHOT, (view) => {
 });
 
 export const registerGameView = createAction(REGISTER_GAME_VIEW, webview => webview);
+
+export const registerNotificationHandlers = createAction(REGISTER_NOTIFICATION_HANDLERS, handlers => handlers);
