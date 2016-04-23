@@ -33,7 +33,7 @@ type TimerObj = {
 const timers:TimerObj = {};
 
 // Timer creation
-const createTimer = (arg:TimerArgs, event:Event):void => {
+const createTimer = (arg:TimerArgs, event:Event):?TimerReply => {
   if (timers[arg.id]) {
     return; // already have one, get out (maybe clean it up and replace?)
             // too lazy
@@ -45,14 +45,16 @@ const createTimer = (arg:TimerArgs, event:Event):void => {
   if (timeDiff <= 0) {
     reply.error = new Error('Timer needs to be in the future');
     event.sender.send(AppEvent.TIMER_ERROR, reply);
-    return;
+    return reply;
   }
 
   timers[arg.id] = setTimeout(() => event.sender.send(AppEvent.TIMER_DONE, reply), timeDiff);
+
+  return reply;
 };
 
 // Timer event IPC listener
 ipcMain.on(AppEvent.TIMER_START, (event:Event, arg:TimerArgs) => {
-  createTimer(arg, event);
-  event.sender.send(AppEvent.TIMER_STARTED, { ...arg });
+  const reply = createTimer(arg, event);
+  event.sender.send(AppEvent.TIMER_STARTED, { ...reply });
 });
