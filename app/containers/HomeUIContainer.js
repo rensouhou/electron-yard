@@ -11,7 +11,7 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import HomeUI from '../components/HomeUI';
-import { combineShips, combineSlotItems, getFleetShips } from '../selectors/ships';
+import { combineShips, combineSlotItems, combined } from '../selectors/ships';
 import * as coreActions from '../actions/core';
 
 const mapStateToProps = (state) => ({
@@ -20,8 +20,9 @@ const mapStateToProps = (state) => ({
   player: {
     ...state.player,
     ships: combineShips(state),
-    // slotItems: combineSlotItems(state)
-  }
+    slotItems: combineSlotItems(state)
+  },
+  models: combined(state)
 });
 
 const mapDispatchToProps = dispatch => ({

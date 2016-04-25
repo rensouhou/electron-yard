@@ -19,6 +19,8 @@ const getPlayerShips = state => state.player.ships;
 const getPlayerSlotItems = state => state.player.slotItems;
 const getBaseShips = state => state.game.ships;
 const getBaseSlotItems = state => state.game.slotItems;
+// For the sake of finding something easier
+const getBaseShipsObj = state => R.indexBy(R.prop('shipId'), state.game.ships);
 
 // Compose
 const findByProp = (idProp, id, list) => R.find(R.propEq(idProp, id), list);
@@ -34,5 +36,20 @@ const combine = R.curry(combineTwoLists);
 const combineByKey = combine(_, _);
 
 // Export usable functions
-export const combineShips = createSelector([getPlayerShips, getBaseShips], combineByKey('shipId'));
+export const combineShips = createSelector([getPlayerShips, getBaseShipsObj], (ships, baseShipsObj) =>
+  R.map(s => ({ ...baseShipsObj[s.shipId], ...s, $_combined: true }), ships));
+
+export const combineSlotItems = createSelector(
+  [getPlayerSlotItems, getBaseSlotItems],
+  (slotItems, baseSlotItems) => {
+    // @todo(@stuf): why does this behave like this?
+    const playerItems = R.pipe(R.toPairs, R.map(R.tail), R.flatten)(slotItems);
+    const baseItems = R.indexBy(R.prop('slotItemId'), baseSlotItems);
+    return R.map(it => ({ ...baseItems[it.slotItemId], ...it, $_combined: true }), playerItems);
+  });
+
+export const combined = createSelector(
+  [combineShips, combineSlotItems],
+  (ships, slotItems) => ({ ships, slotItems }));
+
 // export const combineSlotItems = createSelector([getPlayerSlotItems, getBaseSlotItems], combineByKey('slotItemId'));

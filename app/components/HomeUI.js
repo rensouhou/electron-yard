@@ -6,6 +6,7 @@
  * @module app/components/home-ui
  * @flow
  */
+import { normalize, Schema, arrayOf } from 'normalizr';
 import type { PlayerProfile } from '../types/player-profile';
 import React, { Component, PropTypes } from 'react';
 import { Button, Progress, Label } from './ui';
@@ -17,7 +18,8 @@ export default class HomeUI extends Component {
     gameState: PropTypes.string,
     player: PropTypes.object.isRequired,
     actions: PropTypes.object,
-    selectors: PropTypes.object
+    selectors: PropTypes.object,
+    models: PropTypes.object
   };
 
   handleScreenshotClick = (handler:Function, webview:Element) => {
@@ -29,8 +31,9 @@ export default class HomeUI extends Component {
   };
 
   render() {
-    const { player, selectors, actions, children, core } = this.props;
+    const { player, models, selectors, actions, children, core } = this.props;
     const profile:PlayerProfile = player.profile;
+    const { limits } = profile;
     const screenshotHandler:Function = this.handleScreenshotClick(
       (actions || {}).takeScreenshot,
       (core || {}).webview);
@@ -49,8 +52,8 @@ export default class HomeUI extends Component {
           <Button onClick={notifyTestHandler}>Notify</Button>
           <Label>Game state: <strong>{this.props.gameState}</strong></Label>
           <Label>HQ Level: <strong>{profile.level}</strong></Label>
-          <Label>Ships: <strong>{player.ships.length} / {profile.limits.maxShips}</strong></Label>
-          <Label>Equipment: <strong>{player.slotItems.length} / {profile.limits.maxSlotItems}</strong></Label>
+          <Label>Ships <strong>{models.ships.length}/{limits.maxShips}</strong></Label>
+          <Label>Equip <strong>{models.slotItems.length}/{limits.maxSlotItems}</strong></Label>
         </div>
         <div className={styles.testFleet}>
           There was a fleet here, but now it's gone.
