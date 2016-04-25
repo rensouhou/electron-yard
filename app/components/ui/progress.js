@@ -8,30 +8,30 @@
  */
 import React, { Component, PropTypes } from 'react';
 import styles from './progress.scss';
+import cx from 'classnames';
 
 export class Progress extends Component {
   static propTypes = {
     min: PropTypes.number,
     max: PropTypes.number,
     val: PropTypes.number,
-    label: PropTypes.string
+    label: PropTypes.string,
+    size: PropTypes.oneOf(['small', 'normal', 'large'])
   };
 
   static defaultProps = {
     min: 0,
     max: 100,
     val: null,
-    label: null
+    label: null,
+    size: 'normal'
   };
 
   render() {
-    const { val, max, label } = this.props;
+    const { val, max, label, size } = this.props;
     return (
-      <div className={styles.base}>
-        <div className={styles.bar} style={{ width: `${(val / max) * 100}%` }}></div>
-        <div className={styles.label}>
-          <span>{label}</span>
-        </div>
+      <div className={cx(styles.base)}>
+        <div className={cx(styles.bar, styles[size])} style={{ width: `${(val / max) * 100}%` }}></div>
       </div>
     );
   }

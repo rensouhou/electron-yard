@@ -58,15 +58,16 @@ const playerProfile = (d:ApiRequest):PlayerProfile => ({
     inProgress: asBool(d.api_tutorial),
     progress: d.api_tutorial_progress
   },
-  _active: asBool(d.api_active_flag),
-  _playtime: d.api_playtime,
-  _ptChallenged: d.api_pt_challenged,
-  _ptChallengedWon: d.api_pt_challenged_won,
-  _pvp: d.api_pvp,
-  _commentId: d.api_comment_id,
-  _nicknameId: d.api_nickname_id,
-  $_finalized: false,
-  $_wip: true
+  $_unknown: {
+    active: asBool(d.api_active_flag),
+    playtime: d.api_playtime,
+    ptChallenged: d.api_pt_challenged,
+    ptChallengedWon: d.api_pt_challenged_won,
+    pvp: d.api_pvp,
+    commentId: d.api_comment_id,
+    nicknameId: d.api_nickname_id
+  },
+  $_finalized: false
 });
 
 export { playerProfile };

@@ -11,6 +11,9 @@
  */
 import fs from 'fs';
 import { createAction } from 'redux-actions';
+import AppEvent from '../../src/shared/constants';
+import electron from 'electron';
+const ipcRenderer = electron.ipcRenderer;
 
 /** @type {string} Register a reference to the <webview /> holding the game SWF */
 export const REGISTER_GAME_VIEW = 'REGISTER_GAME_VIEW';
@@ -18,6 +21,8 @@ export const UPDATE_CONFIGURATION = 'UPDATE_CONFIGURATION';
 export const TAKE_SCREENSHOT = 'TAKE_SCREENSHOT';
 export const POST_NOTIFICATION = 'POST_NOTIFICATION';
 export const REGISTER_NOTIFICATION_HANDLERS = 'REGISTER_NOTIFICATION_HANDLERS';
+export const NOTIFY = 'NOTIFY';
+export const CREATE_TIMER = 'CREATE_TIMER';
 
 /**
  * Action Creators
@@ -48,3 +53,15 @@ export const takeScreenshot = createAction(TAKE_SCREENSHOT, (view) => {
 export const registerGameView = createAction(REGISTER_GAME_VIEW, webview => webview);
 
 export const registerNotificationHandlers = createAction(REGISTER_NOTIFICATION_HANDLERS, handlers => handlers);
+
+export const notify = createAction(NOTIFY, (title, options) => new Notification(title, options));
+
+export const createTimer = createAction(CREATE_TIMER, async args => {
+  ipcRenderer.send(AppEvent.TIMER_START, { ...args });
+
+  const result = await new Promise((resolve, reject) => {
+    ipcRenderer.once(AppEvent.TIMER_STARTED, (event, payload) => resolve(payload));
+  });
+
+  return result;
+});

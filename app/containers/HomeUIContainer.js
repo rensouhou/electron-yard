@@ -4,23 +4,23 @@
  * @overview
  *
  * @since 0.3.0
+ * @version 0.4.0
  * @author Stefan Rimaila <stefan@rimaila.fi>
  * @module app/containers/home-ui-container
  */
-import R from 'ramda';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import HomeUI from '../components/HomeUI';
-import { getFleetShips, combineShips } from '../selectors/fleet-ships';
+import { combineShips, combineSlotItems, getFleetShips } from '../selectors/ships';
 import * as coreActions from '../actions/core';
 
 const mapStateToProps = (state) => ({
-  game: state.game,
   gameState: state.gameState,
-  player: state.player,
-  selectors: {
-    fleetShips: getFleetShips(state),
-    combinedShips: combineShips(state)
+  game: state.game,
+  player: {
+    ...state.player,
+    ships: combineShips(state),
+    // slotItems: combineSlotItems(state)
   }
 });
 

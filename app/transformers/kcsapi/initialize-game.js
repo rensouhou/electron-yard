@@ -14,7 +14,7 @@ import R from 'ramda';
 import { baseShip } from '../api/base-ship';
 import { baseShipGraphic } from '../api/base-ship-graphic';
 import { baseShipType } from '../api/base-ship-types';
-// import { baseSlotItem } from '../api/base-slotitem';
+import { baseSlotItem } from '../api/base-slotitem';
 
 /**
  * @event INITIALIZE_GAME
@@ -46,6 +46,7 @@ export default function (r:ApiRequest):ApiRequestResult {
   return {
     ships: api_mst_ship.map(baseShip),
     shipGraphics: api_mst_shipgraph.map(baseShipGraphic),
-    shipTypes: api_mst_stype.map(baseShipType)
+    shipTypes: api_mst_stype.map(baseShipType),
+    slotItems: api_mst_slotitem.map(baseSlotItem)
   };
 }

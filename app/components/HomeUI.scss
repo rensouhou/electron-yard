@@ -8,7 +8,11 @@
 .topBar {
   display: flex;
   align-items: center;
-  padding: 0.2rem;
+  padding: 0.25rem 0.4rem;
+
+  button {
+    margin-right: 0.8rem;
+  }
 }
 
 .mainView {
@@ -26,4 +30,12 @@
 .testShip {
   width: 50%;
   padding: 0 0.25rem 0.25rem;
+  //border: solid 1px #f00;
 }
+
+.title {
+  //border: solid 1px #f00;
+  display: flex;
+  justify-content: space-between;
+}
+

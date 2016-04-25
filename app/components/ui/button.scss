@@ -13,9 +13,13 @@ $color: $primary-color;
   font-weight: 500;
   padding: 0.4rem 1rem;
   display: inline-block;
+  transition: all 0.2s ease-out;
 
   &:hover {
     cursor: pointer;
+    transform: translateY(-0.15rem);
+    box-shadow: 0 0.5rem 0.6rem transparentize($md-black, 0.7);
+    transition: all 0.2s ease-in;
   }
 }
 

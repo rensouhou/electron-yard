@@ -22,11 +22,9 @@ import { playerFleet as fleet } from '../api/player-fleet';
  * @returns {Dockyard.API.GetBaseData}
  */
 export default function action$getBaseData(r:ApiRequest):ApiRequestResult {
-  const basic = r.body.api_basic;
-
   return {
-    id: basic.api_member_id,
-    profile: profile(basic),
+    id: r.body.api_basic.api_member_id,
+    profile: profile(r.body.api_basic),
     fleets: r.body.api_deck_port.map(fleet),
     ships: r.body.api_ship.map(ship),
     materials: parseMaterialObjects(r.body.api_material)

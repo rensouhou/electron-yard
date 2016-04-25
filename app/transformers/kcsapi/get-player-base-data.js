@@ -5,29 +5,24 @@
  *  Handler for `GET_PLAYER_BASE_DATA` event
  *
  * @since 0.3.0
+ * @version 0.4.0
  * @author Stefan Rimaila <stefan@rimaila.fi>
  * @module app/transformers/kcsapi/get-player-base-data
- * @flow
  */
-import type { ApiRequest, ApiRequestResult } from '../../types/api';
+import { playerSlotItem } from '../api/player-slotitem';
+import { constructionDock } from '../api/construction-dock';
 
-export default function action$getPlayerBaseData(r:ApiRequest):ApiRequestResult {
-  const {
-          api_basic,
-          api_slot_item,
-          api_unsetslot,
-          api_kdock,
-          api_useitem,
-          api_furniture
-        } = r.body;
-
+/**
+ * @param {KCSApi.API.GET_PLAYER_BASE_DATA} r
+ */
+export default function action$getPlayerBaseData(r) {
   return {
     slotItems: {
-      items: api_slot_item,
-      unused: api_unsetslot,
-      used: api_useitem
+      items: r.body.api_slot_item.map(playerSlotItem),
+      unused: r.body.api_unsetslot,
+      used: r.body.api_useitem
     },
-    constructionDocks: api_kdock,
-    furniture: api_furniture
+    constructionDocks: r.body.api_kdock.map(constructionDock),
+    furniture: r.body.api_furniture
   };
 }

@@ -1,9 +1,19 @@
 /**
  * Models
+ *
+ * Table of Contents
+ *
+ * Models:
+ *
+ * - Construction Docks [DOCK]
+ * - Base API Data [BDAT]
+ *   - Ship [BSHP]
+ *   - Slotitem [BSLT]
+ *   - Mission [BMIS]
  */
 namespace KCS {
   export module Models {
-    import ConstructionDockState = KCSApi.ConstructionDockState;
+    /** @label [DOCK] */
     interface ConstructionDock {
       api_member_id: number;
       api_id: number;
@@ -16,13 +26,32 @@ namespace KCS {
       api_item3: number;
       api_item4: number;
       api_item5: number;
-    };
+    }
+
+    /** @label [BDAT] */
+    /** @label [BSHP] */
     interface BaseShip {
       api_id: number;
     }
 
+    /** @label [BSLT] */
     interface BaseSlotItem {
       api_id: number;
+    }
+
+    /** @label [BMIS] */
+    interface BaseMission {
+      api_id: number;
+      api_maparea_id: number;
+      api_name: string;
+      api_details: string;
+      api_difficulty: number;
+      api_return_flag: number;
+      api_time: number;
+      api_use_bull: number;
+      api_use_fuel: number;
+      api_win_item1: [number, number];
+      api_win_item2: [number, number];
     }
 
     interface PlayerShip {
@@ -147,6 +176,14 @@ namespace KCS {
     enum QuestType {
       2 = PracticeDaily
     }
+
+    /** `kdock` */
+    enum ConstructionDockState {
+      Locked = -1,
+      Empty = 0,
+      UnderConstruction = 2,
+      ConstructionComplete = 3
+    }
   }
 
   export class SlotItem {
@@ -185,14 +222,6 @@ namespace KCSApi {
     HugeSuccess = 2
   }
 
-  /** `kdock` */
-  enum ConstructionDockState {
-    Locked = -1,
-    Empty = 0,
-    UnderConstruction = 2,
-    ConstructionComplete = 3
-  }
-
   /** `useitem` */
   enum UseItemCategory {
     Other = 0,
@@ -203,12 +232,19 @@ namespace KCSApi {
     Available = 4
   }
 
+  /**
+   * API Method Calls
+   */
   module API {
+    import ConstructionDock = Dockyard.PlayerData.ConstructionDock;
+    import SlotItem = Dockyard.PlayerData.SlotItem;
+
     export interface INITIALIZE_GAME extends ApiRequest {
       body: {
         api_mst_ship: Array<any>;
       }
     }
+
     export interface GET_BASE_DATA extends ApiRequest {
       body: {
         api_basic: KCS.Models.PlayerProfile;
@@ -221,6 +257,17 @@ namespace KCSApi {
         api_ship: Array<KCS.Models.PlayerShip>;
       }
     }
+
+    export interface GET_SLOT_ITEMS extends ApiRequest {
+      body: Array<{
+        api_id: number;
+        api_slotitem_id: number;
+        api_locked: number;
+        api_level: number;
+        api_alv?: number;
+      }>;
+    }
+
     export interface GET_SORTIE_CONDITIONS extends ApiRequest {
       body: {
         api_war: {
@@ -230,6 +277,7 @@ namespace KCSApi {
         };
       };
     }
+
     export interface GET_MATERIAL extends ApiRequest {
       body: Array<{
         api_member_id: number;
@@ -237,10 +285,24 @@ namespace KCSApi {
         api_value: number;
       }>;
     }
+
+    export interface GET_PLAYER_BASE_DATA extends ApiRequest {
+      body: {
+        api_items: Array<SlotItem>;
+        api_kdock: Array<ConstructionDock>;
+        api_unsetslot: Array<any>;
+        api_useitem: Array<any>;
+        api_furniture: Array<any>;
+      }
+    }
+
     export interface FINISHED_PRACTICE extends ApiRequest {
       body: {};
     }
-    export interface START_REPAIR extends ApiRequest {}
+
+    export interface START_REPAIR extends ApiRequest {
+    }
+
     export interface CRAFT_SHIP extends ApiRequest {
       postBody: {
         api_kdock_id: number;
@@ -325,19 +387,7 @@ namespace KCSApi {
     }
 
     export interface GET_CONSTRUCTION_DOCKS extends ApiRequest {
-      body: Array<{
-        api_member_id: number;
-        api_id: number;
-        api_state: ConstructionDockState;
-        api_created_ship_id: number;
-        api_complete_time: number;
-        api_complete_time_str: string;
-        api_item1: number;
-        api_item2: number;
-        api_item3: number;
-        api_item4: number;
-        api_item5: number;
-      }>;
+      body: Array<ConstructionDock>;
     }
     export interface GET_USABLE_ITEMS extends ApiRequest {
       body: Array<{
