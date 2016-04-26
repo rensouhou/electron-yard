@@ -8,19 +8,19 @@
  * @module app/components/game/ship
  */
 import React, { Component, PropTypes } from 'react';
+import cx from 'classnames';
+import css from './ship.scss';
 
 export default class Ship extends Component {
   static propTypes = {
-    ship: PropTypes.object
-  };
-
-  static defaultProps = {
-    ship: {}
+    ship: PropTypes.object.isRequired
   };
 
   render() {
     return (
-      <div>ship</div>
+      <div className={cx(css.ship)}>
+        {JSON.stringify(this.props.ship)}
+      </div>
     );
   }
 }

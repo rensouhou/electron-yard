@@ -9,5 +9,6 @@
  * @flow
  */
 import Ship from './ship';
+import Fleet from './fleet';
 
-export { Ship };
+export { Ship, Fleet };
