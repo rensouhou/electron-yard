@@ -13,16 +13,7 @@ import { bindActionCreators } from 'redux';
 import HomeUI from '../components/HomeUI';
 import { combineShips, combineSlotItems, combined } from '../selectors/ships';
 import * as coreActions from '../actions/core';
-import { normalize, Schema, arrayOf } from 'normalizr';
-
-const ship = new Schema('ships');
-const slotItem = new Schema('slotItems');
-
-ship.define({
-  slot: {
-    items: arrayOf(slotItem)
-  }
-});
+import { gameEntities } from '../selectors/game-entities';
 
 const mapStateToProps = (state) => ({
   gameState: state.gameState,
@@ -33,7 +24,7 @@ const mapStateToProps = (state) => ({
     slotItems: combineSlotItems(state)
   },
   models: combined(state),
-  modelsNormalized: normalize(combined(state), { ships: arrayOf(ship), slotItems: arrayOf(slotItem) })
+  gameEntities: gameEntities(state)
 });
 
 const mapDispatchToProps = dispatch => ({

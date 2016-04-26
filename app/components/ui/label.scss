@@ -3,7 +3,8 @@
 
 $color: $primary-color;
 
-.base {
+.column {
   padding-left: $bar-horizontal-space;
+  border: solid 1px #f00;
   padding-right: $bar-horizontal-space;
 }

@@ -21,6 +21,7 @@ const getBaseShips = state => state.game.ships;
 const getBaseSlotItems = state => state.game.slotItems;
 // For the sake of finding something easier
 const getBaseShipsObj = state => R.indexBy(R.prop('shipId'), state.game.ships);
+const getShipSort = state => state.appState.sort;
 
 // Compose
 const findByProp = (idProp, id, list) => R.find(R.propEq(idProp, id), list);
@@ -51,5 +52,3 @@ export const combineSlotItems = createSelector(
 export const combined = createSelector(
   [combineShips, combineSlotItems],
   (ships, slotItems) => ({ ships, slotItems }));
-
-// export const combineSlotItems = createSelector([getPlayerSlotItems, getBaseSlotItems], combineByKey('slotItemId'));

@@ -1,0 +1,22 @@
+
+$column-count: 12;
+$column-size: 100% / $column-count;
+
+@mixin col-x {
+  $col-list: null;
+  @for $i from 1 through $column-count {
+    .size-#{$i} {
+      width: $column-size * $i;
+    }
+    $col-list: append($col-list, unquote(".size-#{$i}"), comma);
+  }
+
+  #{$col-list} {
+    border: solid 1px #f00;
+  }
+}
+
+@include col-x
+
+.column {
+}

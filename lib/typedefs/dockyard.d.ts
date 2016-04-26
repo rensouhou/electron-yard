@@ -323,6 +323,13 @@ namespace __PROTO {
     gameState: string;
     appState: string;
 
+    app: {
+      sorting: {
+        shipSortBy: string; // current ship sorting
+        slotItemSortBy: string; // current slotitem sorting
+      };
+    };
+
     /** Game-related base data */
     game: {
       ships: Array<Dockyard.BaseData.Ship>

@@ -6,13 +6,16 @@
  * @module app/transformers/api/player-ship
  * @flow
  */
-import { asBool } from '../primitive';
+import { asBool, notEmpty } from '../primitive';
+import R from 'ramda';
 
 const playerShipHelp = [
   ['id', 'player unique ship id'],
   ['sortId', 'ship sorting id (= found in gallery)'],
   ['shipId', 'ship\'s unique id (= used for linking base- and player data together)']
 ];
+
+const rejectEmpty = R.filter(id => notEmpty(id));
 
 /**
  * @param {KCS.Models.PlayerShip} s
@@ -28,7 +31,7 @@ const playerShip = (s) => ({
   stars: s.api_stars,
   slot: {
     count: s.api_slotnum,
-    items: s.api_slot
+    items: rejectEmpty(s.api_slot)
   },
   fuel: s.api_fuel,
   ammo: s.api_bull,
@@ -56,15 +59,16 @@ const playerShip = (s) => ({
   },
   repair: {
     cost: (([fuel, steel]) => ({ fuel, steel }))(s.api_ndock_item),
-    time: s.api_ndock_time,
-    timeStr: s.api_ndock_time_str
+    time: s.api_ndock_time
   },
   flags: {
     isLocked: asBool(s.api_locked),
     isSlotItemLocked: asBool(s.api_locked_equip)
   },
   $_finalized: false,
-  $_wip: true
+  $_unknown: {
+    timeStr: s.api_ndock_time_str
+  }
 });
 
 export { playerShip };

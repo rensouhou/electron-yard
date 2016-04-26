@@ -6,10 +6,9 @@
  * @module app/components/home-ui
  * @flow
  */
-import { normalize, Schema, arrayOf } from 'normalizr';
 import type { PlayerProfile } from '../types/player-profile';
 import React, { Component, PropTypes } from 'react';
-import { Button, Progress, Label } from './ui';
+import { Button, Progress, Label, Column, Row } from './ui';
 import styles from './HomeUI.scss';
 
 export default class HomeUI extends Component {
@@ -47,20 +46,22 @@ export default class HomeUI extends Component {
 
     return (
       <div className={styles.base}>
-        <div className={styles.topBar}>
+        <Row className={styles.topBar}>
           <Button onClick={screenshotHandler}>Grab</Button>
           <Button onClick={notifyTestHandler}>Notify</Button>
           <Label>Game state: <strong>{this.props.gameState}</strong></Label>
           <Label>HQ Level: <strong>{profile.level}</strong></Label>
           <Label>Ships <strong>{models.ships.length}/{limits.maxShips}</strong></Label>
           <Label>Equip <strong>{models.slotItems.length}/{limits.maxSlotItems}</strong></Label>
-        </div>
-        <div className={styles.testFleet}>
-          There was a fleet here, but now it's gone.
-        </div>
-        <div className={styles.mainView}>
-          {JSON.stringify(player.materials, null, 2)}
-        </div>
+        </Row>
+        <Row>
+          <Column size={3}>
+            {JSON.stringify(player.materials, null, 2)}
+          </Column>
+          <Column size={6}>
+            There was a fleet here, but now it's gone.
+          </Column>
+        </Row>
       </div>
     );
   }
