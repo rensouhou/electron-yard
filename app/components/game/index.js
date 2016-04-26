@@ -8,4 +8,6 @@
  * @module app/components/game
  * @flow
  */
-export {};
+import Ship from './ship';
+
+export { Ship };

@@ -6,10 +6,9 @@
  * @module app/components/home-ui
  * @flow
  */
-import R from 'ramda';
 import type { PlayerProfile } from '../types/player-profile';
 import React, { Component, PropTypes } from 'react';
-import { Button, Progress, Label } from './ui';
+import { Button, Progress, Label, Column, Row } from './ui';
 import styles from './HomeUI.scss';
 
 export default class HomeUI extends Component {
@@ -18,7 +17,8 @@ export default class HomeUI extends Component {
     gameState: PropTypes.string,
     player: PropTypes.object.isRequired,
     actions: PropTypes.object,
-    selectors: PropTypes.object
+    selectors: PropTypes.object,
+    models: PropTypes.object
   };
 
   handleScreenshotClick = (handler:Function, webview:Element) => {
@@ -30,39 +30,38 @@ export default class HomeUI extends Component {
   };
 
   render() {
-    const { player, selectors, children, core, actions } = this.props;
+    const { player, models, selectors, actions, children, core } = this.props;
     const profile:PlayerProfile = player.profile;
-    const handler:Function = this.handleScreenshotClick(
+    const { limits } = profile;
+    const screenshotHandler:Function = this.handleScreenshotClick(
       (actions || {}).takeScreenshot,
       (core || {}).webview);
 
-    const a = selectors.fleetShips['1'];
+    console.log(this.props);
+
+    const notifyTestHandler = (event:Event) => {
+      event.preventDefault();
+      actions.notify('This is a test', { body: 'and a wonderful test it is' });
+    };
 
     return (
       <div className={styles.base}>
-        <div className={styles.topBar}>
-          <Button onClick={handler}>Screenshot</Button>
+        <Row className={styles.topBar}>
+          <Button onClick={screenshotHandler}>Grab</Button>
+          <Button onClick={notifyTestHandler}>Notify</Button>
           <Label>Game state: <strong>{this.props.gameState}</strong></Label>
-          <Label><strong>{profile.nickname}</strong></Label>
-          <Label>Level: <strong>{profile.level}</strong></Label>
-          <Label>Coins: <strong>{profile.coins}</strong></Label>
-        </div>
-        <div className={styles.testFleet}>
-          {(a || []).map(s => {
-            const [cur, max] = s.hp;
-            return (
-              <div key={s.id} className={styles.testShip}>
-                <div>
-                  {s.name.kanji}
-                </div>
-                <Progress min={0} max={max} val={cur} label={`${cur} / ${max}`} />
-              </div>
-            );
-          })}
-        </div>
-        <div className={styles.mainView}>
-          {JSON.stringify(player.materials, null, 2)}
-        </div>
+          <Label>HQ Level: <strong>{profile.level}</strong></Label>
+          <Label>Ships <strong>{models.ships.length}/{limits.maxShips}</strong></Label>
+          <Label>Equip <strong>{models.slotItems.length}/{limits.maxSlotItems}</strong></Label>
+        </Row>
+        <Row>
+          <Column size={3}>
+            {JSON.stringify(player.materials, null, 2)}
+          </Column>
+          <Column size={6}>
+            There was a fleet here, but now it's gone.
+          </Column>
+        </Row>
       </div>
     );
   }

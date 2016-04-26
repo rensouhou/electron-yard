@@ -45,13 +45,12 @@ const typeName:ShipTypeName = {
 
 const shipTypeName = (id, name = typeName) => name[id] || null;
 
-const baseShipType = (o) => ({
+export const baseShipType = (o) => ({
   id: o.api_id,
   sortId: o.api_sortno,
   name: shipTypeName(o.api_name),
   slotCount: o.api_scnt,
   silhouette: o.api_kcnt,
-  equipType: o.api_equip_type
+  equipType: o.api_equip_type,
+  $_finalized: false
 });
-
-export { baseShipType };

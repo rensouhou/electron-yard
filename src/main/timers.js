@@ -34,7 +34,13 @@ const createTimer = (arg, event) => {
     return reply;
   }
 
-  timers[arg.id] = setTimeout(() => event.sender.send(AppEvent.TIMER_DONE, reply), timeDiff);
+  console.log(`timeDiff => ${timeDiff}`);
+
+  timers[arg.id] = setTimeout(() => {
+    console.log(`Timer with id ${arg.id} done`);
+    event.sender.send(AppEvent.TIMER_DONE, reply);
+    delete timers[arg.id];
+  }, timeDiff);
 
   return reply;
 };

@@ -62,6 +62,7 @@ export const ApiEventsByPath = T.Map({
 
 export const ApiEvents = {
   INITIALIZE_GAME: 'INITIALIZE_GAME',
+  GET_PLAYER_BASE_DATA: 'GET_PLAYER_BASE_DATA',
   GET_PROFILE_DATA: 'GET_PROFILE_DATA',
   GET_FURNITURE: 'GET_FURNITURE',
   GET_BASE_DATA: 'GET_BASE_DATA',
@@ -82,6 +83,9 @@ export const ApiEvents = {
   SCRAP_SHIP: 'SCRAP_SHIP',
   REMODEL_SHIP: 'REMODEL_SHIP',
   MODERNIZE_SHIP: 'MODERNIZE_SHIP',
+
+  // Equipment
+  CRAFT_ITEM: 'CRAFT_ITEM',
 
   // Fleet-related (and combined)
   FLEET_COMBINED: 'FLEET_COMBINED',

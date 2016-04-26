@@ -36,6 +36,7 @@ namespace Dockyard {
       type: ShipType;
       shipExtraVoices: boolean;
     }
+
     interface ShipType {
       id: number;
       sortId: number;
@@ -46,8 +47,14 @@ namespace Dockyard {
         scnt: any;
       };
     }
+
     interface SlotItem {
+      id: number;
+      sortId: number;
+      name: string;
+      type: [number, number, number, number];
     }
+
     interface Remodel {
       level: number;
       remodelsToId: number;
@@ -56,6 +63,7 @@ namespace Dockyard {
         ammo: number;
       };
     }
+
     interface ShipStats {
       firepower: [number, number];
       torpedo: [number, number];
@@ -65,6 +73,7 @@ namespace Dockyard {
       range: number;
       speed: number;
     }
+    
     enum Rarity { 1, 2, 3, 4, 5 }
   }
 
@@ -140,15 +149,17 @@ namespace Dockyard {
     }
 
     interface CompleteMission extends ApiAction {
-      payload: {
-        
-      };
+      payload: {};
     }
 
-    interface GetBaseData {
-
+    interface GetSlotItems extends ApiAction {
+      
     }
 
+    interface GetBaseData extends ApiAction {
+
+    }
+    
     /** @event GET_QUEST_LIST */
     interface GetQuestList {
       questCount: number;
@@ -169,6 +180,31 @@ namespace Dockyard {
       win: number;
       lose: number;
       rate: number;
+    }
+
+    /** @event CRAFT_SHIP */
+    interface CraftShip {
+      dockId: number;
+      flags: {
+        instant: boolean;
+        lcs: boolean;
+      };
+      consumed: {
+        recipe: any;
+      };
+    }
+
+    /** @event CRAFT_ITEM */
+    interface CraftItem {
+      flags: {
+        successful: boolean;
+      };
+      consumed: {
+        recipe: any;
+        developmentMaterials: number;
+      };
+      slotItem?: any;
+      materials: Materials;
     }
   }
 
@@ -285,6 +321,14 @@ namespace __PROTO {
 
     /** Current game state */
     gameState: string;
+    appState: string;
+
+    app: {
+      sorting: {
+        shipSortBy: string; // current ship sorting
+        slotItemSortBy: string; // current slotitem sorting
+      };
+    };
 
     /** Game-related base data */
     game: {

@@ -1,6 +1,6 @@
 /// <reference path="../../../lib/typedefs/kancolle.d.ts" />
 /// <reference path="../../../lib/typedefs/dockyard.d.ts" />
-/* eslint no-param-reassign: 0, camelcase: 0 */
+/* eslint no-param-reassign: 0, camelcase: 0, no-underscore-dangle: 0 */
 /**
  * @overview
  *
@@ -13,6 +13,8 @@
 import type { Material } from '../../types/kcsapi';
 import { getArrayOrDefault } from '../primitive';
 import R from 'ramda';
+
+const _ = R.__;
 
 type MaterialsObject = {
   fuel: number,
@@ -84,3 +86,11 @@ export const parseMaterialObjects:MaterialsObject =
  */
 export const parseMaterialsRecipe:MaterialsObject =
   R.compose(R.pickBy((k, v) => !R.isNil(v)), parseMaterialArray);
+
+/**
+ * Convenience function for @see {@link parseMaterialsRecipe}
+ *
+ * @type {Function}
+ * @returns {Dockyard.Materials}
+ */
+export const parseRecipe:MaterialsObject = R.curry(parseMaterialsRecipe)(_, _, _, _, null, null, _);

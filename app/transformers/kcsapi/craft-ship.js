@@ -14,10 +14,9 @@ import { parseMaterialsRecipe } from '../api/materials';
 /**
  * @event CRAFT_SHIP
  * @param {KCSApi.API.CRAFT_SHIP} r
- * @returns {{r: ApiRequest}}
+ * @returns {Dockyard.API.CraftShip}
  */
 export default function action$craftShip(r) {
-  console.warn('action$craftShip NYI; event `CRAFT_SHIP`');
   const d = r.postBody;
 
   return {
@@ -26,6 +25,8 @@ export default function action$craftShip(r) {
       instant: asBool(d.api_highspeed),
       lsc: asBool(d.api_large_flag)
     },
-    recipe: parseMaterialsRecipe([d.api_item1, d.api_item1, d.api_item3, d.api_item4, null, null, d.api_item5])
+    consumed: {
+      recipe: parseMaterialsRecipe([d.api_item1, d.api_item1, d.api_item3, d.api_item4, null, null, d.api_item5])
+    }
   };
 }

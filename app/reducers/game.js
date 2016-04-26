@@ -8,7 +8,13 @@
 import { ApiEvents } from '../actions/game';
 import createReducer from './create-reducer';
 
-export default createReducer({}, {
+const initialState = {
+  ships: [],
+  shipTypes: [],
+  slotItems: []
+};
+
+export default createReducer(initialState, {
   [ApiEvents.INITIALIZE_GAME](state, action) {
     return { ...state, ...action.payload };
   }

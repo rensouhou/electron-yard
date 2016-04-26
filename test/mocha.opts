@@ -1,5 +1,5 @@
 --require expect.js
 --timeout 200
---reporter list
+--reporter spec
 --ui bdd
 --recursive

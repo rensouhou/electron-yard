@@ -15,7 +15,7 @@ import { parseMaterialArray } from './materials';
  * @returns {Dockyard.BaseData.Ship}
  * @todo(@stuf): create methods to check if a ship is player/enemy
  */
-const baseShip = (s) => ({
+export const baseShip = (s) => ({
   shipId: s.api_id,
   sortId: s.api_sortno,
   flavorText: formatLineBreaks(s.api_getmes),
@@ -62,5 +62,3 @@ const baseShip = (s) => ({
   buildTime: s.api_buildtime,
   $_finalized: false
 });
-
-export { baseShip };

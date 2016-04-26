@@ -9,6 +9,7 @@
  * @flow
  */
 import type { ApiRequest, ApiRequestResult } from '../../types/api';
+import deprecate from 'deprecate';
 import R from 'ramda';
 import { getArrayOrDefault, asNumber } from '../primitive';
 import { playerFleet } from '../api/player-fleet';
@@ -26,9 +27,11 @@ type GetFleetPostBody = {
 /**
  * @event GET_FLEET
  * @param {__PROTO.ApiRequest} r
+ * @todo(@stuf): remove R.indexBy(...) logic
  */
 export default function (r:ApiRequest):ApiRequestResult {
   console.log('GET_FLEET r:ApiRequest =>', r);
+  deprecate('Remove redundant R.indexBy(...) logic');
 
   const body:GetFleetBody = r.body;
   const postBody:GetFleetPostBody = r.postBody;

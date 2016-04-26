@@ -14,7 +14,9 @@ import R from 'ramda';
 import { baseShip } from '../api/base-ship';
 import { baseShipGraphic } from '../api/base-ship-graphic';
 import { baseShipType } from '../api/base-ship-types';
-// import { baseSlotItem } from '../api/base-slotitem';
+import { baseSlotItem } from '../api/base-slotitem';
+import { normalize, Schema, arrayOf } from 'normalizr';
+// import * as Schema from '../../schema';
 
 /**
  * @event INITIALIZE_GAME
@@ -43,9 +45,23 @@ export default function (r:ApiRequest):ApiRequestResult {
           api_mst_bgm,
         } = r.body;
 
+  const response = {
+    ships: R.map(baseShip, r.body.api_mst_ship)
+  };
+
+  const baseShip_Schema = new Schema('ships', { idAttribute: 'shipId' });
+
+  const result = normalize(response, {
+    ships: baseShip_Schema
+  });
+
+  console.log('normalized =>', result);
+
   return {
+    normalized: result,
     ships: api_mst_ship.map(baseShip),
     shipGraphics: api_mst_shipgraph.map(baseShipGraphic),
-    shipTypes: api_mst_stype.map(baseShipType)
+    shipTypes: api_mst_stype.map(baseShipType),
+    slotItems: api_mst_slotitem.map(baseSlotItem)
   };
 }
