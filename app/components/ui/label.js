@@ -17,7 +17,7 @@ export class Label extends Component {
     const { children } = this.props;
 
     return (
-      <div className={css.base}>
+      <div className={css.label}>
         {children}
       </div>
     );
