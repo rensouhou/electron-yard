@@ -10,9 +10,9 @@ import { normalize, Schema, arrayOf } from 'normalizr';
 import R from 'ramda';
 import deepAssign from 'deep-assign';
 
-export const ship = new Schema('ships', { idAttribute: 'shipId' });
-export const slotItem = new Schema('slotItems', { idAttribute: 'slotItemId' });
-export const fleet = new Schema('fleets');
+const ship = new Schema('ships', { idAttribute: 'shipId' });
+const slotItem = new Schema('slotItems', { idAttribute: 'slotItemId' });
+const fleet = new Schema('fleets', { idAttribute: 'id' });
 
 function* entries(obj) {
   let key = null;
@@ -51,3 +51,5 @@ ship.define({
 fleet.define({
   ships: arrayOf(ship)
 });
+
+export { ship, slotItem, fleet };

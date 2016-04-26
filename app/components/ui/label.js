@@ -6,7 +6,7 @@
  * @module app/components/ui/label
  */
 import React, { Component, PropTypes } from 'react';
-import styles from './label.scss';
+import css from './label.scss';
 
 export class Label extends Component {
   static propTypes = {
@@ -17,7 +17,7 @@ export class Label extends Component {
     const { children } = this.props;
 
     return (
-      <div className={styles.base}>
+      <div className={css.label}>
         {children}
       </div>
     );

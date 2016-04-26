@@ -17,7 +17,7 @@ import { parseMaterialArray } from '../api/materials';
  * @returns {Dockyard.BaseData.SlotItem}
  */
 export const baseSlotItem = o => ({
-  id: o.api_id,
+  slotItemId: o.api_id,
   sortId: o.api_sortno,
   name: o.api_name,
   flavorText: formatLineBreaks(o.api_info),
