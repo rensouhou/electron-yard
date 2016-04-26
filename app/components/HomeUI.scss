@@ -1,5 +1,9 @@
 @import "~material-colors/dist/colors.scss";
 
+.base {
+  width: 800px;
+}
+
 .column {
   width: 800px;
   color: $md-white;
@@ -39,3 +43,74 @@
   justify-content: space-between;
 }
 
+.resources {
+  display: flex;
+  flex-wrap: wrap;
+  padding-right: 0.5rem;
+}
+
+.resource {
+  width: 50%;
+  display: flex;
+  align-items: center;
+}
+
+.resourceKey,
+.resourceValue {
+  padding: 0 0.2rem;
+}
+
+.resourceKey {
+  width: 60%;
+  text-align: right;
+  text-overflow: ellipsis;
+  font-size: 0.9em;
+  overflow: hidden;
+}
+
+.resourceValue {
+  width: 40%;
+  font-weight: bold;
+}
+
+.fleet {
+}
+
+.fleetInfo {
+  padding-left: 0.5rem;
+}
+
+.fleetShips {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.fleetShip {
+  width: 50%;
+  padding: 0 0.25rem;
+}
+
+.shipTitle {
+  display: flex;
+
+  > div {
+    width: 50%;
+  }
+}
+
+.shipName,
+.shipLevel {
+  font-size: 1.2em;
+}
+
+.shipName {
+}
+
+.shipLevel {
+  text-align: right;
+  font-weight: bold;
+}
+
+.shipBars {
+  //border: solid 1px #f00;
+}

@@ -17,12 +17,6 @@ const playerShipHelp = [
 
 const rejectEmpty = R.filter(id => notEmpty(id));
 
-const playerShipHelp = [
-  ['id', 'player unique ship id'],
-  ['sortId', 'ship sorting id (= found in gallery)'],
-  ['shipId', 'ship\'s unique id (= used for linking base- and player data together)']
-];
-
 /**
  * @param {KCS.Models.PlayerShip} s
  * @returns {Dockyard.PlayerData.Ship}

@@ -6,19 +6,19 @@
  * @module app/components/ui/label
  */
 import React, { Component, PropTypes } from 'react';
+import cx from 'classnames';
 import css from './label.scss';
 
 export class Label extends Component {
   static propTypes = {
-    children: PropTypes.any
+    children: PropTypes.any,
+    className: PropTypes.string
   };
 
   render() {
-    const { children } = this.props;
-
     return (
-      <div className={css.label}>
-        {children}
+      <div className={cx(css.label, this.props.className)}>
+        {this.props.children}
       </div>
     );
   }

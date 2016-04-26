@@ -1,4 +1,19 @@
 
 .row {
   display: flex;
+  align-items: flex-start;
+}
+
+.verticalAlign {
+  &-top {
+    align-items: flex-start;
+  }
+
+  &-bottom {
+    align-items: flex-end;
+  }
+
+  &-center {
+    align-items: center;
+  }
 }

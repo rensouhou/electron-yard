@@ -14,7 +14,7 @@ export class Progress extends Component {
   static propTypes = {
     min: PropTypes.number,
     max: PropTypes.number,
-    val: PropTypes.number,
+    value: PropTypes.number,
     label: PropTypes.string,
     size: PropTypes.oneOf(['small', 'normal', 'large'])
   };
@@ -22,16 +22,16 @@ export class Progress extends Component {
   static defaultProps = {
     min: 0,
     max: 100,
-    val: null,
+    value: null,
     label: null,
     size: 'normal'
   };
 
   render() {
-    const { val, max, label, size } = this.props;
+    const { value, max, label, size } = this.props;
     return (
       <div className={cx(styles.base)}>
-        <div className={cx(styles.bar, styles[size])} style={{ width: `${(val / max) * 100}%` }}></div>
+        <div className={cx(styles.bar, styles[size])} style={{ width: `${(value / max) * 100}%` }}></div>
       </div>
     );
   }

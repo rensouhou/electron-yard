@@ -5,8 +5,8 @@ $button-border-radius: 0rem;
 $color: $primary-color;
 
 .button {
-  background: $md-pink-a400;
-  border: solid 0.15rem $md-pink-a400;
+  background: $md-grey-500;
+  border: solid 0.15rem $md-grey-500;
   // border-radius: $button-border-radius;
   color: $md-white;
   font-family: $base-font-family;
@@ -21,6 +21,11 @@ $color: $primary-color;
     box-shadow: 0 0.5rem 0.6rem transparentize($md-black, 0.7);
     transition: all 0.2s ease-in;
   }
+
+  &.color {
+    &-pink {
+      background-color: $md-pink-a400;
+      border-color: $md-pink-a400;
+    }
+  }
 }
-
-

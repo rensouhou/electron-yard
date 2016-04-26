@@ -12,12 +12,17 @@ import css from './row.scss';
 export class Row extends Component {
   static propTypes = {
     children: PropTypes.any,
-    className: PropTypes.arrayOf(PropTypes.string)
+    className: PropTypes.arrayOf(PropTypes.string),
+    verticalAlign: PropTypes.oneOf(['center', 'top', 'bottom'])
+  };
+
+  static defaultProps = {
+    verticalAlign: 'top'
   };
 
   render() {
     return (
-      <div className={cx(css.row, this.props.className)}>
+      <div className={cx(css.row, css[`verticalAlign-${this.props.verticalAlign}`], this.props.className)}>
         {this.props.children}
       </div>
     );
