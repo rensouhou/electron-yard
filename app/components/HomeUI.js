@@ -75,10 +75,6 @@ export default class HomeUI extends Component {
                 </div>
               </div>
             ))}
-
-            <Row>
-              
-            </Row>
           </Column>
 
           <Column size={8} className={css.fleetInfo}>
