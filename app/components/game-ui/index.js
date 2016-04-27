@@ -8,8 +8,8 @@
  * @module app/components/game-ui
  * @flow
  */
-import Ship from './ship';
-import Fleet from './fleet';
-import HealthBar from './health-bar';
+import { Ship } from './ship';
+import { Fleet } from './fleet';
+import { HealthBar } from './health-bar';
 
 export { Ship, Fleet, HealthBar };

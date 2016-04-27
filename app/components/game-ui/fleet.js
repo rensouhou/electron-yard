@@ -10,7 +10,7 @@ import cx from 'classnames';
 import Ship from './ship';
 import css from './fleet.scss';
 
-export class Fleet extends Component {
+class Fleet extends Component {
   static propTypes = {
     fleet: PropTypes.any
     // fleet: PropTypes.shape({
@@ -38,3 +38,7 @@ export class Fleet extends Component {
     );
   }
 }
+
+export { Fleet };
+
+export default Fleet;

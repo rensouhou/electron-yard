@@ -14,7 +14,7 @@ import css from './health-bar.scss';
 
 const _ = R.__;
 
-export default class HealthBar extends Component {
+class HealthBar extends Component {
   static propTypes = {
     cur: PropTypes.number,
     max: PropTypes.number
@@ -47,3 +47,7 @@ export default class HealthBar extends Component {
     );
   }
 }
+
+export { HealthBar };
+
+export default HealthBar;

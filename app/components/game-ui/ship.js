@@ -13,7 +13,7 @@ import { Progress, Row, Column } from '../ui';
 import cx from 'classnames';
 import css from './ship.scss';
 
-export default class Ship extends Component {
+class Ship extends Component {
   static propTypes = {
     ship: PropTypes.object.isRequired
   };
@@ -37,3 +37,7 @@ export default class Ship extends Component {
     );
   }
 }
+
+export { Ship };
+
+export default Ship;

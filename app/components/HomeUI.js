@@ -10,7 +10,7 @@ import type { PlayerProfile } from '../types/player-profile';
 import R from 'ramda';
 import React, { Component, PropTypes } from 'react';
 import { Button, Progress, Label, Column, Row } from './ui';
-import Fleet from './game-ui/fleet';
+import { Fleet } from './game-ui';
 import css from './HomeUI.scss';
 
 export default class HomeUI extends Component {
