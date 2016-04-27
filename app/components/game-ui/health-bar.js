@@ -31,7 +31,7 @@ class HealthBar extends Component {
       [R.lte(_, 0.25), R.always('red')],
       [R.lte(_, 0.5), R.always('orange')],
       [R.lte(_, 0.75), R.always('yellow')],
-      [R.gt(_, 0.75), R.always('green')]
+      [R.T, R.always('green')]
     ]);
 
     return fn(ratio);

@@ -14,13 +14,31 @@ import css from './timer.scss';
 
 class Timer extends Component {
   static propTypes = {
-    targetTime: PropTypes.number
+    targetTime: PropTypes.number.isRequired,
+    autoStart: PropTypes.bool,
+    updateInterval: PropTypes.number
   };
 
+  static defaultProps = {
+    autoStart: true,
+    updateInterval: 500
+  };
+
+  getRemainingMilliseconds = ():number => this.props.targetTime - +(new Date());
+
+  setTimer = ():void => {
+    if (!!this.timerInstance) {
+      window.clearInterval(this.timerInstance);
+    }
+  };
+
+  timerInstance = null;
+
   render() {
+    const timeRemaining:number = this.getRemainingMilliseconds(this.props.targetTime);
     return (
       <div className={css.timer}>
-        derp
+        timer
       </div>
     );
   }
