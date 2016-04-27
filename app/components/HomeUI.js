@@ -48,7 +48,7 @@ export default class HomeUI extends Component {
     const resources = R.toPairs(player.materials);
     const defaultFleet = R.head(player.fleets);
     const defaultFleetShips = R.props(
-      defaultFleet.ships,
+      ((defaultFleet || {}).ships || []),
       R.path(['gameEntities', 'entities', 'ships'], this.props));
 
     return (

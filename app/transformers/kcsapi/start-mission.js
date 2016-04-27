@@ -14,11 +14,9 @@
  * @param {KCSApi.API.START_MISSION} r
  */
 export default function action$startMission(r) {
-  const { body, postBody } = r;
-
   return {
-    completionTime: body.api_complatetime,
-    fleetId: postBody.api_deck_id,
-    missionId: postBody.api_mission_id
+    completionTime: r.body.api_complatetime,
+    fleetId: r.postBody.api_deck_id,
+    missionId: r.postBody.api_mission_id
   };
 }

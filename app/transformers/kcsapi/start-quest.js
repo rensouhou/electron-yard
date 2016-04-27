@@ -17,6 +17,6 @@ import { asNumber } from '../primitive';
  * @param {__PROTO.ApiRequest} r
  * @returns {number}
  */
-export default function action$StartQuest(r:ApiRequest):ApiRequestResult {
+export default function action$startQuest(r:ApiRequest):ApiRequestResult {
   return asNumber(r.postBody.api_quest_id);
 }

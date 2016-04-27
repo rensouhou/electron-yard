@@ -10,6 +10,7 @@
  */
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { bindActionCreators as b, observableFromStore } from 'redux-rx';
 import HomeUI from '../components/HomeUI';
 import { combineShips, combineSlotItems, combined } from '../selectors/ships';
 import * as coreActions from '../actions/core';
