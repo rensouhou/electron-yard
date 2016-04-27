@@ -1,0 +1,10 @@
+.healthBar {
+  border: dashed 1px #f00;
+}
+
+.state {
+  &-green {}
+  &-yellow {}
+  &-orange {}
+  &-red {}
+}
