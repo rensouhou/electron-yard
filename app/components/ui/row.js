@@ -12,7 +12,7 @@ import css from './row.scss';
 export class Row extends Component {
   static propTypes = {
     children: PropTypes.any,
-    className: PropTypes.arrayOf(PropTypes.string),
+    className: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
     verticalAlign: PropTypes.oneOf(['center', 'top', 'bottom'])
   };
 
