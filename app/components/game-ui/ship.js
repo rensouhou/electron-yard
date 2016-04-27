@@ -5,9 +5,11 @@
  *
  * @since 0.4.0
  * @author Stefan Rimaila <stefan@rimaila.fi>
- * @module app/components/game/ship
+ * @module app/components/game-ui/ship
  */
 import React, { Component, PropTypes } from 'react';
+import HealthBar from './health-bar';
+import { Progress, Row, Column } from '../ui';
 import cx from 'classnames';
 import css from './ship.scss';
 
@@ -17,9 +19,20 @@ export default class Ship extends Component {
   };
 
   render() {
+    const { ship } = this.props;
+
     return (
       <div className={cx(css.ship)}>
-        {JSON.stringify(this.props.ship)}
+        <Row>
+          <Column size={6}>{ship.name.kanji}</Column>
+          <Column size={6}>{ship.level}</Column>
+        </Row>
+        <Row>
+          <HealthBar cur={ship.hp[0]} max={ship.hp[1]} />
+        </Row>
+        <Row>
+          <Progress cur={ship.experience[2]} size="small" />
+        </Row>
       </div>
     );
   }

@@ -51,7 +51,7 @@ namespace KCS {
       api_use_bull: number;
       api_use_fuel: number;
       api_win_item1: [number, number];
-      api_win_item2: [number, number];
+      api_win_item2?: [number, number];
     }
 
     interface PlayerShip {

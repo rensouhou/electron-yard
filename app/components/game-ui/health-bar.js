@@ -4,7 +4,7 @@
  *
  * @since 0.4.0
  * @author Stefan Rimaila <stefan@rimaila.fi>
- * @module app/components/game/hpbar
+ * @module app/components/game-ui/hpbar
  */
 import R from 'ramda';
 import React, { Component, PropTypes } from 'react';
