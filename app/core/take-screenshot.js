@@ -5,6 +5,7 @@
  * @author Stefan Rimaila <stefan@rimaila.fi>
  * @module app/core/take-screenshot
  * @flow
+ * @deprecated
  */
 const browserWindow = require('electron').remote.getCurrentWindow();
 

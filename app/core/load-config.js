@@ -4,6 +4,7 @@
  * @since 0.3.0
  * @author Stefan Rimaila <stefan@rimaila.fi>
  * @module app/core/load-config
+ * @deprecated
  */
 import fs from 'fs';
 import path from 'path';
