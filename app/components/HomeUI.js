@@ -46,11 +46,22 @@ export default class HomeUI extends Component {
       actions.notify('This is a test', { body: 'and a wonderful test it is' });
     };
 
+    const getFromPath = (ctx = this.props, ...path:Array<string>) => R.path(path, ctx);
+
+    const fleets = R.map(fl => ({
+      ...defaultFleet, ships: R.props(
+        (fl.ships || []),
+        getFromPath(this.props, 'gameEntities', 'entities', 'ships'))
+    }), player.fleets);
+
+    console.log(fleets);
+    getFromPath(this.props, 'gameEntities', 'entities', 'ships');
+
     const resources = R.toPairs(player.materials);
-    const defaultFleet = R.head(player.fleets);
+    const defaultFleet = R.head(player.fleets) || {};
     const defaultFleetShips = R.props(
       ((defaultFleet || {}).ships || []),
-      R.path(['gameEntities', 'entities', 'ships'], this.props));
+      getFromPath(this.props, 'gameEntities', 'entities', 'ships'));
 
     return (
       <div className={css.base}>
@@ -76,28 +87,8 @@ export default class HomeUI extends Component {
               </div>
             ))}
           </Column>
-
-          <Column size={8} className={css.fleetInfo}>
-            <div className={css.fleet}>
-              <div className={css.fleetShips}>
-                {(defaultFleetShips || []).map(s => (
-                  <div key={s.id} className={css.fleetShip}>
-                    <div className={css.shipTitle}>
-                      <div className={css.shipName}>
-                        {s.name.kanji}
-                      </div>
-                      <div className={css.shipLevel}>
-                        {s.level}
-                      </div>
-                    </div>
-                    <div className={css.shipBars}>
-                      <Progress min={0} max={s.hp[1]} value={s.hp[0]} />
-                      <Progress min={0} max={100} value={s.experience[2]} size="small" />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
+          <Column size={8}>
+            <Fleet fleet={R.head(fleets) || {}} />
           </Column>
         </Row>
       </div>

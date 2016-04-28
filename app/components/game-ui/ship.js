@@ -7,6 +7,7 @@
  * @author Stefan Rimaila <stefan@rimaila.fi>
  * @module app/components/game-ui/ship
  */
+import R from 'ramda';
 import React, { Component, PropTypes } from 'react';
 import HealthBar from './health-bar';
 import { Progress, Row, Column } from '../ui';
@@ -20,18 +21,24 @@ class Ship extends Component {
 
   render() {
     const { ship } = this.props;
+    if (R.isEmpty(ship) || R.not(R.is(Object, ship))) return (<div>Nothing here.</div>);
+
+    console.log('ship =>', ship);
+
+    const [hpCur, hpMax] = ship.hp;
+    const [expTotal, expToLevel, expPercent] = ship.experience;
+    const { morale } = ship;
 
     return (
-      <div className={cx(css.ship)}>
-        <Row>
-          <Column size={6}>{ship.name.kanji}</Column>
-          <Column size={6}>{ship.level}</Column>
+      <div className={css.ship}>
+        <Row className={css.shipTitle}>
+          <Column size={4} className={css.shipName}>{ship.name.kanji}</Column>
+          <Column size={4} className={css.shipMorale}>♡ {morale}</Column>
+          <Column size={4} className={css.shipLevel}>{ship.level}</Column>
         </Row>
-        <Row>
-          <HealthBar cur={ship.hp[0]} max={ship.hp[1]} />
-        </Row>
-        <Row>
-          <Progress cur={ship.experience[2]} size="small" />
+        <Row className={css.shipBars}>
+          <Progress value={hpCur} min={0} max={hpMax} />
+          <Progress value={expPercent} min={0} max={100} size="small" />
         </Row>
       </div>
     );
@@ -39,5 +46,3 @@ class Ship extends Component {
 }
 
 export { Ship };
-
-export default Ship;

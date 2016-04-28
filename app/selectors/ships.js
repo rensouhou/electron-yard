@@ -14,6 +14,15 @@ import { createSelector } from 'reselect';
 // Utility
 const _ = R.__;
 
+const findByProp = (idProp, id, list) => R.find(R.propEq(idProp, id), list);
+const combineItem = (l, r) => ({ ...l, ...r });
+const combineTwoLists = (target, base, pk) => R.map(it =>
+  combineItem(findByProp(pk, it[pk], base), findByProp(pk, it[pk], target)), target);
+
+const combine = R.curry(combineTwoLists);
+const combineByKey = combine(_, _);
+
+
 // Selector data
 const getPlayerShips = state => state.player.ships;
 const getPlayerSlotItems = state => state.player.slotItems;
@@ -23,23 +32,10 @@ const getBaseSlotItems = state => state.game.slotItems;
 const getBaseShipsObj = state => R.indexBy(R.prop('shipId'), state.game.ships);
 const getShipSort = state => state.appState.sort;
 
-// Compose
-const findByProp = (idProp, id, list) => R.find(R.propEq(idProp, id), list);
-const combineItem = (l, r) => ({ ...l, ...r });
-const combineTwoLists = (target, base, pk) => R.map(it =>
-    combineItem(
-      findByProp(pk, it[pk], base),
-      findByProp(pk, it[pk], target)
-    ),
-  target);
-
-const combine = R.curry(combineTwoLists);
-const combineByKey = combine(_, _);
+const combinePlayerShips = (ships, baseShips) => R.map(s => ({ ...baseShips[s.shipId], ...s, $_combined: true }), ships);
 
 // Export usable functions
-export const combineShips = createSelector([getPlayerShips, getBaseShipsObj], (ships, baseShipsObj) =>
-  R.map(s => ({ ...baseShipsObj[s.shipId], ...s, $_combined: true }), ships));
-
+export const combineShips = createSelector([getPlayerShips, getBaseShipsObj], combinePlayerShips);
 export const combineSlotItems = createSelector(
   [getPlayerSlotItems, getBaseSlotItems],
   (slotItems, baseSlotItems) => {

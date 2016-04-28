@@ -29,8 +29,9 @@ export class Progress extends Component {
 
   render() {
     const { value, max, label, size } = this.props;
+    console.log('progress =>', { value, max, label, size });
     return (
-      <div className={cx(styles.base)}>
+      <div className={cx(styles.progress)}>
         <div className={cx(styles.bar, styles[size])} style={{ width: `${(value / max) * 100}%` }}></div>
       </div>
     );

@@ -5,11 +5,12 @@
  * @author Stefan Rimaila <stefan@rimaila.fi>
  * @module app/components/ui/timer
  * @flow
+ * @todo(@stuf): add reactive bindings to timer instead of doing it the imperative way
  */
 import React, { Component, PropTypes } from 'react';
-import { createConnector } from 'redux-rx/react';
-import { bindActionCreators, observableFromStore } from 'redux-rx';
 import cx from 'classnames';
+import R from 'ramda';
+import S from 'sanctuary';
 import css from './timer.scss';
 
 class Timer extends Component {
@@ -24,12 +25,39 @@ class Timer extends Component {
     updateInterval: 500
   };
 
-  getRemainingMilliseconds = ():number => this.props.targetTime - +(new Date());
+  constructor(props) {
+    super(props);
+    this.state = {
+      timeLeft: null
+    };
+  }
 
-  setTimer = ():void => {
+  // @todo(@stuf): clear and re-set the timer if targetTime does not match
+  componentWillReceiveProps(nextProps:Object) {
+    if (this.props.targetTime !== nextProps.targetTime) {
+      this.setTimer(nextProps.targetTime);
+    }
+    return { ...this.props, targetTime: nextProps.targetTime };
+  }
+
+  componentWillUnmount() {
     if (!!this.timerInstance) {
       window.clearInterval(this.timerInstance);
     }
+  }
+
+  getRemainingMilliseconds = ():number => this.props.targetTime - +(new Date());
+
+  setTimer = (targetTime:number):void => {
+    if (!!this.timerInstance) {
+      clearInterval(this.timerInstance);
+    }
+    this.timerInstance = setInterval(() => {
+      if (this.getRemainingMilliseconds() <= 0) {
+        clearInterval(this.timerInstance);
+      }
+      this.setState({ timeLeft: this.getRemainingMilliseconds() });
+    }, this.props.updateInterval);
   };
 
   timerInstance = null;
@@ -38,7 +66,7 @@ class Timer extends Component {
     const timeRemaining:number = this.getRemainingMilliseconds(this.props.targetTime);
     return (
       <div className={css.timer}>
-        timer
+        {this.state.timeLeft}
       </div>
     );
   }

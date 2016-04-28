@@ -7,7 +7,7 @@
  */
 import React, { Component, PropTypes } from 'react';
 import cx from 'classnames';
-import Ship from './ship';
+import { Ship } from './ship';
 import css from './fleet.scss';
 
 class Fleet extends Component {
@@ -24,16 +24,15 @@ class Fleet extends Component {
     }
   };
 
-  renderShips = ships => {
-    console.log('renderShips', ships);
-    return ships.map(s => <Ship ship={s} />);
-  };
+  renderShips = ships => ships.map(s => <Ship ship={s} />);
 
   render() {
     console.log('fleet:render', this.props);
     return (
       <div className={cx(css.fleet)}>
-        {this.renderShips(this.props.fleet.ships)}
+        <div className={css.fleetShips}>
+          {this.renderShips(this.props.fleet.ships)}
+        </div>
       </div>
     );
   }

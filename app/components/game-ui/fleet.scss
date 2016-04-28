@@ -1,4 +1,11 @@
+.fleet {}
 
-.fleet {
-  border: dashed 1px #f00;
+.fleetInfo {
+  padding-left: 0.5rem;
 }
+
+.fleetShips {
+  display: flex;
+  flex-wrap: wrap;
+}
+
