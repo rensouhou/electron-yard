@@ -23,8 +23,6 @@ class Ship extends Component {
     const { ship } = this.props;
     if (R.isEmpty(ship) || R.not(R.is(Object, ship))) return (<div>Nothing here.</div>);
 
-    console.log('ship =>', ship);
-
     const [hpCur, hpMax] = ship.hp;
     const [expTotal, expToLevel, expPercent] = ship.experience;
     const { morale } = ship;
@@ -32,12 +30,12 @@ class Ship extends Component {
     return (
       <div className={css.ship}>
         <Row className={css.shipTitle}>
-          <Column size={4} className={css.shipName}>{ship.name.kanji}</Column>
-          <Column size={4} className={css.shipMorale}>♡ {morale}</Column>
-          <Column size={4} className={css.shipLevel}>{ship.level}</Column>
+          <Column size={6} className={css.shipName}>{ship.name.kanji}</Column>
+          <Column size={3} className={css.shipMorale}>♡ {morale}</Column>
+          <Column size={3} className={css.shipLevel}>{ship.level}</Column>
         </Row>
         <Row className={css.shipBars}>
-          <Progress value={hpCur} min={0} max={hpMax} />
+          <HealthBar value={hpCur} min={0} max={hpMax} />
           <Progress value={expPercent} min={0} max={100} size="small" />
         </Row>
       </div>

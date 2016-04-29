@@ -49,13 +49,10 @@ export default class HomeUI extends Component {
     const getFromPath = (ctx = this.props, ...path:Array<string>) => R.path(path, ctx);
 
     const fleets = R.map(fl => ({
-      ...defaultFleet, ships: R.props(
+      ...(R.head(player.fleets) || {}), ships: R.props(
         (fl.ships || []),
         getFromPath(this.props, 'gameEntities', 'entities', 'ships'))
     }), player.fleets);
-
-    console.log(fleets);
-    getFromPath(this.props, 'gameEntities', 'entities', 'ships');
 
     const resources = R.toPairs(player.materials);
     const defaultFleet = R.head(player.fleets) || {};
