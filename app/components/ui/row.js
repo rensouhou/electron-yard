@@ -13,16 +13,24 @@ export class Row extends Component {
   static propTypes = {
     children: PropTypes.any,
     className: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
-    verticalAlign: PropTypes.oneOf(['center', 'top', 'bottom'])
+    verticalAlign: PropTypes.oneOf(['center', 'top', 'bottom']),
+    wrap: PropTypes.bool
   };
 
   static defaultProps = {
-    verticalAlign: 'top'
+    verticalAlign: 'top',
+    wrap: true
   };
 
   render() {
+    const classNames = [
+      css.row,
+      !this.props.wrap ? css.disableWrap : null,
+      css[`verticalAlign-${this.props.verticalAlign}`],
+      this.props.className
+    ];
     return (
-      <div className={cx(css.row, css[`verticalAlign-${this.props.verticalAlign}`], this.props.className)}>
+      <div className={cx(classNames)}>
         {this.props.children}
       </div>
     );

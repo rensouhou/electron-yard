@@ -41,7 +41,6 @@ class HealthBar extends Component {
     const { value, max } = this.props;
     const health = [value, max];
     const healthBarColorClass = `state-${this.getHealthBarColor(health)}`;
-    console.log({ healthBarColorClass });
 
     return (
       <Progress className={cx(css.healthBar, css[healthBarColorClass])} value={value} max={max} />

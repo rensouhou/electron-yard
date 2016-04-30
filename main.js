@@ -16,6 +16,8 @@ const electron = require('electron');
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 const crashReporter = electron.crashReporter;
+const powerSaveBlocker = electron.powerSaveBlocker;
+powerSaveBlocker.start('prevent-app-suspension');
 
 crashReporter.start();
 

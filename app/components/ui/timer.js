@@ -15,58 +15,76 @@ import css from './timer.scss';
 
 class Timer extends Component {
   static propTypes = {
-    targetTime: PropTypes.number.isRequired,
+    targetTime: PropTypes.number,
+    id: PropTypes.any,
     autoStart: PropTypes.bool,
     updateInterval: PropTypes.number
   };
 
   static defaultProps = {
     autoStart: true,
-    updateInterval: 500
+    updateInterval: 2000
   };
 
   constructor(props) {
     super(props);
     this.state = {
-      timeLeft: null
+      timeLeft: null,
+      timerInstance: null
     };
   }
 
   // @todo(@stuf): clear and re-set the timer if targetTime does not match
   componentWillReceiveProps(nextProps:Object) {
-    if (this.props.targetTime !== nextProps.targetTime) {
+    console.log('componentWillReceiveProps', this.state.timerInstance, nextProps);
+    if (this.props.targetTime && this.props.targetTime !== nextProps.targetTime) {
       this.setTimer(nextProps.targetTime);
     }
     return { ...this.props, targetTime: nextProps.targetTime };
   }
 
   componentWillUnmount() {
+    console.log('componentWillUnmount', this.timerInstance);
     if (!!this.timerInstance) {
       window.clearInterval(this.timerInstance);
+    }
+  }
+
+  componentDidMount() {
+    console.log('componentDidMount', this.props, this.state);
+    console.log('timerInstance', typeof this.state.timerInstance, this.state.timerInstance == null, this.state.timerInstance);
+    if (!!this.timerInstance) {
+      console.log('no timerInstance; targetTime =>', this.props.targetTime);
+      this.setTimer(this.props.targetTime);
     }
   }
 
   getRemainingMilliseconds = ():number => this.props.targetTime - +(new Date());
 
   setTimer = (targetTime:number):void => {
-    if (!!this.timerInstance) {
-      clearInterval(this.timerInstance);
+    console.log('setTimer =>', targetTime);
+    if (!!this.state.timerInstance) {
+      this.setState({ timerInstance: clearInterval(this.state.timerInstance) });
     }
-    this.timerInstance = setInterval(() => {
-      if (this.getRemainingMilliseconds() <= 0) {
-        clearInterval(this.timerInstance);
-      }
-      this.setState({ timeLeft: this.getRemainingMilliseconds() });
-    }, this.props.updateInterval);
+    this.setState({
+      timerInstance: setInterval(() => {
+        if (this.getRemainingMilliseconds() <= 0) {
+          this.setState({ timerInstance: clearInterval(this.state.timerInstance) });
+        }
+        this.setState({ timeLeft: this.getRemainingMilliseconds() });
+      }, this.props.updateInterval)
+    });
   };
 
-  timerInstance = null;
-
   render() {
+    console.log('Timer:render', this.props, this.state);
+    console.log('setInterval =>', typeof setInterval);
     const timeRemaining:number = this.getRemainingMilliseconds(this.props.targetTime);
     return (
       <div className={css.timer}>
-        {this.state.timeLeft}
+        <pre>
+          {JSON.stringify({ props: this.props, state: this.state }, null, 2)}
+        </pre>
       </div>
     );
   }
