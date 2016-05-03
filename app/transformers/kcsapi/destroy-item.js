@@ -8,7 +8,14 @@
  * @author Stefan Rimaila <stefan@rimaila.fi>
  * @module app/transformers/kcsapi/destroy-item
  */
+import { parseMaterialArray } from '../api/materials';
+
+/**
+ * @param r
+ * @returns {{materials: *}}
+ */
 export function action$destroyItem(r) {
-  console.warn('NYI action$destroyShip');
-  return { r };
+  return {
+    materials: parseMaterialArray(r.body.api_material)
+  };
 }

@@ -16,15 +16,12 @@ import { parseMaterialArray } from '../api/materials';
  * @param {KCSApi.API.COMPLETE_QUEST} r
  */
 export default function action$completeQuest(r) {
-  const body = r.body;
-  const postBody = r.postBody;
-
   return {
-    id: asNumber(postBody.api_quest_id),
-    materials: parseMaterialArray(body.api_material),
+    id: asNumber(r.postBody.api_quest_id),
+    materials: parseMaterialArray(r.body.api_material),
     rewards: {
-      count: body.api_bounus_count,
-      items: body.api_bounus
+      count: r.body.api_bounus_count,
+      items: r.body.api_bounus
     }
   };
 }

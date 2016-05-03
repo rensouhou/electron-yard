@@ -1,4 +1,4 @@
-/*eslint no-case-declarations: 0*/
+/*eslint no-case-declarations:0,no-new:0*/
 /**
  * @overview
  *  Back-end implementation for RDB logging.
@@ -34,6 +34,15 @@ ipcMain.on(AppEvent.RDB_LOG_EVENT, (event, arg) => {
       new schema.MaterialState(payload.materials).saveAll();
       break;
     case ApiEvent.CRAFT_ITEM:
+      new schema.MaterialState(payload.materials).saveAll();
+      new schema.CraftingLog(
+        Object.assign({},
+          payload.consumed.recipe,
+          payload.slotItem,
+          { flags: payload.flags }
+        )).saveAll();
+      break;
+    case ApiEvent.DESTROY_SHIP:
       new schema.MaterialState(payload.materials).saveAll();
       break;
     case ApiEvent.GET_CONSTRUCTION_DOCKS:

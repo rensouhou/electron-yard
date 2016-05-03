@@ -18,7 +18,7 @@ const transformers = {
   FINISHED_PRACTICE: require('./finished-practice'),
   FINISHED_SORTIE: require('./finished-sortie'),
   GET_BASE_DATA: require('./get-base-data'),
-  GET_CONSTRUCTION_DOCKS: require('./get-construction-docks'),
+  //GET_CONSTRUCTION_DOCKS: require('./get-construction-docks'),
   GET_FLEET: require('./get-fleet'),
   GET_MATERIAL: require('./get-material'),
   GET_QUEST_LIST: require('./get-quest-list'),

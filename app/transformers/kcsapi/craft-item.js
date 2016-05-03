@@ -25,6 +25,7 @@ export default function action$craftItem(r) {
       recipe: parseMaterialsRecipe(R.map(asNumber, r.postBody))
     },
     materials: parseMaterialArray(r.body.api_material),
+    // @todo(@stuf): replace with Maybe type
     slotItem: !R.is(Object, r.body.api_slot_item) ? null : {
       id: r.body.api_slot_item.api_id,
       slotItemId: r.body.api_slot_item.api_slotitem_id

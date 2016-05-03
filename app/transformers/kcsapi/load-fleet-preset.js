@@ -18,8 +18,10 @@ import { asNumber } from '../primitive';
  */
 export default function action$loadFleetPreset(r) {
   return {
-    fleet: playerFleet(r.body),
-    fleetId: asNumber(r.postBody.api_deck_id),
-    presetId: asNumber(r.postBody.api_preset_no)
+    fleet: {
+      fleet: playerFleet(r.body),
+      fleetId: asNumber(r.postBody.api_deck_id),
+      presetId: asNumber(r.postBody.api_preset_no)
+    }
   };
 }

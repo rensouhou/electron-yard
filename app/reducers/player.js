@@ -11,6 +11,8 @@ import R from 'ramda';
 import { ApiEvents } from '../actions/game';
 import createReducer from './create-reducer';
 
+const _ = R.__;
+
 const initialState = {
   profile: {
     limits: {
@@ -46,12 +48,17 @@ const mergeProfile = (k, l, r) => {
   }
 };
 
+const updateFleet = (state, payload) => ({
+  ...state,
+  fleets: R.update(
+    R.propEq('id', payload.fleet.fleetId), state.fleets,
+    payload.fleet.fleet,
+    state.fleets
+  )
+});
+
 const updateBaseData = (data, state) => R.mergeWithKey(mergeProfile, state, data);
 const updateKey = (key, data, state) => R.assoc(key, { ...data }, state);
-// const updateFleet = (fleet, state) => R.assoc('fleets', { ...fleet }, state);
-// const updateMaterials = (materials, state) => R.assoc('materials', { ...materials }, state);
-// const updateShips = (ships, state) => R.assoc('ships', { ...ships }, state);
-// const updateSlotItems = (slotItems, state) => R.assoc('slotItems', { ...slotItems }, state);
 
 export default createReducer(initialState, {
   [ApiEvents.GET_PLAYER_BASE_DATA](state, action) {
@@ -62,20 +69,19 @@ export default createReducer(initialState, {
     return updateBaseData(action.payload, state);
   },
   [ApiEvents.GET_FLEET](state, action) {
-    return updateKey('ships', action.payload.ships, state);
+    return updateFleet(state, action.payload);
   },
   [ApiEvents.LOAD_FLEET_PRESET](state, action) {
-    return {
-      ...state,
-      fleets: R.update(
-        R.findIndex(R.propEq('id', action.payload.fleetId), state.fleets),
-        action.payload.fleet,
-        state.fleets
-      )
-    };
+    return updateFleet(state, action.payload);
   },
   [ApiEvents.GET_MATERIAL](state, action) {
-    return updateKey('materials', action.payload, state);
+    return {
+      ...state,
+      materials: {
+        ...state.materials,
+        ...action.payload.materials
+      }
+    };
   },
   [ApiEvents.GET_CONSTRUCTION_DOCKS](state, action) {
     return { ...state };

@@ -8,9 +8,7 @@
  * @author Stefan Rimaila <stefan@rimaila.fi>
  * @module app/transformers/kcsapi/get-material
  * @see {@link __PROTO.AppState}
- * @flow
  */
-import { ApiRequest, ApiRequestResult } from '../../types/api';
 import { parseMaterialObjects } from '../api/materials';
 import { getArrayOrDefault } from '../primitive';
 
@@ -19,7 +17,7 @@ import { getArrayOrDefault } from '../primitive';
  * @param {__PROTO.ApiRequest} r
  * @returns {Dockyard.API.GetMaterial}
  */
-export default function (r:ApiRequest):ApiRequestResult {
+export default function (r) {
   return {
     materials: parseMaterialObjects(getArrayOrDefault(r.body))
   };

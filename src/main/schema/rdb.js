@@ -7,14 +7,12 @@
  */
 import invariant from 'invariant';
 
-
 export default function (thinky, type) {
   invariant(thinky && type, 'Thinky instance required');
-
-  const getDefault = () => type.date().default(new Date());
+  const r = thinky.r;
 
   const MaterialState = thinky.createModel('MaterialState', {
-    timestamp: type.date().default(new Date()),
+    timestamp: type.date().default(r.now()),
     fuel: type.number().integer(),
     ammo: type.number().integer(),
     steel: type.number().integer(),
@@ -27,7 +25,7 @@ export default function (thinky, type) {
   MaterialState.ensureIndex('timestamp');
 
   const CraftingLog = thinky.createModel('CraftingLog', {
-    timestamp: type.date().default(new Date()),
+    timestamp: type.date().default(r.now()),
     fuel: type.number().integer(),
     ammo: type.number().integer(),
     steel: type.number().integer(),
@@ -41,22 +39,25 @@ export default function (thinky, type) {
     id: type.number().optional(),
     entityId: type.number().optional()
   });
-
   CraftingLog.ensureIndex('timestamp');
 
   const Opponent = thinky.createModel('Opponent', {
-    timestamp: type.date().default(new Date()),
+    timestamp: type.date().default(r.now()),
     id: type.number().required(),
     level: type.number().required(),
     nickname: type.string(),
     comment: type.string(),
     rank: type.number(),
     counts: {
-      ships: type.number()
+      ships: type.number(),
+      slotItems: type.number()
+    },
+    fleet: {
+      name: type.string(),
+      ships: [type.number()]
     }
   });
-
   Opponent.ensureIndex('timestamp');
 
-  return { MaterialState, CraftingLog };
+  return { MaterialState, CraftingLog, Opponent };
 }

@@ -10,15 +10,16 @@
 import R from 'ramda';
 import { parseMaterialArray } from '../api/materials';
 import { asNumber, getObjectOrDefault } from '../primitive';
+import { Enum } from '../../helpers';
 
 /**
  * @type {KCSApi.MissionResult}
  */
-const missionResult = {
-  0: 'Failure',
-  1: 'Success',
-  2: 'HugeSucess'
-};
+const missionResult = Enum({
+  FAILURE: 0,
+  SUCCESS: 1,
+  HUGE_SUCCESS: 2
+});
 
 /**
  * @param {KCSApi.API.COMPLETE_MISSION.body.api_get_item1} it
@@ -38,7 +39,7 @@ const collectShipExperience = (ids, exp) => R.mergeAll(R.zipObj(ids, exp));
 export default function action$completeMission(r) {
   return {
     fleetId: asNumber(r.postBody.api_deck_id),
-    result: missionResult[r.body.api_clear_result],
+    result: missionResult(r.body.api_clear_result),
     map: {
       area: r.body.api_maparea_name,
       name: r.body.api_quest_name,
@@ -46,7 +47,7 @@ export default function action$completeMission(r) {
     },
     rewards: [r.body.api_get_item1, r.body.api_get_item2].map(getObjectOrDefault).map(parseReward),
     materials: parseMaterialArray(r.body.api_get_material),
-    ships: r.body.api_ship_id.slice[1],
+    ships: r.body.api_ship_id.slice[1]
     // experience: collectShipExperience(r.body.api_ship_id.slice[1], r.body.api_get_exp_lvup)
   };
 }

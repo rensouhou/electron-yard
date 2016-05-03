@@ -42,8 +42,6 @@ export default class HomeUI extends Component {
       (actions || {}).takeScreenshot,
       (core || {}).webview);
 
-    console.log(this.props);
-
     const notifyTestHandler = (event:Event) => {
       event.preventDefault();
       actions.notify('This is a test', { body: 'and a wonderful test it is' });
@@ -59,8 +57,6 @@ export default class HomeUI extends Component {
 
     const mainFleet = R.head(fleets) || {};
     const secFleets = R.tail(player.fleets) || [];
-
-    console.log({ secFleets });
 
     const targetTimes = secFleets.map(f => ({ id: f.id, mission: f.mission }));
 

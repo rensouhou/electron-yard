@@ -14,5 +14,7 @@ import { playerSlotItem } from '../api/player-slotitem';
  * @returns {{r: *}}
  */
 export default function action$getSlotItems(r) {
-  return r.body.map(playerSlotItem);
+  return {
+    slotItems: r.body.map(playerSlotItem)
+  };
 }
