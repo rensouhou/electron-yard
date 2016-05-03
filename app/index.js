@@ -20,10 +20,6 @@ import './components/electron';
 const store = configureStore();
 const history = syncHistoryWithStore(hashHistory, store);
 
-const unsub = store.subscribe(() => {
-  console.log('store update =>\n\t', store.getState());
-});
-
 render(
   <Provider store={store}>
     <Router history={history} routes={routes} />
