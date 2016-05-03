@@ -30,7 +30,7 @@ class Ship extends Component {
       <div className={css.ship}>
         <Row className={css.shipTitle}>
           <Column size={7} className={css.shipName}>{ship.name.kanji}</Column>
-          <Column size={3} className={css.shipMorale}>♡ {morale}</Column>
+          <Column size={3} className={css.shipMorale}><i className="fa fa-heart" /> {morale}</Column>
           <Column size={2} className={css.shipLevel}>{ship.level}</Column>
         </Row>
         <Row className={css.shipBars}>

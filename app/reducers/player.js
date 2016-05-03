@@ -13,7 +13,12 @@ import createReducer from './create-reducer';
 
 const initialState = {
   profile: {
-    limits: {}
+    limits: {
+      maxShips: 0,
+      maxSlotItems: 0,
+      maxFurniture: 0
+    },
+    level: 0
   },
   quests: {},
   fleets: [],
@@ -60,7 +65,14 @@ export default createReducer(initialState, {
     return updateKey('ships', action.payload.ships, state);
   },
   [ApiEvents.LOAD_FLEET_PRESET](state, action) {
-    return updateKey('fleets', { [action.payload.fleetId]: action.payload.fleet }, state);
+    return {
+      ...state,
+      fleets: R.update(
+        R.findIndex(R.propEq('id', action.payload.fleetId), state.fleets),
+        action.payload.fleet,
+        state.fleets
+      )
+    };
   },
   [ApiEvents.GET_MATERIAL](state, action) {
     return updateKey('materials', action.payload, state);
