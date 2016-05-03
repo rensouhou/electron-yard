@@ -1,4 +1,20 @@
 @import "~material-colors/dist/colors.scss";
 
+$gameviewWidth: 800px;
+
 .column {
+}
+
+.base {
+  display: flex;
+  height: 100%;
+}
+
+.leftSide {
+  width: 800px;
+}
+
+.rightSide {
+  border: dashed 0.1rem $md-teal-a400;
+  width: 100%;
 }
