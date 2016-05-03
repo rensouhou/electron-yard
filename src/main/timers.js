@@ -7,7 +7,6 @@
  * @since 0.4.0
  * @author Stefan Rimaila <stefan@rimaila.fi>
  * @module src/main/timers
- * @flow
  */
 const electron = require('electron');
 const AppEvent = require('../shared/constants');
@@ -26,21 +25,21 @@ const createTimer = (arg, event) => {
   }
 
   const reply = Object.assign({}, arg);
-  const timeDiff = arg.targetTime - (+new Date());
+  const timeDelta = arg.targetTime - (+new Date());
 
-  if (timeDiff <= 0) {
+  if (timeDelta <= 0) {
     reply.error = new Error('Timer needs to be in the future');
     event.sender.send(AppEvent.TIMER_ERROR, reply);
     return reply;
   }
 
-  console.log(`timeDiff => ${timeDiff}`);
+  console.log(`timeDelta => ${timeDelta}`);
 
   timers[arg.id] = setTimeout(() => {
     console.log(`Timer with id ${arg.id} done`);
     event.sender.send(AppEvent.TIMER_DONE, reply);
     delete timers[arg.id];
-  }, timeDiff);
+  }, timeDelta);
 
   return reply;
 };
