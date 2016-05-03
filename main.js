@@ -16,8 +16,6 @@ const electron = require('electron');
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 const crashReporter = electron.crashReporter;
-const powerSaveBlocker = electron.powerSaveBlocker;
-powerSaveBlocker.start('prevent-app-suspension');
 
 crashReporter.start();
 
@@ -73,3 +71,5 @@ app.on('activate', () => {
 
 // Start timer listeners
 require('./src/main/timers');
+
+require('./src/main/db-logger');
