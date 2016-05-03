@@ -27,6 +27,7 @@ const transformers = {
   GET_SLOT_ITEMS: require('./get-slot-items'),
   LOAD_FLEET_PRESET: require('./load-fleet-preset'),
   INITIALIZE_GAME: require('./initialize-game'),
+  RESUPPLY_SHIP: require('./resupply-ship'),
   START_MISSION: require('./start-mission'),
   START_PVP_BATTLE: require('./start-pvp-battle'),
   START_QUEST: require('./start-quest'),
