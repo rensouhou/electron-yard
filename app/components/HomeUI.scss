@@ -10,13 +10,6 @@
 }
 
 .topBar {
-  display: flex;
-  align-items: center;
-  padding: 0.25rem 0.4rem;
-
-  button {
-    margin-right: 0.8rem;
-  }
 }
 
 .mainView {
@@ -83,34 +76,4 @@
 .fleetShips {
   display: flex;
   flex-wrap: wrap;
-}
-
-.fleetShip {
-  width: 50%;
-  padding: 0 0.25rem;
-}
-
-.shipTitle {
-  display: flex;
-
-  > div {
-    width: 50%;
-  }
-}
-
-.shipName,
-.shipLevel {
-  font-size: 1.2em;
-}
-
-.shipName {
-}
-
-.shipLevel {
-  text-align: right;
-  font-weight: bold;
-}
-
-.shipBars {
-  //border: solid 1px #f00;
 }

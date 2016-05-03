@@ -1,10 +1,12 @@
+@import "~material-colors/dist/colors.scss";
+
 .healthBar {
-  border: dashed 1px #f00;
+  //border: dashed 1px #f00;
 }
 
 .state {
   &-green {}
-  &-yellow {}
-  &-orange {}
-  &-red {}
+  &-yellow { background-color: $md-yellow-a400; }
+  &-orange { background-color: $md-amber-a400; }
+  &-red { background-color: $md-red-a400; }
 }

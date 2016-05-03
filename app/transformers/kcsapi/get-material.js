@@ -20,5 +20,7 @@ import { getArrayOrDefault } from '../primitive';
  * @returns {Dockyard.API.GetMaterial}
  */
 export default function (r:ApiRequest):ApiRequestResult {
-  return parseMaterialObjects(getArrayOrDefault(r.body));
+  return {
+    materials: parseMaterialObjects(getArrayOrDefault(r.body))
+  };
 }

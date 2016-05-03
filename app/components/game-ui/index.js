@@ -11,5 +11,6 @@
 import { Ship } from './ship';
 import { Fleet } from './fleet';
 import { HealthBar } from './health-bar';
+import { TopBar } from './topbar';
 
-export { Ship, Fleet, HealthBar };
+export { Ship, Fleet, HealthBar, TopBar };

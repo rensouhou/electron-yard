@@ -1,4 +1,25 @@
-
 .fleet {
-  border: dashed 1px #f00;
+  padding-left: 0.5rem;
 }
+
+.fleetInfo {
+  //border: dashed 1px #f00;
+  display: flex;
+  justify-content: space-between;
+  padding: 0rem 0.5rem 0.75rem 0.25rem;
+  font-size: 1.2rem;
+}
+
+.fleetId {
+  text-align: right;
+}
+
+.fleetName {
+  font-weight: bold;
+}
+
+.fleetShips {
+  display: flex;
+  flex-wrap: wrap;
+}
+

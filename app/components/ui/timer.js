@@ -5,41 +5,35 @@
  * @author Stefan Rimaila <stefan@rimaila.fi>
  * @module app/components/ui/timer
  * @flow
+ * @todo(@stuf): add reactive bindings to timer instead of doing it the imperative way
  */
 import React, { Component, PropTypes } from 'react';
-import { createConnector } from 'redux-rx/react';
-import { bindActionCreators, observableFromStore } from 'redux-rx';
-import cx from 'classnames';
 import css from './timer.scss';
 
 class Timer extends Component {
   static propTypes = {
-    targetTime: PropTypes.number.isRequired,
+    targetTime: PropTypes.number,
+    id: PropTypes.any,
     autoStart: PropTypes.bool,
     updateInterval: PropTypes.number
   };
 
   static defaultProps = {
     autoStart: true,
-    updateInterval: 500
+    updateInterval: 2000
   };
 
-  getRemainingMilliseconds = ():number => this.props.targetTime - +(new Date());
-
-  setTimer = ():void => {
-    if (!!this.timerInstance) {
-      window.clearInterval(this.timerInstance);
-    }
-  };
-
-  timerInstance = null;
+  constructor(props) {
+    super(props);
+    this.state = {
+      timeLeft: null,
+      timerInstance: null
+    };
+  }
 
   render() {
-    const timeRemaining:number = this.getRemainingMilliseconds(this.props.targetTime);
     return (
-      <div className={css.timer}>
-        timer
-      </div>
+      <div className={css.timer}></div>
     );
   }
 }

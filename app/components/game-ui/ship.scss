@@ -1,4 +1,42 @@
+@import "~material-colors/dist/colors.scss";
 
 .ship {
-  border: dashed 1px #00f;
+  width: 50%;
+  padding: 0 0.25rem;
+}
+
+.shipTitle {
+  display: flex;
+  align-items: center;
+
+  > div {
+    //width: 50%;
+  }
+}
+
+.shipName,
+.shipLevel {
+  font-size: 1.2em;
+}
+
+.shipMorale {
+  text-align: center;
+}
+
+.shipName {
+}
+
+.shipLevel {
+  text-align: right;
+  font-weight: bold;
+}
+
+.shipBars {
+  //border: solid 1px #f00;
+}
+
+.shipMoraleIndicator {
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-color: $md-amber-400;
 }

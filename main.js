@@ -71,3 +71,5 @@ app.on('activate', () => {
 
 // Start timer listeners
 require('./src/main/timers');
+
+require('./src/main/db-logger');

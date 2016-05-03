@@ -6,4 +6,5 @@ $color: $primary-color;
 .label {
   padding-left: $bar-horizontal-space;
   padding-right: $bar-horizontal-space;
+  border: dashed 0.1rem $md-pink-a400;
 }

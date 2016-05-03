@@ -1,7 +1,10 @@
+@import '../../assets/styles/variables';
+
 .row {
   display: flex;
   align-items: flex-start;
   flex-wrap: wrap;
+  border: dashed 0.1rem #f00;
 }
 
 .verticalAlign {
@@ -16,4 +19,8 @@
   &-center {
     align-items: center;
   }
+}
+
+.disableWrap {
+  flex-wrap: nowrap;
 }

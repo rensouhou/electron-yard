@@ -16,7 +16,7 @@ const _ = R.__;
 
 class HealthBar extends Component {
   static propTypes = {
-    cur: PropTypes.number,
+    value: PropTypes.number,
     max: PropTypes.number
   };
 
@@ -38,12 +38,12 @@ class HealthBar extends Component {
   };
 
   render() {
-    const { cur, max } = this.props;
-    const health = [cur, max];
+    const { value, max } = this.props;
+    const health = [value, max];
     const healthBarColorClass = `state-${this.getHealthBarColor(health)}`;
 
     return (
-      <Progress className={cx(css.healthBar, css[healthBarColorClass])} />
+      <Progress className={cx(css.healthBar, css[healthBarColorClass])} value={value} max={max} />
     );
   }
 }

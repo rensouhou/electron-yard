@@ -8,10 +8,13 @@
  */
 import type { PlayerProfile } from '../types/player-profile';
 import R from 'ramda';
+import m from 'monet';
 import React, { Component, PropTypes } from 'react';
 import { Button, Progress, Label, Column, Row, Timer } from './ui';
-import { Fleet } from './game-ui';
+import { Fleet, TopBar } from './game-ui';
 import css from './HomeUI.scss';
+
+const { Maybe, List } = m;
 
 export default class HomeUI extends Component {
   static propTypes = {
@@ -46,22 +49,41 @@ export default class HomeUI extends Component {
       actions.notify('This is a test', { body: 'and a wonderful test it is' });
     };
 
+    const getFromPath = (ctx = this.props, ...path:Array<string>) => R.path(path, ctx);
+
+    const fleets = R.map(fl => ({
+      ...(R.head(player.fleets) || {}), ships: R.props(
+        (fl.ships || []),
+        getFromPath(this.props, 'gameEntities', 'entities', 'ships'))
+    }), player.fleets);
+
+    const mainFleet = R.head(fleets) || {};
+    const secFleets = R.tail(player.fleets) || [];
+
+    console.log({ secFleets });
+
+    const targetTimes = secFleets.map(f => ({ id: f.id, mission: f.mission }));
+
     const resources = R.toPairs(player.materials);
-    const defaultFleet = R.head(player.fleets);
+    const defaultFleet = R.head(player.fleets) || {};
     const defaultFleetShips = R.props(
       ((defaultFleet || {}).ships || []),
-      R.path(['gameEntities', 'entities', 'ships'], this.props));
+      getFromPath(this.props, 'gameEntities', 'entities', 'ships'));
 
     return (
       <div className={css.base}>
-        <Row className={css.topBar} verticalAlign="center">
-          <Button onClick={screenshotHandler}>Grab</Button>
-          <Button onClick={notifyTestHandler}>Notify</Button>
+        <TopBar verticalAlign="center" wrap={false}>
           <Label>Game state: <strong>{this.props.gameState}</strong></Label>
           <Label>HQ Level: <strong>{profile.level}</strong></Label>
           <Label>Ships <strong>{models.ships.length}/{limits.maxShips}</strong></Label>
           <Label>Equip <strong>{models.slotItems.length}/{limits.maxSlotItems}</strong></Label>
-        </Row>
+        </TopBar>
+        <TopBar verticalAlign="center">
+          <div>Test features</div>
+          <Button onClick={screenshotHandler}>Grab</Button>
+          <Button onClick={notifyTestHandler}>Notify</Button>
+          <Button>Timer test</Button>
+        </TopBar>
 
         <Row>
           <Column size={4} className={css.resources}>
@@ -75,33 +97,12 @@ export default class HomeUI extends Component {
                 </div>
               </div>
             ))}
-
-            <Row>
-              
-            </Row>
-          </Column>
-
-          <Column size={8} className={css.fleetInfo}>
-            <div className={css.fleet}>
-              <div className={css.fleetShips}>
-                {(defaultFleetShips || []).map(s => (
-                  <div key={s.id} className={css.fleetShip}>
-                    <div className={css.shipTitle}>
-                      <div className={css.shipName}>
-                        {s.name.kanji}
-                      </div>
-                      <div className={css.shipLevel}>
-                        {s.level}
-                      </div>
-                    </div>
-                    <div className={css.shipBars}>
-                      <Progress min={0} max={s.hp[1]} value={s.hp[0]} />
-                      <Progress min={0} max={100} value={s.experience[2]} size="small" />
-                    </div>
-                  </div>
-                ))}
-              </div>
+            <div>
+              {targetTimes.map(t => <Timer id={t.id} targetTime={t.mission.completionTime} />)}
             </div>
+          </Column>
+          <Column size={8}>
+            <Fleet {...mainFleet} />
           </Column>
         </Row>
       </div>

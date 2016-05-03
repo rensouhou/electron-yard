@@ -335,6 +335,20 @@ namespace KCSApi {
         api_item4: number;
       };
     }
+
+    export interface RESUPPLY_SHIP extends ApiRequest {
+      body: {
+        api_material: Array<number>;
+        api_ship: Array<any>;
+        api_use_bou: number;
+      };
+      postBody: {
+        api_id_items: string;
+        api_kind: string;
+        api_onslot: string;
+      };
+    }
+
     export interface GET_SHIP extends ApiRequest {
       body: {
         api_id: number;

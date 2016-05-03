@@ -10,14 +10,20 @@
 import React, { Component } from 'react';
 import GameContainer from '../containers/GameContainer';
 import HomeUIContainer from '../containers/HomeUIContainer';
-import styles from './Home.scss';
+import SidebarContainer from '../containers/SidebarContainer';
+import css from './Home.scss';
 
 export default class Home extends Component {
   render() {
     return (
-      <div className={styles.base}>
-        <GameContainer />
-        <HomeUIContainer />
+      <div className={css.base}>
+        <div className={css.leftSide}>
+          <GameContainer />
+          <HomeUIContainer />
+        </div>
+        <div className={css.rightSide}>
+          <SidebarContainer />
+        </div>
       </div>
     );
   }

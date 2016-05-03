@@ -47,5 +47,7 @@ const parseDock = dock => ({
  * @event GET_CONSTRUCTION_DOCKS
  */
 export default function action$getConstructionDocks(r) {
-  return r.body.map(parseDock);
+  return {
+    docks: r.body.map(parseDock)
+  };
 }

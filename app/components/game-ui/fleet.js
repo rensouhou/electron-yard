@@ -6,34 +6,37 @@
  * @module app/components/game-ui/fleet
  */
 import React, { Component, PropTypes } from 'react';
-import cx from 'classnames';
-import Ship from './ship';
+import { Ship } from './ship';
 import css from './fleet.scss';
 
 class Fleet extends Component {
   static propTypes = {
-    fleet: PropTypes.any
-    // fleet: PropTypes.shape({
-    //   ships: PropTypes.arrayOf(PropTypes.object)
-    // })
+    name: PropTypes.string,
+    mission: PropTypes.any,
+    ships: PropTypes.array,
+    id: PropTypes.number
   };
 
   static defaultProps = {
-    fleet: {
-      ships: []
-    }
-  };
-
-  renderShips = ships => {
-    console.log('renderShips', ships);
-    return ships.map(s => <Ship ship={s} />);
+    ships: []
   };
 
   render() {
-    console.log('fleet:render', this.props);
+    const { ships, name, id } = this.props;
+
     return (
-      <div className={cx(css.fleet)}>
-        {this.renderShips(this.props.fleet.ships)}
+      <div className={css.fleet}>
+        <div className={css.fleetInfo}>
+          <div className={css.fleetName}>
+            {name}
+          </div>
+          <div className={css.fleetId}>
+            {id}
+          </div>
+        </div>
+        <div className={css.fleetShips}>
+          {ships.map(s => <Ship ship={s} key={s.id || 0} />)}
+        </div>
       </div>
     );
   }
