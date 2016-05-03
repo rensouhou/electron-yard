@@ -19,5 +19,7 @@ import { opponentFleet } from '../api/opponent-fleet';
  * @param {__PROTO.ApiRequest} r
  */
 export default function action$getOpponentInfo(r:ApiRequest):ApiRequestResult {
-  return opponentFleet(r.body);
+  return {
+    fleet: opponentFleet(r.body)
+  };
 }

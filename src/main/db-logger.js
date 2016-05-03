@@ -19,6 +19,10 @@ const AppEvent = require('../shared/constants');
 const ApiEvent = require('../../app/constants/api-events').ApiEvents;
 const ipcMain = electron.ipcMain;
 
+ipcMain.on(AppEvent.REHYDRATE_STORE_REQUEST, (event, arg) => {
+  event.sender.send(AppEvent.REHYDRATE_STORE);
+});
+
 ipcMain.on(AppEvent.RDB_LOG_EVENT, (event, arg) => {
   const t = arg.action.type;
   const payload = arg.action.payload;

@@ -7,8 +7,11 @@
  */
 import invariant from 'invariant';
 
+
 export default function (thinky, type) {
   invariant(thinky && type, 'Thinky instance required');
+
+  const getDefault = () => type.date().default(new Date());
 
   const MaterialState = thinky.createModel('MaterialState', {
     timestamp: type.date().default(new Date()),
@@ -40,6 +43,20 @@ export default function (thinky, type) {
   });
 
   CraftingLog.ensureIndex('timestamp');
+
+  const Opponent = thinky.createModel('Opponent', {
+    timestamp: type.date().default(new Date()),
+    id: type.number().required(),
+    level: type.number().required(),
+    nickname: type.string(),
+    comment: type.string(),
+    rank: type.number(),
+    counts: {
+      ships: type.number()
+    }
+  });
+
+  Opponent.ensureIndex('timestamp');
 
   return { MaterialState, CraftingLog };
 }

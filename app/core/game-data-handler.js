@@ -34,6 +34,12 @@ export function createGameViewHandler(parseFunObj, cfg) {
   return handleGameView(parseFunObj, cfg);
 }
 
+/**
+ * @param parseFunObj
+ * @param cfg
+ * @returns {function()}
+ * @todo(@stuf): handle data as monads and rewrite individual handlers
+ */
 export function handleGameView(parseFunObj, cfg) {
   return (e) => {
     const view = e.target;

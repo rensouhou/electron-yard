@@ -108,6 +108,7 @@
     "invariant": "^2.2.1",
     "material-colors": "^1.0.0",
     "monet": "^0.8.10",
+    "mori": "^0.3.2",
     "node-notifier": "^4.5.0",
     "node-sass": "^3.5.3",
     "normalize.css": "^4.1.1",
