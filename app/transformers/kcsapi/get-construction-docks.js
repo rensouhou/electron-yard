@@ -10,6 +10,7 @@
  */
 import R from 'ramda';
 import { parseMaterialsRecipe } from '../api/materials';
+import { Enum } from '../../helpers';
 
 // @todo(@stuf): pls
 const range = R.range(1, 6);
@@ -17,19 +18,12 @@ const apiItems = R.map(it => `api_item${it}`, range);
 const getRecipe = R.props(apiItems);
 const padList = R.insertAll(4, [null, null]);
 
-const State = {
-  LOCKED: '-1',
+const State = Enum({
+  LOCKED: -1,
   EMPTY: 0,
   UNDER_CONSTRUCTION: 2,
   COMPLETE: 3
-};
-
-const ConstructionDockState = {
-  '-1': 'LOCKED',
-  0: 'EMPTY',
-  2: 'UNDER_CONSTRUCTION',
-  3: 'COMPLETE'
-};
+});
 
 /**
  * @param {KCS.Models.ConstructionDock} dock
@@ -39,7 +33,7 @@ const parseDock = dock => ({
   completionTime: dock.api_complete_time,
   shipId: dock.api_created_ship_id,
   materials: parseMaterialsRecipe(padList(getRecipe(dock))),
-  state: ConstructionDockState[dock.api_state]
+  state: State(dock.api_state)
 });
 
 /**
