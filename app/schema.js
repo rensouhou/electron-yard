@@ -5,6 +5,7 @@
  * @since 0.4.0
  * @author Stefan Rimaila <stefan@rimaila.fi>
  * @module app/schema
+ * @todo(@stuf): clean this up
  */
 import { normalize, Schema, arrayOf } from 'normalizr';
 import R from 'ramda';

@@ -18,7 +18,9 @@
     "lint": "eslint app *.js",
     "hot-server": "node server.js",
     "dev": "npm run webpack-dev; concurrently --kill-others \"npm run webpack-dev-watch\" \"npm run start-dev\"",
-    "dev-hot": "concurrently --kill-others \"npm run hot-server\" \"npm run start-hot\""
+    "dev-hot": "concurrently --kill-others \"npm run hot-server\" \"npm run start-hot\"",
+    "package": "cross-env NODE_ENV=production node -r babel-register package.js --name Dockyard",
+    "package-all": "npm run package -- --all"
   },
   "repository": {
     "type": "git",
@@ -46,7 +48,6 @@
     "babel-preset-react": "^6.5.0",
     "babel-preset-react-hmre": "^1.1.1",
     "babel-preset-stage-0": "^6.5.0",
-    "babel-register": "^6.7.2",
     "chai": "^3.5.0",
     "concurrently": "^2.0.0",
     "cross-env": "^1.0.7",
@@ -68,6 +69,7 @@
     "json-loader": "^0.5.4",
     "karma": "^0.13.22",
     "karma-mocha": "^0.2.2",
+    "minimist": "^1.2.0",
     "mocha": "^2.4.5",
     "react-addons-test-utils": "^15.0.1",
     "redux-devtools": "^3.2.0",
@@ -99,7 +101,6 @@
     "decamelize": "^1.2.0",
     "deep-assign": "^2.0.0",
     "deprecate": "^0.1.0",
-    "electron-debug": "^0.6.0",
     "electron-prebuilt": "^0.37.7",
     "expect.js": "^0.3.1",
     "file-loader": "^0.8.5",
@@ -137,6 +138,7 @@
     "rethinkdb": "^2.3.1",
     "sass-loader": "^3.2.0",
     "scss-loader": "0.0.1",
+    "source-map-support": "^0.4.0",
     "thinky": "^2.3.2",
     "webpack": "^1.13.0"
   },
