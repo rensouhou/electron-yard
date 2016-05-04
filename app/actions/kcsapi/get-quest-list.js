@@ -10,8 +10,8 @@
  * @module app/transformers/kcsapi/get-quest-list
  */
 import R from 'ramda';
-import { getArrayOrDefault } from '../primitive';
-import { quest as transformQuest } from '../api/quest';
+import { getArrayOrDefault } from '../../transformers/primitive';
+import { quest as transformQuest } from '../../transformers/api/quest';
 
 /**
  * @param {KCS.Models.Quest} r

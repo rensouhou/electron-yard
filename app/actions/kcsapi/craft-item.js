@@ -1,5 +1,3 @@
-/// <reference path="../../../lib/typedefs/kancolle.d.ts" />
-/// <reference path="../../../lib/typedefs/dockyard.d.ts" />
 /**
  * @overview
  *  Handler for `CRAFT_ITEM` event
@@ -9,10 +7,11 @@
  * @module app/transformers/kcsapi/craft-item
  */
 import R from 'ramda';
-import { asNumber, asBool } from '../primitive';
-import { parseMaterialsRecipe, parseMaterialArray } from '../api/materials';
+import { asNumber, asBool } from '../../transformers/primitive';
+import { parseMaterialsRecipe, parseMaterialArray } from '../../transformers/api/materials';
 
 /**
+ * @event CRAFT_ITEM
  * @param {KCSApi.API.CRAFT_ITEM} r
  */
 export default function action$craftItem(r) {

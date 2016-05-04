@@ -8,10 +8,11 @@
  * @author Stefan Rimaila <stefan@rimaila.fi>
  * @module app/transformers/kcsapi/destroy-ship
  */
-import { parseMaterialArray } from '../api/materials';
-import { asNumber } from '../primitive';
+import { parseMaterialArray } from '../../transformers/api/materials';
+import { asNumber } from '../../transformers/primitive';
 
 /**
+ * @event DESTROY_SHIP
  * @param r
  * @returns {{materials: *, id: number}}
  */

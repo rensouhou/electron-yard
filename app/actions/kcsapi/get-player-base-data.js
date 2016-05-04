@@ -9,8 +9,8 @@
  * @author Stefan Rimaila <stefan@rimaila.fi>
  * @module app/transformers/kcsapi/get-player-base-data
  */
-import { playerSlotItem } from '../api/player-slotitem';
-import { constructionDock } from '../api/construction-dock';
+import { playerSlotItem } from '../../transformers/api/player-slotitem';
+import { constructionDock } from '../../transformers/api/construction-dock';
 
 /**
  * @param {KCSApi.API.GET_PLAYER_BASE_DATA} r

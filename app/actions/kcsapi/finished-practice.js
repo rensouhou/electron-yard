@@ -8,6 +8,7 @@
  */
 
 /**
+ * @event FINISHED_PRACTICE
  * @param r
  */
 export default function action$finishedPractice(r) {

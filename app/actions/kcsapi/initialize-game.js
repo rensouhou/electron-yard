@@ -11,10 +11,10 @@
  */
 import type { ApiRequest, ApiRequestResult } from '../../types/api';
 import R from 'ramda';
-import { baseShip } from '../api/base-ship';
-import { baseShipGraphic } from '../api/base-ship-graphic';
-import { baseShipType } from '../api/base-ship-types';
-import { baseSlotItem } from '../api/base-slotitem';
+import { baseShip } from '../../transformers/api/base-ship';
+import { baseShipGraphic } from '../../transformers/api/base-ship-graphic';
+import { baseShipType } from '../../transformers/api/base-ship-types';
+import { baseSlotItem } from '../../transformers/api/base-slotitem';
 import { normalize, Schema, arrayOf } from 'normalizr';
 // import * as Schema from '../../schema';
 

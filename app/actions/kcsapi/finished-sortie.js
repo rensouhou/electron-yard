@@ -9,7 +9,7 @@
  * @author Stefan Rimaila <stefan@rimaila.fi>
  * @module app/transformers/kcsapi/finished-sortie
  */
-import { sortieResult } from '../api/sortie-result';
+import { sortieResult } from '../../transformers/api/sortie-result';
 
 /**
  * @event FINISHED_SORTIE

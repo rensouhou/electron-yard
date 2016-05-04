@@ -8,8 +8,8 @@
  * @author Stefan Rimaila <stefan@rimaila.fi>
  * @module app/transformers/kcsapi/load-fleet-preset
  */
-import { playerFleet } from '../api/player-fleet';
-import { asNumber } from '../primitive';
+import { playerFleet } from '../../transformers/api/player-fleet';
+import { asNumber } from '../../transformers/primitive';
 
 /**
  * @event LOAD_FLEET_PRESET

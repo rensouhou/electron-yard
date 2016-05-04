@@ -9,8 +9,8 @@
  * @module app/transformers/kcsapi/get-material
  * @see {@link __PROTO.AppState}
  */
-import { parseMaterialObjects } from '../api/materials';
-import { getArrayOrDefault } from '../primitive';
+import { parseMaterialObjects } from '../../transformers/api/materials';
+import { getArrayOrDefault } from '../../transformers/primitive';
 
 /**
  * @event GET_MATERIAL

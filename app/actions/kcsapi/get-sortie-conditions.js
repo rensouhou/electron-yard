@@ -9,7 +9,7 @@
  * @author Stefan Rimaila <stefan@rimaila.fi>
  * @module app/transformers/kcsapi/get-sortie-conditions
  */
-import { asNumber } from '../primitive';
+import { asNumber } from '../../transformers/primitive';
 
 /**
  * @event GET_SORTIE_CONDITIONS

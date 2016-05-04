@@ -9,7 +9,7 @@
  * @module app/transformers/kcsapi/get-construction-docks
  */
 import R from 'ramda';
-import { parseMaterialsRecipe } from '../api/materials';
+import { parseMaterialsRecipe } from '../../transformers/api/materials';
 import { Enum } from '../../helpers';
 
 // @todo(@stuf): pls

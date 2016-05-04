@@ -1,5 +1,3 @@
-/// <reference path="../../../lib/typedefs/kancolle.d.ts" />
-/// <reference path="../../../lib/typedefs/dockyard.d.ts" />
 /**
  * @overview
  *  Handler for `CRAFT_SHIP` event
@@ -8,8 +6,8 @@
  * @author Stefan Rimaila <stefan@rimaila.fi>
  * @module app/transformers/kcsapi/craft-ship
  */
-import { asBool, asNumber } from '../primitive';
-import { parseMaterialsRecipe } from '../api/materials';
+import { asBool, asNumber } from '../../transformers/primitive';
+import { parseMaterialsRecipe } from '../../transformers/api/materials';
 
 /**
  * @event CRAFT_SHIP

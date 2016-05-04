@@ -12,7 +12,7 @@
  * @todo(@stuf): display if opponent seen at an earlier time (probably needs some time lookup magic)
  */
 import { ApiRequest, ApiRequestResult } from '../../types/api';
-import { opponentFleet } from '../api/opponent-fleet';
+import { opponentFleet } from '../../transformers/api/opponent-fleet';
 
 /**
  * @event GET_OPPONENT_INFO

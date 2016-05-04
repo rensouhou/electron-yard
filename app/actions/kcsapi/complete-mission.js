@@ -8,8 +8,8 @@
  * @module app/transformers/kcsapi/complete-mission
  */
 import R from 'ramda';
-import { parseMaterialArray } from '../api/materials';
-import { asNumber, getObjectOrDefault } from '../primitive';
+import { parseMaterialArray } from '../../transformers/api/materials';
+import { asNumber, getObjectOrDefault } from '../../transformers/primitive';
 import { Enum } from '../../helpers';
 
 /**

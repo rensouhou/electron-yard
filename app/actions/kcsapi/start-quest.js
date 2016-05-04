@@ -10,7 +10,7 @@
  * @flow
  */
 import type { ApiRequest, ApiRequestResult } from '../../types/api';
-import { asNumber } from '../primitive';
+import { asNumber } from '../../transformers/primitive';
 
 /**
  * @event START_QUEST

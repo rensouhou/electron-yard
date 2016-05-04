@@ -8,8 +8,8 @@
  * @author Stefan Rimaila <stefan@rimaila.fi>
  * @module app/transformers/kcspai/complete-quest
  */
-import { asNumber } from '../primitive';
-import { parseMaterialArray } from '../api/materials';
+import { asNumber } from '../../transformers/primitive';
+import { parseMaterialArray } from '../../transformers/api/materials';
 
 /**
  * @event COMPLETE_QUEST

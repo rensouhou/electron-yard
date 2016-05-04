@@ -10,11 +10,11 @@
  * @flow
  */
 import type { ApiRequest, ApiRequestResult } from '../../types/api';
-import { parseMaterialObjects } from '../api/materials';
-import { playerShip as ship } from '../api/player-ship';
-import { playerProfile as profile } from '../api/player-profile';
-import { playerFleet as fleet } from '../api/player-fleet';
-import { mission } from '../api/mission';
+import { parseMaterialObjects } from '../../transformers/api/materials';
+import { playerShip as ship } from '../../transformers/api/player-ship';
+import { playerProfile as profile } from '../../transformers/api/player-profile';
+import { playerFleet as fleet } from '../../transformers/api/player-fleet';
+import { mission } from '../../transformers/api/mission';
 
 /**
  * @event GET_BASE_DATA

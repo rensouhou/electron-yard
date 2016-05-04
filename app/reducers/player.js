@@ -69,10 +69,10 @@ export default createReducer(initialState, {
     return updateBaseData(action.payload, state);
   },
   [ApiEvents.GET_FLEET](state, action) {
-    return updateFleet(state, action.payload);
+    return updateFleet(state, action.payload.fleet);
   },
   [ApiEvents.LOAD_FLEET_PRESET](state, action) {
-    return updateFleet(state, action.payload);
+    return updateFleet(state, action.payload.fleet);
   },
   [ApiEvents.GET_MATERIAL](state, action) {
     return {

@@ -9,9 +9,9 @@
  */
 import deprecate from 'deprecate';
 import R from 'ramda';
-import { getArrayOrDefault, asNumber } from '../primitive';
-import { playerFleet } from '../api/player-fleet';
-import { playerShip as ship } from '../api/player-ship';
+import { getArrayOrDefault, asNumber } from '../../transformers/primitive';
+import { playerFleet } from '../../transformers/api/player-fleet';
+import { playerShip as ship } from '../../transformers/api/player-ship';
 
 /**
  * @event GET_FLEET

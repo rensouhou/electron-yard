@@ -2,19 +2,19 @@
 /// <reference path="../../../lib/typedefs/dockyard.d.ts" />
 /**
  * @overview
- *  Handler for `DESTROY_ITEM` event
+ *  Handler for the `RESUPPLY_SHIP` event.
  *
  * @since 0.4.0
  * @author Stefan Rimaila <stefan@rimaila.fi>
- * @module app/transformers/kcsapi/destroy-item
+ * @module app/transformers/kcsapi/resupply-ship
  */
-import { parseMaterialArray } from '../api/materials';
+import { parseMaterialArray } from '../../transformers/api/materials';
 
 /**
- * @param r
- * @returns {{materials: *}}
+ * @event RESUPPLY_SHIP
+ * @param {KCSApi.API.RESUPPLY_SHIP} r
  */
-export function action$destroyItem(r) {
+export default function action$resupplyShip(r) {
   return {
     materials: parseMaterialArray(r.body.api_material)
   };

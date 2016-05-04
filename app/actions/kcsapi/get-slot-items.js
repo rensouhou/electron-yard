@@ -7,7 +7,7 @@
  * @author Stefan Rimaila <stefan@rimaila.fi>
  * @module app/transformers/kcsapi/get-slot-items
  */
-import { playerSlotItem } from '../api/player-slotitem';
+import { playerSlotItem } from '../../transformers/api/player-slotitem';
 
 /**
  * @param {KCSApi.API.GET_SLOT_ITEMS} r
