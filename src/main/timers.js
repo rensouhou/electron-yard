@@ -8,12 +8,14 @@
  * @author Stefan Rimaila <stefan@rimaila.fi>
  * @module src/main/timers
  */
-const electron = require('electron');
-const AppEvent = require('../shared/constants');
+import electron from 'electron';
+import AppEvent from '../shared/constants';
 const { ipcMain } = electron;
 
 // Timer store
 const timers = {};
+
+console.log('src/main/timers#import');
 
 // Timer creation
 const createTimer = (arg, event) => {
@@ -48,5 +50,5 @@ const createTimer = (arg, event) => {
 ipcMain.on(AppEvent.TIMER_START, (event, arg) => {
   console.log(`ipcMain received ${AppEvent.TIMER_START}`);
   const reply = createTimer(arg, event);
-  event.sender.send(AppEvent.TIMER_STARTED, Object.assign({}, reply));
+  event.sender.send(AppEvent.TIMER_STARTED, { ...reply });
 });

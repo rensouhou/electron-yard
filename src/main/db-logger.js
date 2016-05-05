@@ -8,7 +8,6 @@
  * @author Stefan Rimaila <stefan@rimaila.fi>
  * @module app/core/db-logger
  */
-require('babel-register');
 const thinky = require('thinky')({ db: 'dockyard_rdb' });
 const type = thinky.type;
 const schema = require('./schema/rdb')(thinky, type);
@@ -18,6 +17,8 @@ const electron = require('electron');
 const AppEvent = require('../shared/constants');
 const ApiEvent = require('../../app/constants/api-events').ApiEvents;
 const ipcMain = electron.ipcMain;
+
+console.log('app/core/db-logger#import');
 
 ipcMain.on(AppEvent.REHYDRATE_STORE_REQUEST, (event, arg) => {
   event.sender.send(AppEvent.REHYDRATE_STORE);

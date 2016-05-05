@@ -4,27 +4,26 @@
  *  Main electron entry point
  *
  * @since 0.1.0
+ * @version 0.4.0
  * @author Stefan Rimaila <stefan@rimaila.fi>
  * @module main
  */
-'use strict';
-
 process.env.NODE_ENV = process.env.NODE_ENV || 'production';
 
-const path = require('path');
-const electron = require('electron');
-const app = electron.app;
-const BrowserWindow = electron.BrowserWindow;
-const crashReporter = electron.crashReporter;
+import path from 'path';
+import electron from 'electron';
+import electronDebug from 'electron-debug';
+
+const { app, BrowserWindow, crashReporter } = electron;
 
 crashReporter.start({
   companyName: 'rensouhou',
-  submitUrl: 'http://heatenin.gs:8643',
+  submitURL: 'http://heatenin.gs:8643',
   productName: 'Dockyard'
 });
 
 if (process.env.NODE_ENV === 'development') {
-  require('electron-debug')();
+  electronDebug();
 }
 
 let mainWindow = null;

@@ -11,7 +11,7 @@
     "test-watch": "mocha --recursive --compilers js:babel-register --watch",
     "start": "cross-env NODE_ENV=products electron ./",
     "start-dev": "cross-env ELECTRON_ENABLE_LOGGING=true NODE_ENV=development electron ./",
-    "start-hot": "cross-env HOT=1 NODE_ENV=development electron ./",
+    "start-hot": "cross-env HOT=1 NODE_ENV=development electron -r babel-register ./main.development.js",
     "webpack-dev": "webpack --config webpack.config.development.js --progress --colors",
     "webpack-dev-watch": "webpack --config webpack.config.development.js --progress --watch --colors",
     "test": "mocha --recursive --compilers js:babel-register",

@@ -11,7 +11,7 @@ import type { ApiRequest, ApiRequestResult } from '../types/api';
 
 import { createAction } from 'redux-actions';
 import T from 'immutable';
-import ApiTransformers from '../transformers/kcsapi';
+import ApiTransformers from './kcsapi';
 import { ApiEventsByPath, ApiEvents } from '../constants/api-events';
 
 const transformers = T.Map(ApiTransformers);
@@ -21,6 +21,7 @@ export const PARSED_API_DATA:string = 'PARSED_API_DATA';
 
 export { ApiEvents, ApiEventsByPath };
 
+// @todo(@stuf): fix me properly pls
 export const createTransformerActions = () => transformers
   .toKeyedSeq()
   .mapEntries(([k, v]) => [k, createAction(k, v)])

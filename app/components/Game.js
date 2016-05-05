@@ -1,5 +1,3 @@
-/// <reference path="../../lib/typedefs/kancolle.d.ts" />
-/// <reference path="../../lib/typedefs/dockyard.d.ts" />
 /**
  * @overview
  *
@@ -32,7 +30,7 @@ class Game extends Component {
     const view = Object.assign(document.createElement('webview'), {
       nodeintegration: true,
       plugins: true,
-      //partition: 'persist:kc',
+      partition: 'perasist:kc',
       src: 'http://www.dmm.com/netgame/social/-/gadgets/=/app_id=854854/'
     });
     view.addEventListener('dom-ready', createGameViewHandler({ game, transformerActions }, config));
