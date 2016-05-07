@@ -15,8 +15,6 @@ const { ipcMain } = electron;
 // Timer store
 const timers = {};
 
-console.log('src/main/timers#import');
-
 // Timer creation
 const createTimer = (arg, event) => {
   console.log('Create timer;', arg);

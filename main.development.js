@@ -8,13 +8,10 @@
  * @author Stefan Rimaila <stefan@rimaila.fi>
  * @module main
  */
-process.env.NODE_ENV = process.env.NODE_ENV || 'production';
-
+import { app, BrowserWindow, Menu, crashReporter, shell } from 'electron';
 import path from 'path';
-import electron from 'electron';
-import electronDebug from 'electron-debug';
 
-const { app, BrowserWindow, crashReporter } = electron;
+process.env.NODE_ENV = process.env.NODE_ENV || 'production';
 
 crashReporter.start({
   companyName: 'rensouhou',
@@ -23,7 +20,7 @@ crashReporter.start({
 });
 
 if (process.env.NODE_ENV === 'development') {
-  electronDebug();
+  require('electron-debug')();
 }
 
 let mainWindow = null;
@@ -40,7 +37,7 @@ app.commandLine.appendSwitch('ppapi-flash-version', '21.0.0.197');
 function createWindow() {
   const windowOpts = {
     width: 1200,
-    height: 800,
+    height: 1100,
     webPreferences: {
       plugins: true
     }

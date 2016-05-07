@@ -30,7 +30,7 @@ class Game extends Component {
     const view = Object.assign(document.createElement('webview'), {
       nodeintegration: true,
       plugins: true,
-      partition: 'perasist:kc',
+      partition: 'persist:kc',
       src: 'http://www.dmm.com/netgame/social/-/gadgets/=/app_id=854854/'
     });
     view.addEventListener('dom-ready', createGameViewHandler({ game, transformerActions }, config));

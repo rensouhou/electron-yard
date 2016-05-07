@@ -1,5 +1,3 @@
-/// <reference path="../../lib/typedefs/kancolle.d.ts" />
-/// <reference path="../../lib/typedefs/dockyard.d.ts" />
 /**
  * @overview
  *
@@ -51,8 +49,8 @@ const mergeProfile = (k, l, r) => {
 const updateFleet = (state, payload) => ({
   ...state,
   fleets: R.update(
-    R.propEq('id', payload.fleet.fleetId), state.fleets,
-    payload.fleet.fleet,
+    R.propEq('id', payload.fleetId), state.fleets,
+    payload.fleet,
     state.fleets
   )
 });
@@ -69,10 +67,22 @@ export default createReducer(initialState, {
     return updateBaseData(action.payload, state);
   },
   [ApiEvents.GET_FLEET](state, action) {
-    return updateFleet(state, action.payload.fleet);
+    let fleets = state.fleets;
+    fleets[action.payload.fleetId - 1] = action.payload.fleet;
+
+    return {
+      ...state,
+      fleets: fleets
+    };
   },
   [ApiEvents.LOAD_FLEET_PRESET](state, action) {
-    return updateFleet(state, action.payload.fleet);
+    let fleets = state.fleets;
+    fleets[action.payload.fleetId - 1] = action.payload.fleet;
+
+    return {
+      ...state,
+      fleets: fleets
+    };
   },
   [ApiEvents.GET_MATERIAL](state, action) {
     return {

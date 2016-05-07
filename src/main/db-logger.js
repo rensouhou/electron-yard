@@ -25,42 +25,36 @@ ipcMain.on(AppEvent.REHYDRATE_STORE_REQUEST, (event, arg) => {
 });
 
 ipcMain.on(AppEvent.RDB_LOG_EVENT, (event, arg) => {
-  const t = arg.action.type;
-  const payload = arg.action.payload;
-  const state = arg.state;
+  const type = arg.action.type;
+    const payload = arg.action.payload;
 
-  switch (t) {
-    case ApiEvent.GET_BASE_DATA || ApiEvent.RESUPPLY_SHIP || ApiEvent.GET_MATERIAL:
-      console.log('Logging material state');
-      new schema.MaterialState(payload.materials).saveAll();
-      break;
-    case ApiEvent.CRAFT_ITEM:
-      new schema.MaterialState(payload.materials).saveAll();
-      new schema.CraftingLog(
-        Object.assign({},
-          payload.consumed.recipe,
-          payload.slotItem,
-          { flags: payload.flags }
-        )).saveAll();
-      break;
-    case ApiEvent.DESTROY_SHIP:
-      new schema.MaterialState(payload.materials).saveAll();
-      break;
-    case ApiEvent.GET_CONSTRUCTION_DOCKS:
-      const flags = R.path(['crafting', 'flags'], state);
-      if (flags && flags.shipCrafted) {
-        new schema.CraftingLog(
-          Object.assign({}, payload.recipe, {
-            flags: payload.flags,
-            id: payload.slotItem.id,
-            entityId: payload.slotItem.slotItemId
-          })
-        ).saveAll();
-      }
+  let schemas = [];
+  schemas = schemas.concat(new schema.GameEvent({ event: payload.type }));
 
-      break;
-    default:
-      console.log('Unhandled action of type %s', t);
-      break;
+  // Log material state
+  if ([
+      ApiEvent.GET_BASE_DATA,
+      ApiEvent.RESUPPLY_SHIP,
+      ApiEvent.GET_MATERIAL,
+      ApiEvent.CRAFT_ITEM,
+      ApiEvent.DESTROY_SHIP
+    ].includes(type)) {
+    console.log('Logging material state');
+    new schema.MaterialState(payload.materials).saveAll();
   }
+
+  // Log craftables
+  if ([
+      ApiEvent.CRAFT_ITEM,
+      ApiEvent.CRAFT_SHIP
+    ]) {
+    schemas = schemas.concat(new schema.CraftingLog(
+      Object.assign({},
+        payload.consumed.recipe,
+        payload.slotItem,
+        { flags: payload.flags }
+      )));
+  }
+
+  schemas.forEach(s => s.saveAll());
 });

@@ -59,5 +59,11 @@ export default function (thinky, type) {
   });
   Opponent.ensureIndex('timestamp');
 
-  return { MaterialState, CraftingLog, Opponent };
+  const GameEvent = thinky.createModel('GameEvent', {
+    timestamp: type.date().default(r.now()),
+    type: type.string()
+  });
+  GameEvent.ensureIndex('timestamp');
+
+  return { MaterialState, CraftingLog, Opponent, GameEvent };
 }

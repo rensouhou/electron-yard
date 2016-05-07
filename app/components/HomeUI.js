@@ -94,7 +94,7 @@ export default class HomeUI extends Component {
               </div>
             ))}
             <div>
-              {targetTimes.map(t => <Timer id={t.id} targetTime={t.mission.completionTime} />)}
+              {targetTimes.map(t => <Timer key={t.id} id={t.id} targetTime={t.mission.completionTime} />)}
             </div>
           </Column>
           <Column size={8}>

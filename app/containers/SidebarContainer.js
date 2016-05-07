@@ -8,11 +8,11 @@
  * @todo(@stuf): use redux-rx?
  */
 import { connect } from 'react-redux';
-import { bindActionCreators, observableFromStore } from 'redux-rx';
 import Sidebar from '../components/Sidebar';
 
 const mapStateToProps = state => ({});
 
 const mapDispatchToProps = dispatch => ({});
 
-export default connect()(Sidebar);
+//export default connect()(Sidebar);
+export default Sidebar;

@@ -12,20 +12,9 @@
  * @flow
  */
 
-// getArrayOrDefault :: a -> b
 export const getArrayOrDefault = (arr:Array):Array => arr || [];
-
-// getObjectOrDefault :: a -> b
 export const getObjectOrDefault = (obj:Object):Object => obj || {};
-
-// asNumber :: a -> Integer b
 export const asNumber = (num:any):number => !isNaN(parseInt(num, 10)) ? parseInt(num, 10) : null;
-
-// asBool :: a -> Bool b
 export const asBool = (n:number):boolean => asNumber(n) === 1;
-
-// notEmpty :: a -> Bool b
 export const notEmpty = (n:number):boolean => asNumber(n) !== -1;
-
-// formatLineBreaks :: String a -> String b
 export const formatLineBreaks = (s:string):string => (s || '').replace(/<br\s?\/?>/gi, '\n');

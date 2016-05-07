@@ -75,9 +75,9 @@ const sortieResult = o => {
         ship: flags.getShip,
         remaining: flags.remaining
       },
-      ship: getShip(gs),
-      item: getItem(gi),
-      slotItem: getSlotItem(gsi)
+      ship: !!gs ? getShip(gs) : null,
+      item: !!gi ? getItem(gi) : null,
+      slotItem: !!gsi ? getSlotItem(gsi) : null
     },
     sunken: {
       ships: o.api_dests,

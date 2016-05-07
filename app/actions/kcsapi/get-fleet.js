@@ -26,15 +26,10 @@ export default function action$getFleet(r) {
 
   const fleet = playerFleet(R.head(r.body.api_deck_data));
   const fleetId = asNumber(postBody.api_deck_rid);
-  const ships = R.indexBy(
-    R.prop('sortId'),
-    R.map(ship, getArrayOrDefault(r.body.api_ship_data)));
 
   return {
-    fleet: {
-      fleet,
-      fleetId,
-      ships
-    }
+    fleet: fleet,
+    fleetId: fleetId,
+    ships: R.map(ship, getArrayOrDefault(r.body.api_ship_data))
   };
 }

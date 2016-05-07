@@ -11,7 +11,7 @@ const { ipcRenderer } = electron;
 
 function createGameDbLogger(options) {
   return ({ getState }) => (next) => (action) => {
-    ipcRenderer.send(AppEvent.RDB_LOG_EVENT, { state: getState(), action });
+    ipcRenderer.send(AppEvent.RDB_LOG_EVENT, { action });
     return next(action);
   };
 }

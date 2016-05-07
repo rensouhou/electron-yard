@@ -1,5 +1,3 @@
-/// <reference path="../../../lib/typedefs/kancolle.d.ts" />
-/// <reference path="../../../lib/typedefs/dockyard.d.ts" />
 /**
  * @overview
  *
@@ -14,7 +12,7 @@ import { mission } from './mission';
  * @param {KCS.Models.Fleet} d
  * @returns {Dockyard.PlayerData.Fleet}
  */
-const playerFleet = (d) => ({
+export const playerFleet = (d) => ({
   flagship: d.api_flagship,
   id: d.api_id,
   memberId: d.api_member_id,
@@ -26,5 +24,3 @@ const playerFleet = (d) => ({
   },
   $_finalized: false
 });
-
-export { playerFleet };

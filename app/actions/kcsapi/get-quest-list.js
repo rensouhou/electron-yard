@@ -26,6 +26,7 @@ export default function action$getQuestList(r) {
     $_unknown: {
       execCount: r.body.api_exec_count,
       execType: r.body.api_exec_type
-    }
+    },
+    $_finalized: false
   };
 }

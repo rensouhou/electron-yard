@@ -28,7 +28,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators(Object.assign({}, coreActions), dispatch)
+  actions: bindActionCreators({ ...coreActions }, dispatch)
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomeUI);
+//export default connect(mapStateToProps, mapDispatchToProps)(HomeUI);
+export default connect(mapStateToProps)(HomeUI);
